@@ -5,6 +5,7 @@ const app = getApp()
 Page({
   data: {
     motto: '如果明天是晴天就好了',
+    weather:{},
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo')
@@ -50,5 +51,31 @@ Page({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
     })
+  },
+  loadWeatherData: function () {
+    var apiURL = "http://www.sojson.com/open/api/weather/json.shtml?city=" + '深圳';
+    wx.request({
+      url: apiURL,
+      success: function (res) {
+        console.log(res);
+        app.globalData.weatherData = res.data;
+      }
+    });
+  },
+  chooseImg:function(){
+    wx.chooseImage({
+      count: 0,
+      sizeType: [],
+      sourceType: [],
+      success: function (res) { 
+        console.log(res)
+        wx.previewImage({
+          urls: [res.tempFilePaths[0]],
+        })
+      },
+      fail: function (res) { },
+      complete: function (res) { },
+    })
   }
+
 })

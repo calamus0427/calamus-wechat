@@ -6,9 +6,9 @@
       <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
       <text class="userinfo-nickname">{{userInfo.nickName}}</text>
     </block>
-    <a class="next-page">下一页</a>
-  </view>
+    <a class="next-page" bindtap="chooseImg">选择图片</a>
   <view class="usermotto">
     <text class="user-motto">{{motto}}</text>
+  </view>
   </view>
 </view>
