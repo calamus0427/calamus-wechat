@@ -51,23 +51,36 @@ Page({
       })
     };
 
-    wx.request({
-      // url: 'https://tj.nineton.cn/Heart/index/all?city=CHGD050000', 
-      url:'https://api.seniverse.com/v3/weather/daily.json?key=ocny7hqye90ipuhe&location=beijing&language=zh-Hans&unit=c&start=0&days=5',
-        data: {
-        },
-        header: {
-          'Content-Type': 'application/json'
-        },
-        success: res =>{
-          console.log(res.data.results[0])
-          app.globalData.weather = res.data.results[0]
-          this.setData({
-            weather: res.data.results[0],
-          })
-          console.log(app.globalData.weather);
-        }
-      }) 
+    wx.getLocation({
+      success: res => {
+        console.log("location", res,res.latitude, res.longitude);
+        wx.request({
+          // url: 'https://tj.nineton.cn/Heart/index/all?city=CHGD050000', 
+          // url: 'https://api.seniverse.com/v3/weather/daily.json?key=ocny7hqye90ipuhe&' + 'location=' + res.latitude + ':' + '77.036464' + '&language=zh-Hans&unit=c&start=0&days=5',
+          url: 'https://free-api.heweather.com/s6/weather/forecast?' + 'location=' + res.longitude+ ',' + res.latitude+'&key=dca2d12042d24afaba7deac3140f3f22',
+          data: {
+          },
+          header: {
+            'Content-Type': 'application/json'
+          },
+          success: res => {
+            console.log(res);
+            if(res.statusCode === 200){
+              app.globalData.weather = res.data.HeWeather6[0];
+              this.setData({
+                weather: res.data.HeWeather6[0],
+              })
+              console.log(res.data.HeWeather6[0]);
+            }else{
+              console.log(res)
+            }
+            
+          }
+        }) 
+      },
+    })
+
+    
   },
   getUserInfo: function(res) {
     console.log(e)

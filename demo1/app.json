@@ -21,11 +21,7 @@
                 "text": "首页"
             },
             {
-                "pagePath": "pages/logs/logs",
-                "text": "日志"
-            },
-            {
-                "pagePath": "pages/logs/logs",
+                "pagePath": "pages/sunny/index",
                 "text": "小晴天"
             }
         ]
