@@ -5,6 +5,13 @@ const app = getApp()
 Page({
   data: {
     motto: '如果明天是晴天就好了',
+    text:[{
+      'name':"nihao",
+      'danyinhao':'111'
+    },{
+        'name': "nihao",
+        'danyinhao': '111'
+    }],
     weather:{},
     userInfo: {},
     hasUserInfo: false,
@@ -22,7 +29,7 @@ Page({
         userInfo: app.globalData.userInfo,
         hasUserInfo: true
       })
-    } else if (this.data.canIUse){
+    } else if (this.data.canIUse) {
       // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
       // 所以此处加入 callback 以防止这种情况
       app.userInfoReadyCallback = res => {
@@ -42,9 +49,34 @@ Page({
           })
         }
       })
-    }
+    };
+
+    wx.request({
+      // url: 'https://tj.nineton.cn/Heart/index/all?city=CHGD050000', 
+      url:'https://api.seniverse.com/v3/weather/daily.json?key=ocny7hqye90ipuhe&location=beijing&language=zh-Hans&unit=c&start=0&days=5',
+        data: {
+        },
+        header: {
+          'Content-Type': 'application/json'
+        },
+        success: res =>{
+          console.log(res.data.results[0])
+          app.globalData.weather = res.data.results[0]
+          this.setData({
+            weather: res.data.results[0],
+          })
+          console.log(app.globalData.weather);
+        }
+      }) 
   },
-  getUserInfo: function(e) {
+  getUserInfo: function(res) {
+    console.log(e)
+    app.globalData.weather = res.data.weather[0]
+    this.setData({
+      weather: res.data.weather[0],
+    })
+  },
+  getWeather: function (e) {
     console.log(e)
     app.globalData.userInfo = e.detail.userInfo
     this.setData({

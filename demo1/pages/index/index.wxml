@@ -7,6 +7,13 @@
       <text class="userinfo-nickname">{{userInfo.nickName}}</text>
     </block>
     <a class="next-page" bindtap="chooseImg">选择图片</a>
+    <view style="text-align:center">
+      <view>{{weather.location.name}}</view>
+      <view>现在-{{weather.basic.location}}</view>   
+      <view wx:for="{{weather.daily}}" wx:for-item="item" wx:key="item">
+      <text>{{item.date}}--{{item.text_day}}--{{item.text_night}}</text>
+      </view>   
+    </view>
   <view class="usermotto">
     <text class="user-motto">{{motto}}</text>
   </view>
