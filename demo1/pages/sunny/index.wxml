@@ -1,4 +1,8 @@
 <view class="sunny">
   <image
-  class="sunny-footer" src="http://p3i10hjs7.bkt.clouddn.com/sunny1.jpg"></image>
+  class="sunny-footer" src="{{src}}"></image>
+  <button size="mini" type="default" bindtap="downloadImg">下载图片</button>
+<button size="mini" type="default" bindtap="chooseImg">选择图片</button>
+<button size="mini" type="default" bindtap="addIcon">添加帽子</button>
+
 </view>
