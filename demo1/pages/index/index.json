@@ -1,3 +1,6 @@
 {
-  "navigationBarTitleText": "近期天气"
+  "navigationBarTitleText": "近期天气",
+    "usingComponents": {
+      "modal": "../model/model"
+    }
 }
