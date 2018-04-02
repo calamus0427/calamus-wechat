@@ -4,5 +4,6 @@
   <button size="mini" type="default" bindtap="chooseImg">选择图片</button>
   <button size="mini" type="default" bindtap="downloadImg">下载图片</button>
 <button size="mini" type="default" bindtap="addIcon">选择模板</button>
+<modal modal-hidden="{{is_modal_Hidden}}" modal-msg="{{is_modal_Msg}}"/>  
 
 </view>

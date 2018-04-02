@@ -4,8 +4,6 @@ const app = getApp()
 
 Page({
   data: {
-    is_modal_Hidden: false,
-    is_modal_Msg: '我是一个自定义组件'  ,
     motto: '如果明天是晴天就好了',
     text:[{
       'name':"nihao",

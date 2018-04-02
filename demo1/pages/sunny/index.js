@@ -3,7 +3,9 @@
 
 Page({
   data: {
-    src:''
+    src:'',
+    is_modal_Hidden: false,
+    is_modal_Msg: '我是一个自定义组件',
   },
   onLoad: function() {
     var _this = this ;

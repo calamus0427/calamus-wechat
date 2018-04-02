@@ -1,4 +1,4 @@
-<view hidden='{{modalHidden}}'>  
+<view  hidden='{{modalHidden}}'>  
   <view class='mask_layer' bindtap='modal_click_Hidden' />  
   <view class='modal_box'>  
     <view class="title">提示</view>  

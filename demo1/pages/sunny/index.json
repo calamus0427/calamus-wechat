@@ -1,3 +1,6 @@
 {
-  "navigationBarTitleText": "等晴天"
+  "navigationBarTitleText": "等晴天",
+  "usingComponents": {
+    "modal": "../model/model"
+  }
 }

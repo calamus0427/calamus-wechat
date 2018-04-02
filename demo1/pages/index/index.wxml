@@ -1,7 +1,5 @@
 <!--index.wxml-->
 
-<modal modal-hidden="{{is_modal_Hidden}}" modal-msg="{{is_modal_Msg}}"/>  
-
 <view class="container">
   <view class="userinfo">
     <block wx:if="{{!hasUserInfo && canIUse}}">
