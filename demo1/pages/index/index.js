@@ -1,126 +1,132 @@
-//index.js
-//获取应用实例
-const app = getApp()
+//sunny.js
+
 
 Page({
   data: {
-    motto: '如果明天是晴天就好了',
-    text:[{
-      'name':"nihao",
-      'danyinhao':'111'
-    },{
-        'name': "nihao",
-        'danyinhao': '111'
-    }],
-    weather:{},
-    userInfo: {},
-    hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
+    src:'',
+    is_modal_Hidden: false,
+    is_modal_Msg: '我是一个自定义组件',
+    showModel:false,
   },
-  //事件处理函数
-  bindViewTap: function() {
+  nextPage: function () {
+    console.log("next");
     wx.navigateTo({
       url: '../logs/logs'
     })
   },
-  onLoad: function () {
-    if (app.globalData.userInfo) {
-      this.setData({
-        userInfo: app.globalData.userInfo,
-        hasUserInfo: true
-      })
-    } else if (this.data.canIUse) {
-      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-      // 所以此处加入 callback 以防止这种情况
-      app.userInfoReadyCallback = res => {
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
-        })
-      }
-    } else {
-      // 在没有 open-type=getUserInfo 版本的兼容处理
-      wx.getUserInfo({
-        success: res => {
-          app.globalData.userInfo = res.userInfo
-          this.setData({
-            userInfo: res.userInfo,
-            hasUserInfo: true
-          })
-        }
-      })
-    };
-
-    wx.getLocation({
-      success: res => {
-        console.log("location", res,res.latitude, res.longitude);
-        wx.request({
-          // url: 'https://tj.nineton.cn/Heart/index/all?city=CHGD050000', 
-          // url: 'https://api.seniverse.com/v3/weather/daily.json?key=ocny7hqye90ipuhe&' + 'location=' + res.latitude + ':' + '77.036464' + '&language=zh-Hans&unit=c&start=0&days=5',
-          url: 'https://free-api.heweather.com/s6/weather/forecast?' + 'location=' + res.longitude+ ',' + res.latitude+'&key=dca2d12042d24afaba7deac3140f3f22',
-          data: {
-          },
-          header: {
-            'Content-Type': 'application/json'
-          },
-          success: res => {
-            console.log(res);
-            if(res.statusCode === 200){
-              app.globalData.weather = res.data.HeWeather6[0];
-              this.setData({
-                weather: res.data.HeWeather6[0],
-              })
-              console.log(res.data.HeWeather6[0]);
-            }else{
-              console.log(res)
-            }
-            
-          }
-        }) 
-      },
-    })
-
-    
-  },
-  getUserInfo: function(res) {
-    console.log(e)
-    app.globalData.weather = res.data.weather[0]
-    this.setData({
-      weather: res.data.weather[0],
-    })
-  },
-  getWeather: function (e) {
-    console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
-    })
-  },
-  loadWeatherData: function () {
-    var apiURL = "http://www.sojson.com/open/api/weather/json.shtml?city=" + '深圳';
-    wx.request({
-      url: apiURL,
+  onLoad: function() {
+    var _this = this ;
+    wx.getUserInfo({
       success: function (res) {
-        console.log(res);
-        app.globalData.weatherData = res.data;
+        var userInfo = res.userInfo //用户基本信息
+        var nickName = userInfo.nickName //用户名
+        var avatarUrl = userInfo.avatarUrl
+        _this.setData({
+          src: avatarUrl
+        });
+        //TODO：上传图片
+      }
+    })
+  },
+  chooseImg: function () {
+    var _this = this ;
+    wx.chooseImage({
+      ount: 1,   
+      sizeType: ['compressed'], 
+      sourceType: ['album', 'camera'], 
+      success: function (res) { 
+        console.log(res.tempFilePaths[0]);         
+        _this.setData({
+          src: res.tempFilePaths[0]
+        })
+      },
+      fail: function (res) {
+        wx.hideToast();
+        wx.showModal({
+          title: '错误提示',
+          content: '上传图片失败',
+          showCancel: false,
+          success: function (res) { }
+        })
+      } 
+  })
+  },
+  chooseModel: function(){
+    this.setData({
+      showModel: this.data.showModel == true ? false : true
+    })
+  },
+  addIcon: function () {
+    var _this = this ;
+    wx.showToast({
+      title: '正在处理图片，请稍后...',
+      icon: 'loading',
+      mask: true,
+      duration: 10000
+    })
+    //上传图片
+
+    wx.uploadFile({
+      url:'/home/uploadfilenew',
+      filePath: _this.data.src,
+      name: 'uploadfile_ant',
+      formData: {
+        // 'imgIndex': i
+      },
+      header: {
+        "Content-Type": "multipart/form-data"
+      },
+      success: function (res) {
+        var data = JSON.parse(res.data);
+        //服务器返回格式: { "Catalog": "testFolder", "FileName": "1.jpg", "Url": "https://test.com/1.jpg" }  
+        // _this.setData({
+        //   productInfo: productInfo
+        // });
+          wx.hideToast();
+      },
+      fail: function (res) {
+        wx.hideToast();
+        wx.showModal({
+          title: '错误提示',
+          content: '获取更改图片失败,请重试',
+          showCancel: false,
+          success: function (res) { }
+        })
       }
     });
+
+    console.log("add");
   },
-  chooseImg:function(){
-    wx.chooseImage({
-      count: 0,
-      sizeType: [],
-      sourceType: [],
-      success: function (res) { 
+  downloadImg: function () {
+    var _this = this ;
+    //wx.saveImageToPhotosAlbum 需要授权，下载不需要
+    wx.downloadFile({
+      url: _this.data.src,
+      success: function (res) {
         console.log(res)
-        wx.previewImage({
-          urls: [res.tempFilePaths[0]],
+        wx.saveImageToPhotosAlbum({
+          filePath: res.tempFilePath,
+          success: function (res) {
+            console.log(res)
+          },
+          fail: function (res) {
+            wx.showModal({
+              title: '错误提示',
+              content: '下载图片失败,请重试',
+              showCancel: false,
+              success: function (res) { }
+            })
+          }
         })
       },
-      fail: function (res) { },
-      complete: function (res) { },
-    })
-  }
-
-})
+      fail: function () {
+        wx.showModal({
+          title: '错误提示',
+          content: '下载图片图片失败,请重试',
+          showCancel: false,
+          success: function (res) { }
+        })
+      }
+    })  
+  },
+});

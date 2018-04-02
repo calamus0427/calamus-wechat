@@ -1,8 +1,7 @@
 {
     "pages": [
         "pages/index/index",
-        "pages/logs/logs",
-        "pages/sunny/index"
+        "pages/logs/logs"
     ],
     "window": {
         "backgroundTextStyle": "light",
@@ -21,7 +20,7 @@
                 "text": "首页"
             },
             {
-                "pagePath": "pages/sunny/index",
+                "pagePath": "pages/logs/logs",
                 "text": "小晴天"
             }
         ]
