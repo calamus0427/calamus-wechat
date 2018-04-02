@@ -1,0 +1,100 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>IconFont</title>
+    <link rel="stylesheet" href="demo.css">
+    <link rel="stylesheet" href="iconfont.css">
+</head>
+<body>
+    <div class="main markdown">
+        <h1>IconFont 图标</h1>
+        <ul class="icon_lists clear">
+            
+                <li>
+                <i class="icon calamus cl-zelvxuanzefeiyongdaosanjiaoxingfandui"></i>
+                    <div class="name">择律-选择费用-倒三角形-反对</div>
+                    <div class="fontclass">.cl-zelvxuanzefeiyongdaosanjiaoxingfandui</div>
+                </li>
+            
+                <li>
+                <i class="icon calamus cl-zelvxuanzefeiyongzhengsanjiaoxingzhichi"></i>
+                    <div class="name">择律-选择费用-正三角形-支持</div>
+                    <div class="fontclass">.cl-zelvxuanzefeiyongzhengsanjiaoxingzhichi</div>
+                </li>
+            
+                <li>
+                <i class="icon calamus cl-zhaopianxiazai"></i>
+                    <div class="name">照片下载</div>
+                    <div class="fontclass">.cl-zhaopianxiazai</div>
+                </li>
+            
+                <li>
+                <i class="icon calamus cl-ai231"></i>
+                    <div class="name">下载</div>
+                    <div class="fontclass">.cl-ai231</div>
+                </li>
+            
+                <li>
+                <i class="icon calamus cl-xiazai"></i>
+                    <div class="name">下载</div>
+                    <div class="fontclass">.cl-xiazai</div>
+                </li>
+            
+                <li>
+                <i class="icon calamus cl-xuanze"></i>
+                    <div class="name">选择</div>
+                    <div class="fontclass">.cl-xuanze</div>
+                </li>
+            
+                <li>
+                <i class="icon calamus cl-xiazaidaoru"></i>
+                    <div class="name">218下载、导入</div>
+                    <div class="fontclass">.cl-xiazaidaoru</div>
+                </li>
+            
+                <li>
+                <i class="icon calamus cl-quanping"></i>
+                    <div class="name">全屏</div>
+                    <div class="fontclass">.cl-quanping</div>
+                </li>
+            
+                <li>
+                <i class="icon calamus cl-jiantoushang"></i>
+                    <div class="name">箭头 上</div>
+                    <div class="fontclass">.cl-jiantoushang</div>
+                </li>
+            
+                <li>
+                <i class="icon calamus cl-jiantouxia"></i>
+                    <div class="name">箭头 下</div>
+                    <div class="fontclass">.cl-jiantouxia</div>
+                </li>
+            
+        </ul>
+
+        <h2 id="font-class-">font-class引用</h2>
+        <hr>
+
+        <p>font-class是unicode使用方式的一种变种，主要是解决unicode书写不直观，语意不明确的问题。</p>
+        <p>与unicode使用方式相比，具有如下特点：</p>
+        <ul>
+        <li>兼容性良好，支持ie8+，及所有现代浏览器。</li>
+        <li>相比于unicode语意明确，书写更直观。可以很容易分辨这个icon是什么。</li>
+        <li>因为使用class来定义图标，所以当要替换图标时，只需要修改class里面的unicode引用。</li>
+        <li>不过因为本质上还是使用的字体，所以多色图标还是不支持的。</li>
+        </ul>
+        <p>使用步骤如下：</p>
+        <h3 id="-fontclass-">第一步：引入项目下面生成的fontclass代码：</h3>
+
+
+        <pre><code class="lang-js hljs javascript"><span class="hljs-comment">&lt;link rel="stylesheet" type="text/css" href="./iconfont.css"&gt;</span></code></pre>
+        <h3 id="-">第二步：挑选相应图标并获取类名，应用于页面：</h3>
+        <pre><code class="lang-css hljs">&lt;<span class="hljs-selector-tag">i</span> <span class="hljs-selector-tag">class</span>="<span class="hljs-selector-tag">calamus</span> <span class="hljs-selector-tag">cl-xxx</span>"&gt;&lt;/<span class="hljs-selector-tag">i</span>&gt;</code></pre>
+        <blockquote>
+        <p>"calamus"是你项目下的font-family。可以通过编辑项目查看，默认是"iconfont"。</p>
+        </blockquote>
+    </div>
+</body>
+</html>

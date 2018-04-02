@@ -1,0 +1,35 @@
+<!--index.wxml-->
+
+<view class="container">
+  <view class="userinfo">
+    <block wx:if="{{!hasUserInfo && canIUse}}">
+        <a class="userinfo-waiting"  open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 等晴天 </a>
+    </block>
+
+    <block wx:else>
+      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+    </block>
+    <view class="usermotto">
+    <text class="user-motto">{{motto}}</text>
+  </view>
+  </view>
+    <!-- <a class="next-page" bindtap="chooseImg">选择图片</a> -->
+    <view class="weather" style="text-align:center">
+      <view>{{weather.basic.location}}
+      <text wx:if="{{weather.basic.location}}" class="weather-changeCity">更改城市</text>
+      <text wx:else class="weather-changeCity">设置城市</text>
+      </view>  
+      <view wx:for="{{weather.daily_forecast}}" wx:for-item="item" wx:key="item">
+        <view>{{item.date}}
+          <view>
+            白天：{{item.cond_txt_d}}
+            <br/>
+            晚上：{{item.cond_txt_n}}
+          </view> 
+        </view>
+      </view>   
+    </view>
+
+
+</view>

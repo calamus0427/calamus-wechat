@@ -6,7 +6,6 @@ Page({
     src:'',
     is_modal_Hidden: false,
     is_modal_Msg: '我是一个自定义组件',
-    showModel:false,
   },
   onLoad: function() {
     var _this = this ;
@@ -44,11 +43,6 @@ Page({
         })
       } 
   })
-  },
-  chooseModel: function(){
-    this.setData({
-      showModel: this.data.showModel == true ? false : true
-    })
   },
   addIcon: function () {
     var _this = this ;
