@@ -1,4 +1,9 @@
 <view class="change">
+<view class="indexShow" hidden="{{showChange}}">
+  <rich-text class="title">庆祝创维三十周岁</rich-text>
+  <image bindtap="authUser" class="auth" src="http://p3i10hjs7.bkt.clouddn.com/user.jpg" alt="calamus" mode="widthFix"></image>
+</view>
+ <view class="changeImg" hidden="{{!showChange}}">
   <view class="preview-img">
     <image alr="coocaa" src="{{src}}" mode="widthFix"></image>
   </view>
@@ -24,5 +29,7 @@
     </view>
     
   </block>
+</view> 
+  
 
 </view>

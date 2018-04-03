@@ -3,6 +3,7 @@
 
 Page({
   data: {
+    showChange:false,
     src:'',
     is_modal_Hidden: false,
     is_modal_Msg: '我是一个自定义组件',
@@ -15,17 +16,54 @@ Page({
     })
   },
   onLoad: function() {
+
+  },
+  authUser:function(){
     var _this = this ;
-    wx.getUserInfo({
-      success: function (res) {
-        var userInfo = res.userInfo //用户基本信息
-        var nickName = userInfo.nickName //用户名
-        var avatarUrl = userInfo.avatarUrl
+    wx.getSetting({
+      success(res) {
+        console.log(res.authSetting['scope.userInfo'])  
+        if (!res.authSetting['scope.userInfo']) {
+          wx.authorize({
+            scope: 'scope.userInfo',
+            success() {
+              var _this = this;
+              wx.getUserInfo({
+                success: function (res) {
+                  var userInfo = res.userInfo 
+                  var nickName = userInfo.nickName
+                  var avatarUrl = userInfo.avatarUrl
+                  _this.setData({
+                    src: avatarUrl
+                  });
+                  //TODO：上传图片
+                }
+              })
+            },
+            fail(){
+              _this.setData({
+                src: "http://p3i10hjs7.bkt.clouddn.com/user.jpg"
+              })
+            }
+          })
+        }else{
+          wx.getUserInfo({
+            success: function (res) {
+              var userInfo = res.userInfo
+              var nickName = userInfo.nickName
+              var avatarUrl = userInfo.avatarUrl
+              _this.setData({
+                src: avatarUrl
+              });
+              //TODO：上传图片
+            }
+          })
+        }
         _this.setData({
-          src: avatarUrl
-        });
-        //TODO：上传图片
-      }
+          showChange:true
+        })
+      },
+
     })
   },
   chooseImg: function () {

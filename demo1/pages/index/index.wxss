@@ -4,6 +4,26 @@ page{
   boxing-sizing:border-box;
 }
 
+.indexShow{
+  background-color: black;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;/*垂直居中*/
+  justify-content: center;/*水平居中*/
+}
+
+.title{
+  color:white;
+  margin-bottom:20px;
+}
+.auth{
+  width:30%;
+  border-radius: 50%;
+}
+
 .sunny-footer{
   position: absolute;
   bottom: 0;
