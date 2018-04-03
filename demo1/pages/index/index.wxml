@@ -1,6 +1,3 @@
-
-
-
 <view class="change"> 
 <swiper indicator-dots="{{indicatorDots}}" hidden="{{!showChange}}" 
         autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">  
@@ -12,7 +9,7 @@
         </swiper-item>  
       </block>  
 </swiper>
-  <view class="indexShow" bindtap="authUser" hidden="{{!showChange}}">
+  <view class="indexShow" bindtap="authUser" hidden="{{!showChange}}" animation="{{animationData}}">
      <!-- <rich-text class="title">庆祝创维三十周岁</rich-text>        -->
     <image  class="auth" src="http://p3i10hjs7.bkt.clouddn.com/G9.jpg" alt="calamus" mode="widthFix"></image>
   </view>

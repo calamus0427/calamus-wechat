@@ -25,14 +25,35 @@ Page({
     src:'http://p3i10hjs7.bkt.clouddn.com/coocaa.jpg',
     is_modal_Hidden: false,
     is_modal_Msg: '我是一个自定义组件',
-    showModel:false,
+    showModel:true,
     modelList: [{ 'id': '1', 'url': '../../img/1.png' }, { 'id': '2', 'url': '../../img/bg.jpg' },
       { 'id': '3', 'url': '../../img/sunny.jpg' }, { 'id': '4', 'url': '../../img/sunny1.jpg' }],
     currentModel:'',
     currentModelUrl:'',
-    urlRequest: "http://172.20.158.185:8182/file/upload_img",
+    urlRequest: "http://172.20.139.112:8182",
     x:0,
-    y:0
+    y:0,
+    //动画
+    animationData:{}
+  },
+  onLoad:function(){
+    wx.login({
+      success: function (res) {
+        console.log("login",res)
+        code = res.code //返回code
+        wx.request({
+          url: 'https://api.weixin.qq.com/sns/jscode2session?appid=wxba1d37a4858cdb44&secret=wxba1d37a4858cdb44&js_code=' + code + '&grant_type=authorization_code',
+          data: {},
+          header: {
+            'content-type': 'application/json'
+          },
+          success: function (res) {
+            console.log("openId", res)
+            openid = res.data.openid //返回openid
+          }
+        })
+      }
+    })   
   },
   changePosition(e) {
     console.log("change")
@@ -50,52 +71,82 @@ Page({
   
   authUser:function(){
     var _this = this ;
-    wx.getSetting({
-      success(res) {
-        if (!res.authSetting['scope.userInfo']) {
-          wx.authorize({
-            scope: 'scope.userInfo',
-            success() {
-              var that = _this;
-              wx.getUserInfo({
-                success: function (res) {
-                  var userInfo = res.userInfo 
-                  var nickName = userInfo.nickName
-                  var avatarUrl = userInfo.avatarUrl
-                  console.log("11",avatarUrl)
-                  that.setData({
-                    src: avatarUrl
-                  });
-                  //TODO：上传图片
-                }
-              })
-            },
-            fail(){
-              _this.setData({
-                src: "http://p3i10hjs7.bkt.clouddn.com/user.jpg"
-              })
-            }
-          })
-        }else{
-          wx.getUserInfo({
-            success: function (res) {
-              var userInfo = res.userInfo
-              var nickName = userInfo.nickName
-              var avatarUrl = userInfo.avatarUrl
-              _this.setData({
-                src: avatarUrl
-              });
-            }
-          })
-        }
-        _this.setData({
-          showChange:false
-        })
-      },
-      fail(res){
-        console.log(res);
-      }
+    // wx.getSetting({
+    //   success(res) {
+    //     if (!res.authSetting['scope.userInfo']) {
+    //       wx.authorize({
+    //         scope: 'scope.userInfo',
+    //         success() {
+    //           var that = _this;
+    //           wx.getUserInfo({
+    //             success: function (res) {
+    //               var userInfo = res.userInfo 
+    //               var nickName = userInfo.nickName
+    //               var avatarUrl = userInfo.avatarUrl
+    //               console.log("11",avatarUrl)
+    //               that.setData({
+    //                 src: avatarUrl
+    //               });
+    //             }
+    //           })
+    //         },
+    //         fail(){
+    //           _this.setData({
+    //             src: "http://p3i10hjs7.bkt.clouddn.com/user.jpg"
+    //           })
+    //         }
+    //       })
+    //     }else{
+    //       wx.getUserInfo({
+    //         success: function (res) {
+    //           var userInfo = res.userInfo
+    //           var nickName = userInfo.nickName
+    //           var avatarUrl = userInfo.avatarUrl
+    //           _this.setData({
+    //             src: avatarUrl
+    //           });
+    //         }
+    //       })
+    //     }
+    //     _this.setData({
+    //       showChange:false
+    //     })
+    //   },
+    //   fail(res){
+    //     console.log(res);
+    //   }
 
+    // })
+    wx.getUserInfo({
+      success: function (res) {
+        var userInfo = res.userInfo
+        var nickName = userInfo.nickName
+        var avatarUrl = userInfo.avatarUrl
+        console.log("11", avatarUrl)
+        _this.setData({
+          src: avatarUrl,
+          showChange: false
+        });
+      },
+      fail:function(){
+        _this.setData({
+          src: 'http://p3i10hjs7.bkt.clouddn.com/coocaa.jpg',
+          showChange: false
+        });
+      }
+    })
+    var animation = wx.createAnimation({
+      duration: 1000,
+      timingFunction: "ease",
+    })
+
+    this.animation = animation
+
+    // animation.scale(2, 2).rotate(45).step();
+    animation.rotate(45).scale(3, 3).step()
+    animation.translate(0, 0).step({ duration: 1000 })
+    this.setData({
+      animationData: animation.export()
     })
   },
   chooseImg: function () {
