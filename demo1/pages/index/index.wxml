@@ -14,17 +14,12 @@
   </view>
 
   <block wx:if="{{showModel}}">
-    <scroll-view scroll-y="true" style="height: 100px">
-      <text class="calamus cl-jiantouxia"></text>  
-      <text class="calamus cl-jiantoushang"></text>  
-      <text class="calamus cl-quanping"></text>  
-      <text class="calamus cl-xiazaidaoru"></text>  
-      <text class="calamus cl-xuanze active"></text>  
-      <text class="calamus cl-zhaopian2"></text>  
-      <text class="calamus cl-tianjiajiahaowubiankuang"></text>  
-      <text class="calamus cl-tianjia"></text>
+    <scroll-view scroll-y="true" style="height: 70px">
+    <block wx:for="{{modelList}}" wx:key="index"> 
+      <image bindtap="submitModel" data-id="{{item.id}}" style="background-image:url({{item.url}})" class="modelImg calamus {{currentModel==item.id?'active':''}}"  alt="calamus"></image>
+    </block>
     </scroll-view>
-    <view calss="close-model" bindtap="chooseModel"> 
+    <view class="close-model" bindtap="chooseModel"> 
       <text class="calamus cl-jiantoushang"></text>      
     </view>
     

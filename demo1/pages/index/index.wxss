@@ -24,15 +24,18 @@ page{
   border-radius: 50%;
 }
 
-.sunny-footer{
-  position: absolute;
-  bottom: 0;
-}
 .button-control{
   display: flex;
   justify-content: center;
   margin-bottom:20px;
 }
+
+.modelImg{
+  width:50px;
+  height:50px;
+  margin-left:10px;
+}
+
 .preview-img{
   margin:20px auto ;  
   text-align:center;
@@ -45,6 +48,14 @@ page{
   box-shadow:0 0 5px #7FDBFF;
   width:100%;
 }
+.close-model{
+  display:flex;
+  justify-content: center;/*水平居中*/
+}
+.active:before{
+  content: "\e63e";
+  color:red;
+} 
 .active{
-  background-image: url(http://p3i10hjs7.bkt.clouddn.com/436d0003359aa29fc928.png);
+  border:2px red dotted;
 }

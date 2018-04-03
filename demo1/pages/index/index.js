@@ -1,5 +1,5 @@
-//sunny.js
-
+//utils.js
+const util = require('../../utils/util.js')
 
 Page({
   data: {
@@ -8,6 +8,9 @@ Page({
     is_modal_Hidden: false,
     is_modal_Msg: '我是一个自定义组件',
     showModel:false,
+    modelList: [{ 'id': '1', 'url': '../../img/1.png' }, { 'id': '2', 'url': '../../img/bg.jpg' },
+      { 'id': '3', 'url': '../../img/sunny.jpg' }, { 'id': '4', 'url': '../../img/sunny1.jpg' }],
+    currentModel:''
   },
   nextPage: function () {
     console.log("next");
@@ -18,22 +21,47 @@ Page({
   onLoad: function() {
 
   },
+  submitModel:function(event){
+    console.log(event.target.dataset.id);
+    this.setData({
+      currentModel: event.target.dataset.id
+    })
+    var _this = this ;
+    wx.request({
+      url: 'https://www.cnblogs.com/mvc/blog/ViewCountCommentCout.aspx?postId=6270319',
+      data: {
+        model: this.data.currentModel,
+        img: this.data.src
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      success: function (res) {
+        console.log('request success', res);
+        _this.setData({
+          // src:res
+        })
+      },
+      fail:function(res){
+        console.log("fail",res)
+      }
+    })
+  },
   authUser:function(){
     var _this = this ;
     wx.getSetting({
       success(res) {
-        console.log(res.authSetting['scope.userInfo'])  
         if (!res.authSetting['scope.userInfo']) {
           wx.authorize({
             scope: 'scope.userInfo',
             success() {
-              var _this = this;
+              var that = _this;
               wx.getUserInfo({
                 success: function (res) {
                   var userInfo = res.userInfo 
                   var nickName = userInfo.nickName
                   var avatarUrl = userInfo.avatarUrl
-                  _this.setData({
+                  that.setData({
                     src: avatarUrl
                   });
                   //TODO：上传图片
@@ -63,6 +91,9 @@ Page({
           showChange:true
         })
       },
+      fail(res){
+        console.log(res);
+      }
 
     })
   },
