@@ -1,30 +1,47 @@
-<view class="change">
-<view class="indexShow" hidden="{{showChange}}">
-  <rich-text class="title">庆祝创维三十周岁</rich-text>
-  <image bindtap="authUser" class="auth" src="http://p3i10hjs7.bkt.clouddn.com/user.jpg" alt="calamus" mode="widthFix"></image>
-</view>
- <view class="changeImg" hidden="{{!showChange}}">
-  <view class="preview-img">
-    <image alr="coocaa" src="{{src}}" mode="widthFix"></image>
-  </view>
-  <view class="button-control">
-    <button size="mini" class="calamus cl-zhaopian2" type="default" bindtap="chooseImg"> 选择图片</button>
-    <button size="mini" class="calamus cl-xiazaidaoru" type="default" bindtap="downloadImg"> 下载图片</button>
-    <button size="mini" type="default" class="calamus cl-jiantouxia" bindtap="chooseModel"> 选择模板 </button>
-  </view>
 
-  <block wx:if="{{showModel}}">
-    <scroll-view scroll-y="true" style="height: 70px">
-    <block wx:for="{{modelList}}" wx:key="index"> 
-      <image bindtap="submitModel" data-id="{{item.id}}" style="background-image:url({{item.url}})" class="modelImg calamus {{currentModel==item.id?'active':''}}"  alt="calamus"></image>
-    </block>
-    </scroll-view>
-    <view class="close-model" bindtap="chooseModel"> 
-      <text class="calamus cl-jiantoushang"></text>      
-    </view>
+
+
+<view class="change"> 
+<swiper indicator-dots="{{indicatorDots}}" hidden="{{!showChange}}" 
+        autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">  
+      <block wx:for="{{imgUrls}}" wx:key="{{index}}">  
+        <swiper-item>  
+           <navigator url="{{item.link}}" hover-class="navigator-hover">  
+            <image src="{{item.url}}" class="slide-image" width="355" height="150"/>  
+           </navigator>   
+        </swiper-item>  
+      </block>  
+</swiper>
+  <view class="indexShow" bindtap="authUser" hidden="{{!showChange}}">
+     <!-- <rich-text class="title">庆祝创维三十周岁</rich-text>        -->
+    <image  class="auth" src="http://p3i10hjs7.bkt.clouddn.com/G9.jpg" alt="calamus" mode="widthFix"></image>
+  </view>
+  <block wx:if="{{!showChange}}">
+    <view class="changeImg">
+        <movable-area class="preview-img" >
+          <image alr="coocaa" src="{{src}}"></image> 
+          <movable-view  bindchange="changePosition" direction="all" style="height: 100rpx; width: 100rpx;background-image:url({{currentModelUrl}});"  x="{{x}}" y="{{y}}">
+        </movable-view>
+      </movable-area>  
     
-  </block>
-</view> 
-  
+      <view class="button-control">
+        <!-- <button size="mini" class="calamus cl-zhaopian2" type="default" bindtap="chooseImg"> 选择图片</button> -->
+        <button size="mini" type="default" class="calamus cl-jiantouxia" bindtap="chooseModel"> 选择模板 </button>
+        <button size="mini" class="calamus cl-xiazaidaoru" type="default" bindtap="downloadImg"> 下载图片</button>      
+      </view>
+      <block wx:if="{{showModel}}">
+        <scroll-view scroll-y="true" style="height: 160rpx">
+          <block wx:for="{{modelList}}" wx:key="index"> 
+            <image bindtap="submitModel" data-id="{{item.id}}" data-url="{{item.url}}" style="background-image:url({{item.url}})" class="modelImg calamus {{currentModel==item.id?'active':''}}"  alt="calamus"></image>
+          </block>
+        </scroll-view>
+        <view class="close-model" bindtap="chooseModel"> 
+          <text class="calamus cl-jiantoushang"></text>      
+        </view>
+      </block> 
 
-</view>
+        
+    </view> 
+  </block>
+  
+ </view>

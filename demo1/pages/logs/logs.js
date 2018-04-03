@@ -11,5 +11,8 @@ Page({
         return util.formatTime(new Date(log))
       })
     })
+  },   
+  onChange(e) {
+      console.log(e.detail)
   }
 })
