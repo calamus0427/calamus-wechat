@@ -1,6 +1,7 @@
 page{
   /* background-color: #39CCCC;  */
-  background-color: #f44336;
+  /* background-color: #f44336; */
+  background:linear-gradient(white, red);  
   boxing-sizing:border-box;
 }
 
@@ -29,7 +30,7 @@ page{
   /* border-radius: 50%; */
   margin-top:30rpx;
   position:fixed;
-  bottom:150rpx;
+  bottom:50rpx;
 }
 
 .button-control{
@@ -65,9 +66,10 @@ page{
 .active:before{
   content: "\e63e";
   color:red;
+  font-size:20px;
 } 
 .active{
-  border:2rpx white dotted;
+  border:5rpx red solid;
   border-radius:5px;
 }
 

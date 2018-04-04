@@ -26,30 +26,47 @@ Page({
     is_modal_Hidden: false,
     is_modal_Msg: '我是一个自定义组件',
     showModel:true,
-    modelList: [{ 'id': 'top', 'width': '100%', 'height': '100rpx', 'modelUrl':'','url': '../../img/bottom.jpg' }, 
-      { 'id': 'right', 'width': '100rpx', 'height': '100%', 'modelUrl': '','url': '../../img/right.jpg' },
-      { 'id': 'bottom', 'width': '100%', 'height': '100rpx', 'modelUrl': '', 'url': '../../img/bottom.jpg' }, 
-      { 'id': 'left', 'width': '100rpx', 'height': '100%', 'modelUrl': '', 'url': '../../img/left.jpg' }],
-    currentModel:'',
-    currentModelUrl:'',
-    currentModelWidth:'100rpx',
-    currentModelHeight:'100rpx',
-    urlRequest: "http://172.20.139.112:8182/upload_img",
+    modelList: [{ 'id': 'top', 'modelUrl': 'http://p3i10hjs7.bkt.clouddn.com/topShow.png', 'url': 'http://p3i10hjs7.bkt.clouddn.com/top.png' }, 
+      { 'id': 'right', 'modelUrl': 'http://p3i10hjs7.bkt.clouddn.com/rightShow.png', 'url': 'http://p3i10hjs7.bkt.clouddn.com/right.png' },
+      { 'id': 'bottom', 'modelUrl': 'http://p3i10hjs7.bkt.clouddn.com/bottomShow.png', 'url': 'http://p3i10hjs7.bkt.clouddn.com/bottom.png' }, 
+      { 'id': 'left', 'modelUrl': 'http://p3i10hjs7.bkt.clouddn.com/leftShow.png', 'url': 'http://p3i10hjs7.bkt.clouddn.com/left.png' }],
+    currentModel:'top',
+    currentModelUrl: 'http://p3i10hjs7.bkt.clouddn.com/bottom.png',
+    // currentModelWidth:'100%',
+    // currentModelHeight:'100rpx',
+    urlRequest: "http://172.20.135.126:9091/upload_img",
+    getImgUrl:"http://172.20.135.126:9091/index",
     //TODO:可拖动头像参数
     x:0, 
     y:0,
+    //透明度
+    alpha:1,
     //动画
     animationData:{},
-    openID:''
+    openID:'',
+    appId:'wxba1d37a4858cdb44',
+    appSecret:'854730dc784be3f1c5a8001a02634a31'
   },
-  onLoad:function(){
+  onLoad:function(){    
     var _this = this;
+    wx.request({
+      url: this.data.getImgUrl,
+      method: 'GET',
+      success: function (res) {
+        _this.setData({
+          'imgUrls[0].url': res.data
+        })
+      },
+      fail: function(res){
+        console.log("fail")
+      }
+    })
     wx.login({
       success: function (res) {
         if (res.code) {
           //发起网络请求
           wx.request({
-            url: 'https://api.weixin.qq.com/sns/jscode2session?appid=wxba1d37a4858cdb44&secret=854730dc784be3f1c5a8001a02634a31&js_code=' + res.code + '&grant_type=authorization_code',
+            url: 'https://api.weixin.qq.com/sns/jscode2session?appid=' + _this.data.appId + '&secret=' + _this.data.appSecret+'&js_code=' + res.code + '&grant_type=authorization_code',
             data: {
               code: res.code
             },
@@ -71,12 +88,8 @@ Page({
     });  
   },
   changePosition(e) {
-    // console.log(e.detail)
-  },
-  nextPage: function () {
-    console.log("next");
-    wx.navigateTo({
-      url: '../logs/logs'
+    this.setData({
+      alpha: (e.detail.x / 170).toFixed(2)
     })
   },
   authUser:function(){
@@ -190,8 +203,8 @@ Page({
     this.setData({
       currentModel: event.target.dataset.id,
       currentModelUrl: event.target.dataset.url,
-      currentModelHeight: event.target.dataset.height,
-      currentModelWidth: event.target.dataset.width
+      // currentModelHeight: event.target.dataset.height,
+      // currentModelWidth: event.target.dataset.width
     })
     if (event.target.dataset.id == "top"){
       this.setData({
@@ -218,7 +231,7 @@ Page({
   downloadImg: function () {
     var _this = this ;
     wx.showToast({
-      title: '正在处理图片，请稍后...',
+      title: '正在下载图片，请稍后...',
       icon: 'loading',
       mask: true,
       duration: 10000
@@ -231,6 +244,7 @@ Page({
         avatarUrl: this.data.src,
         openID:this.data.openID,    
         position: this.data.currentModel,
+        alpha:this.data.alpha
       },
       header: {
         'content-type': 'application/x-www-form-urlencoded'
