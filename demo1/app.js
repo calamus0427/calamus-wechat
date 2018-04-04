@@ -7,29 +7,27 @@ App({
     wx.setStorageSync('logs', logs)
 
     // 登录
-    wx.login({
-      success: function (res) {
-        console.log(res)
-        if (res.code) {
-
-          //发起网络请求
-          wx.request({
-            url: 'https://api.weixin.qq.com/sns/jscode2session?appid=wxba1d37a4858cdb44&secret=wxba1d37a4858cdb44&js_code=' + res.code + '&grant_type=authorization_code',
-            data: {
-              code: res.code
-            },
-            success:function(res){
-console.log(res)
-            },
-            fail: function (res) {
-              console.log(res)
-            },
-          })
-        } else {
-          console.log('登录失败！' + res.errMsg)
-        }
-      }
-    });
+    // wx.login({
+    //   success: function (res) {
+    //     if (res.code) {
+    //       //发起网络请求
+    //       wx.request({
+    //         url: 'https://api.weixin.qq.com/sns/jscode2session?appid=wxba1d37a4858cdb44&secret=854730dc784be3f1c5a8001a02634a31&js_code=' + res.code + '&grant_type=authorization_code',
+    //         data: {
+    //           code: res.code
+    //         },
+    //         success:function(res){
+    //           console.log(res)
+    //         },
+    //         fail: function (res) {
+    //           this.globalData.openId = res.data.openid;
+    //         },
+    //       })
+    //     } else {
+    //       console.log('登录失败！' + res.errMsg)
+    //     }
+    //   }
+    // });
     // 获取用户信息
     wx.getSetting({
       success: res => {
@@ -52,6 +50,7 @@ console.log(res)
     })
   },
   globalData: {
-    userInfo: null
+    userInfo: null,
+    openId:null
   }
 })

@@ -1,11 +1,11 @@
-/* @import '../../assets/stylesheet.wxss' ; */
 page{
-  background-color: #39CCCC; 
+  /* background-color: #39CCCC;  */
+  background-color: #f44336;
   boxing-sizing:border-box;
 }
 
 .indexShow{
-  background-color: white; 
+  background:linear-gradient(blueviolet, red);
   position: fixed;
   height: 100%;
   width: 100%;
@@ -16,9 +16,11 @@ page{
 
 .title{
   color:black;
-  /* margin-bottom:30rpx; */
   margin-top:65rpx;  
   font-size:50rpx;
+  width:90%;
+  height:150rpx;
+  color:red;
   font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-weight:bold;
 }
@@ -46,8 +48,8 @@ page{
   display: flex;
   margin:20rpx auto ;  
   text-align:center;
-  width:80%; 
-  min-height: 240px;
+  width:240px; 
+  height: 240px;
 }
 .preview-img image{ 
   border:2rpx #3D9970 solid;
@@ -65,7 +67,8 @@ page{
   color:red;
 } 
 .active{
-  border:2rpx red dotted;
+  border:2rpx white dotted;
+  border-radius:5px;
 }
 
 

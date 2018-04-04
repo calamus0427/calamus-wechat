@@ -1,23 +1,26 @@
 <view class="change"> 
-<swiper indicator-dots="{{indicatorDots}}" hidden="{{!showChange}}" 
+<block wx:if="{{showChange}}">
+  <swiper indicator-dots="{{indicatorDots}}" 
         autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">  
       <block wx:for="{{imgUrls}}" wx:key="{{index}}">  
         <swiper-item>  
            <navigator url="{{item.link}}" hover-class="navigator-hover">  
-            <image src="{{item.url}}" class="slide-image" width="355" height="150"/>  
+            <image src="{{item.url}}"  class="slide-image" style="width:100%;height:150px"/>  
            </navigator>   
         </swiper-item>  
       </block>  
-</swiper>
-  <view class="indexShow" bindtap="authUser" hidden="{{!showChange}}" animation="{{animationData}}">
-     <!-- <rich-text class="title">庆祝创维三十周岁</rich-text>        -->
+  </swiper>
+  <view class="indexShow" bindtap="authUser" animation="{{animationData}}">
+      <!-- <rich-text class="title">30</rich-text>        -->
+    <image  class="title" src="../../img/30.png" alt="calamus" ></image> 
     <image  class="auth" src="http://p3i10hjs7.bkt.clouddn.com/G9.jpg" alt="calamus" mode="widthFix"></image>
   </view>
+  </block>
   <block wx:if="{{!showChange}}">
     <view class="changeImg">
         <movable-area class="preview-img" >
           <image alr="coocaa" src="{{src}}"></image> 
-          <movable-view  bindchange="changePosition" direction="all" style="height: 100rpx; width: 100rpx;background-image:url({{currentModelUrl}});"  x="{{x}}" y="{{y}}">
+          <movable-view  bindchange="changePosition" direction="all" style="height: {{currentModelHeight}}; width: {{currentModelWidth}};background-image:url({{currentModelUrl}});"  x="{{x}}" y="{{y}}">
         </movable-view>
       </movable-area>  
     
@@ -27,9 +30,9 @@
         <button size="mini" class="calamus cl-xiazaidaoru" type="default" bindtap="downloadImg"> 下载图片</button>      
       </view>
       <block wx:if="{{showModel}}">
-        <scroll-view scroll-y="true" style="height: 160rpx">
+        <scroll-view scroll-y="true" style="display:flex;width:100%;height: 160rpx; flex-direction:row;justify-content:space-around">
           <block wx:for="{{modelList}}" wx:key="index"> 
-            <image bindtap="submitModel" data-id="{{item.id}}" data-url="{{item.url}}" style="background-image:url({{item.url}})" class="modelImg calamus {{currentModel==item.id?'active':''}}"  alt="calamus"></image>
+            <image bindtap="submitModel" data-id="{{item.id}}" data-height="{{item.height}}" data-width="{{item.width}}" data-url="{{item.url}}" style="background-image:url({{item.url}});order: {{index}};" class="modelImg calamus {{currentModel==item.id?'active':''}}"  alt="calamus"></image>
           </block>
         </scroll-view>
         <view class="close-model" bindtap="chooseModel"> 
