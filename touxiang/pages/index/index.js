@@ -31,7 +31,7 @@ Page({
       { 'id': 'bottom', 'modelUrl': 'http://p3i10hjs7.bkt.clouddn.com/bottomShow.png', 'url': 'http://p3i10hjs7.bkt.clouddn.com/bottom.png' }, 
       { 'id': 'left', 'modelUrl': 'http://p3i10hjs7.bkt.clouddn.com/leftShow.png', 'url': 'http://p3i10hjs7.bkt.clouddn.com/left.png' }],
     currentModel:'top',
-    currentModelUrl: 'http://p3i10hjs7.bkt.clouddn.com/bottom.png',
+    currentModelUrl: 'http://p3i10hjs7.bkt.clouddn.com/top.png',
     // currentModelWidth:'100%',
     // currentModelHeight:'100rpx',
     urlRequest: "https://thirty.coocaa.com/upload_img",
@@ -44,8 +44,8 @@ Page({
     //动画
     animationData:{},
     openID:'',
-    appId:'wx962b62db6998d015',
-    appSecret:'0e1fc9230d701c333d013b557bd34033'
+    appId: 'wx962b62db6998d015',
+    appSecret: '0e1fc9230d701c333d013b557bd34033'
   },
   onLoad:function(){    
     var _this = this;
@@ -63,7 +63,6 @@ Page({
     })
     wx.login({
       success: function (res) {
-        console.log('code',res.code)
         if (res.code) {
           //发起网络请求
           wx.request({
@@ -72,7 +71,7 @@ Page({
               code: res.code
             },
             success: function (res) {
-              console.log("open",res);
+              console.log(res);
               _this.setData({
                 openID:res.data.openid
               })
@@ -251,7 +250,6 @@ Page({
         'content-type': 'application/x-www-form-urlencoded'
       },
       success: function (res) {
-        console.log("my",res);
         var data = res.data;
         wx.hideToast();
         wx.downloadFile({
