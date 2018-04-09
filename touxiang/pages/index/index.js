@@ -7,13 +7,10 @@ Page({
     imgUrls: [
       {
         link: '/pages/index/index',
-        url: 'http://img3.coocaa.com/goods/skyworth/banner/8/S88.jpg'
+        url: 'http://p3i10hjs7.bkt.clouddn.com/SKYWORTH_30th.png'
       }, {
         link: '/pages/index/index',
         url: 'http://img3.coocaa.com/goods/skyworth/banner/8/hz1.jpg'
-      }, {
-        link: '/pages/index/index',
-        url: 'http://img3.coocaa.com/goods/skyworth/banner/8/G999.jpg'
       }
     ],
     indicatorDots: true,
@@ -34,8 +31,9 @@ Page({
     currentModelUrl: 'http://p3i10hjs7.bkt.clouddn.com/top.png',
     // currentModelWidth:'100%',
     // currentModelHeight:'100rpx',
-    urlRequest: "https://thirty.coocaa.com/upload_img",
+    // urlRequest: "http://www.calamus.xyz/api/getUserMsg.php",
     getImgUrl:"https://thirty.coocaa.com/index",
+    urlRequest: "https://thirty.coocaa.com/file/upload_img",
     //TODO:可拖动头像参数
     x:0, 
     y:0,
@@ -54,7 +52,7 @@ Page({
       method: 'GET',
       success: function (res) {
         _this.setData({
-          'imgUrls[0].url': res.data
+          'imgUrls[1].url': res.data
         })
       },
       fail: function(res){
@@ -88,9 +86,16 @@ Page({
     });  
   },
   changePosition(e) {
-    this.setData({
-      alpha: (e.detail.x / 162).toFixed(2)
-    })
+    console.log(e.detail.x)
+    if (e.detail.x <= 16.2){
+      this.setData({
+        alpha: 0.10
+      })
+    }else{
+      this.setData({
+        alpha: (e.detail.x / 162).toFixed(2)
+      })
+    }
   },
   authUser:function(){
     var _this = this ;
@@ -231,7 +236,7 @@ Page({
   downloadImg: function () {
     var _this = this ;
     wx.showToast({
-      title: '下载中，请稍后...',
+      title: '下载中...',
       icon: 'loading',
       mask: true,
       duration: 10000
@@ -264,7 +269,7 @@ Page({
               fail: function (res) {
                 wx.showModal({
                   title: '错误提示',
-                  content: '下载图片失败,请重试',
+                  content: '取消下载',
                   showCancel: false,
                   success: function (res) { }
                 })

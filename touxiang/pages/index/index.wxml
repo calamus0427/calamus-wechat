@@ -10,11 +10,9 @@
         </swiper-item>  
       </block>  
   </swiper>
-  <view class="indexShow" style="background-image:url(http://p3i10hjs7.bkt.clouddn.com/jihe.png);background-size:100% 100%;background-repeat:no-repeat;" bindtap="authUser" animation="{{animationData}}">
-      <!-- <rich-text class="title">30</rich-text>        -->
-    <image  class="title" src="http://p3i10hjs7.bkt.clouddn.com/30.png" alt="calamus" ></image> 
-    <image  class="auth" src="http://p3i10hjs7.bkt.clouddn.com/tv.png" alt="calamus" ></image>
-     <image  class="hand" src="http://p3i10hjs7.bkt.clouddn.com/%E9%81%A5%E6%8E%A7%E5%99%A8.png" alt="calamus" mode="widthFix" ></image> 
+  <view class="indexShow" bindtap="authUser" animation="{{animationData}}">
+     <image  class="logo" src="http://p3i10hjs7.bkt.clouddn.com/touxiang.jpg" alt="calamus" mode="widthFix"></image>
+     <rich-text class="title">修改头像❥(^_-)</rich-text>
   </view>
 
   </block>
@@ -22,17 +20,11 @@
     <view class="changeImg" >
         <movable-area class="preview-img" >
           <image alr="coocaa" src="{{src}}"></image> 
-          <movable-view   direction="none" style="height: 100%; width: 100%;background-image:url({{currentModelUrl}});opacity:{{alpha}};" x="{{x}}" y="{{y}}">
+          <movable-view   direction="all" style="height: 100%; width: 100%;background-image:url({{currentModelUrl}});opacity:{{alpha}};" x="{{x}}" y="{{y}}">
         </movable-view>
       </movable-area>  
-    
-      <view class="button-control">
-        <!-- <button size="mini" class="calamus cl-zhaopian2" type="default" bindtap="chooseImg"> 选择图片</button> -->
-        <button size="mini" type="default" class="calamus cl-jiantouxia" bindtap="chooseModel"> 选择模板 </button>
-        <button size="mini" class="calamus cl-xiazaidaoru" type="default" bindtap="downloadImg"> 下载图片</button>      
-      </view>
       <block wx:if="{{showModel}}">
-        <scroll-view scroll-y="true" style="width:100%;height: 220rpx;">
+        <scroll-view scroll-y="true" style="width:100%;height: 220rpx;margin-top:30px;">
         <view style="display:flex;flex-direction:row;justify-content:space-around;align-items:center">
           <block wx:for="{{modelList}}" wx:key="index"> 
           <view>
@@ -51,13 +43,19 @@
           </view>
           
         </scroll-view>
-        <view class="close-model" bindtap="chooseModel"> 
+        <!-- <view class="close-model" bindtap="chooseModel"> 
           <text class="calamus cl-jiantoushang"></text>      
-        </view>
+        </view> -->
+        <view class="button-control">
+        <!-- <button size="mini" class="calamus cl-zhaopian2" type="default" bindtap="chooseImg"> 选择图片</button> -->
+        <!-- <button size="mini" type="default" class="calamus cl-jiantouxia" bindtap="chooseModel"> 选择模板 </button> -->
+        <button size="mini" class="calamus cl-xiazaidaoru" type="default" bindtap="downloadImg"> 下载图片</button>
+      </view>
       </block> 
-
-        
+      <view class="footer">
+      <text>© COOCAA</text></view>         
     </view> 
   </block>
+
   
  </view>
