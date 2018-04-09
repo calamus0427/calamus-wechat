@@ -51,20 +51,22 @@ label,text,rich-text{
 }
 
 .preview-img{
-  margin:20rpx auto ;  
-  text-align:center;
+  margin-top:30rpx;
   width:240px; 
   height: 240px;
+  border:5rpx white solid;
+  border-radius:30rpx;
 }
 .preview-img image{ 
-  border:2rpx #3D9970 solid;
-  border-radius:2rpx;
-  box-shadow:0 0 5rpx #7FDBFF;
+  border-radius:30rpx;  
+  box-shadow:0 0 5rpx whitesmoke;
   width:100%;
-  heighr:100%;
+  height:100%;
 }
 .preImg{
   display:flex;
+  flex-direction:row;
+  justify-content:center;
 }
 
 .close-model{
@@ -73,11 +75,11 @@ label,text,rich-text{
 }
 .active:before{
   content: "\e63e";
-  color: #3D9970 ;
+  color: white ;
   font-size:20px;
 } 
 .active{
-  border:5rpx  #3D9970  solid;
+  border:5rpx  blue  solid;
   border-radius:5px;
 }
 

@@ -95,13 +95,13 @@ Page({
   },
   changePosition(e) {
     console.log(e.detail.y)
-   if (e.detail.y <= 18.2){
+   if (e.detail.y <= 17.8){
       this.setData({
         alpha: 0.10
       })
     }else{
       this.setData({
-        alpha: (e.detail.y / 182).toFixed(2)
+        alpha: (e.detail.y / 178).toFixed(2)
       })
     }
   },

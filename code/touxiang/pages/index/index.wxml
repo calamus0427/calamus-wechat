@@ -22,22 +22,23 @@
       <movable-area class="preview-img" >
             <image alr="coocaa" src="{{src}}"></image>
             <block wx:if="{{currentModel == 'template_top1.png' || currentModel == 'template_bottom1.png' || currentModel == 'template_bottom2.png' || currentModel == 'template_bottom3.png'  }}">
-              <movable-view bindchange="changeHat" direction="none" style="height: {{currentHeight}}; width: {{currentWidth}};background-image:url({{currentModelUrl}});opacity:{{alpha}};">
+              <movable-view bindchange="changeHat" direction="none" style="border-radius:30rpx;height: {{currentHeight}}; width: {{currentWidth}};background-image:url({{currentModelUrl}});opacity:{{alpha}};">
               </movable-view>
             </block>
             <block wx:else>
-            <movable-view bindchange="changeHat" direction="all" style="height: {{currentHeight}}; width: {{currentWidth}};background-image:url({{currentModelUrl}});opacity:1;">
+            <movable-view bindchange="changeHat" direction="all" 
+            style="height:{{currentHeight}}; width: {{currentWidth}};background-image:url({{currentModelUrl}});opacity:1;">
             </movable-view>
             </block>          
       </movable-area> 
       <block wx:if="{{currentModel == 'template_top1.png' || currentModel == 'template_bottom1.png' || currentModel == 'template_bottom2.png' || currentModel == 'template_bottom3.png'  }}">
-          <view style="display:flex;flex-direction:column;align-items:center;justify-content: center;">
-            <text>透明度</text>
-            <movable-area style="width:18px;height:200px;border-radius:9px;background-color:white;">
-                <movable-view bindchange="changePosition" direction="all" style="border-radius:9px;height:18px; width: 18px;background-color:orange;" y="182">
+          <view style="display:flex;margin-top:30rpx;flex-direction:column;align-items:center;justify-content: center;width:40px;">
+            <text class="calamus cl-icon--"></text>
+            <movable-area style="width:8px;height:200px;border-radius:9px;background-color:white;">
+                <movable-view bindchange="changePosition" direction="vertical" style="border-radius:50%;border:2px solid white;height:18px; width: 18px;background-color:#dcdcdc;" x="-7" y="182">
               </movable-view>
             </movable-area>
-            <rich-text>{{alpha}}</rich-text>
+            <text class="calamus cl-taiyang"></text>
           </view> 
       </block>
     </view>
