@@ -1,73 +1,64 @@
-<view class="change"> 
-<block wx:if="{{showChange}}">
-    <swiper indicator-dots="{{indicatorDots}}" 
-        autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">  
-      <block wx:for="{{imgUrls}}" wx:key="{{index}}">  
-        <swiper-item>  
-           <navigator url="{{item.link}}" hover-class="navigator-hover">  
-            <image src="{{item.url}}"  class="slide-image" style="width:100%;height:200px"/>  
-           </navigator>   
-        </swiper-item>  
-      </block>  
-  </swiper>
-  <view class="indexShow" bindtap="authUser" animation="{{animationData}}">
-     <image  class="logo" src="http://p3i10hjs7.bkt.clouddn.com/touxiang.png" alt="calamus" mode="widthFix"></image>
-     <rich-text class="title">修改头像❥(^_-)</rich-text>
+<view> 
+<!-- 头像标题 -->
+  <view class="logo center">
+    <image mode="widthFix" src="http://p3i10hjs7.bkt.clouddn.com/title1.png"></image>
   </view>
 
-  </block>
-  <block wx:if="{{!showChange}}">
-    <view class="changeImg" >
-    <view class="preImg">
-      <movable-area class="preview-img" >
-            <image alr="coocaa" src="{{src}}"></image>
-            <block wx:if="{{currentModel == 'template_top1.png' || currentModel == 'template_bottom1.png' || currentModel == 'template_bottom2.png' || currentModel == 'template_bottom3.png'  }}">
-              <movable-view bindchange="changeHat" direction="none" style="border-radius:30rpx;height: {{currentHeight}}; width: {{currentWidth}};background-image:url({{currentModelUrl}});opacity:{{alpha}};">
-              </movable-view>
-            </block>
-            <block wx:else>
-            <movable-view bindchange="changeHat" direction="all" 
-            style="height:{{currentHeight}}; width: {{currentWidth}};background-image:url({{currentModelUrl}});opacity:1;">
+  <!-- 预览图 -->
+  <view class="preImg">
+    <!-- 头像预览 -->
+    <movable-area class="preview-img" >
+          <image alr="coocaa" src="{{src}}"></image>
+          <block wx:if="{{currentModel == 'template_top1.png' || currentModel == 'template_bottom1.png' || currentModel == 'template_bottom2.png' || currentModel == 'template_bottom3.png'  }}">
+            <movable-view class="cover"  bindchange="changeHat" direction="none" style="border-radius:30rpx;height: {{currentHeight}}; width: {{currentWidth}};background-image:url({{currentModelUrl}});opacity:{{alpha}};">
             </movable-view>
-            </block>          
-      </movable-area> 
-      <block wx:if="{{currentModel == 'template_top1.png' || currentModel == 'template_bottom1.png' || currentModel == 'template_bottom2.png' || currentModel == 'template_bottom3.png'  }}">
-          <view style="display:flex;margin-top:30rpx;flex-direction:column;align-items:center;justify-content: center;width:40px;">
-            <text class="calamus cl-icon--"></text>
-            <movable-area style="width:8px;height:200px;border-radius:9px;background-color:white;">
-                <movable-view bindchange="changePosition" direction="vertical" style="border-radius:50%;border:2px solid white;height:18px; width: 18px;background-color:#dcdcdc;" x="-7" y="182">
-              </movable-view>
-            </movable-area>
-            <text class="calamus cl-taiyang"></text>
-          </view> 
-      </block>
-    </view>
-        
-        <block wx:if="{{showModel}}">
-          <scroll-view scroll-x style="width:100%;height:350rpx;white-space: nowrap;margin-top:30px;">
-              <block wx:for="{{modelList}}" wx:key="index"> 
-                <view style="display:inline-block;margin-right:20rpx;">
-                  <image bindtap="submitModel" 
-                  data-id="{{item.id}}"  
-                  data-height="{{item.height}}"
-                  data-width="{{item.width}}"
-                  data-direction="{{item.direction}}"              
-                  data-url="{{item.url}}" 
-                  style="background-image:url({{item.modelUrl}});background-size: cover;order: {{index}};" class="modelImg calamus {{currentModel==item.id?'active':''}}"  alt="calamus"></image>
-                </view>           
-              </block>               
-          </scroll-view>
-         
-        <view class="button-control">
-        <!-- <button size="mini" class="calamus cl-zhaopian2" type="default" bindtap="chooseImg"> 选择图片</button> -->
-        <!-- <button size="mini" type="default" class="calamus cl-jiantouxia" bindtap="chooseModel"> 选择模板 </button> -->
-        <button size="mini" class="calamus cl-xiazaidaoru" type="default" bindtap="downloadImg"> 下载图片</button>
-      </view>
-      </block> 
-      <view class="footer">
-      <text>© COOCAA</text></view>         
-    </view> 
-  </block>
+          </block>
+          <block wx:else>
+          <movable-view bindchange="changeHat" direction="all" class="cover"
+          style="height:{{currentHeight}}; width: {{currentWidth}};background-image:url({{currentModelUrl}});opacity:1;">
+          </movable-view>
+          </block>          
+    </movable-area> 
+    <!-- 透明度 -->
+    <block wx:if="{{currentModel == 'template_top1.png' || currentModel == 'template_bottom1.png' || currentModel == 'template_bottom2.png' || currentModel == 'template_bottom3.png'  }}">
+        <view class="alpha-view center" style="left:{{windowWidth}}px">
+          <text class="calamus cl-icon--" style="color:white"></text>
+          <movable-area class="alpha">
+              <movable-view class="alpha-item" bindchange="changePosition" direction="vertical"  x="-9" y="128">
+            </movable-view>
+          </movable-area>
+          <text class="calamus cl-taiyang" style="color:white"></text>
+        </view> 
+    </block>
+  </view>       
+  <!-- 模板 -->
+  <scroll-view class="model-view" scroll-with-animation="true" scroll-left="{{scrollLeft}}" bindscroll="getleft" scroll-x="true">
+      <block wx:for="{{modelList}}" wx:key="index"> 
+        <view class="model-item" >
+          <image bindtap="submitModel" 
+          data-id="{{item.id}}"  
+          data-height="{{item.height}}"
+          data-width="{{item.width}}"
+          data-direction="{{item.direction}}"              
+          data-url="{{item.url}}" 
+          style="background-image:url({{item.modelUrl}});order: {{index}};" class="modelImg cover calamus {{currentModel==item.id?'active':''}}"  alt="calamus"></image>
+        </view>           
+      </block>               
+  </scroll-view>
+  <!-- 滚动条 -->
+  <movable-area class="scroll-bar" style="">
+          <movable-view  direction="horizontal" class="scroll-bar-item" x="{{scrollX}}">
+        </movable-view>
+  </movable-area>
 
-  
+  <!-- 按钮 -->
+  <view class="button-control">
+    <!-- <button size="mini" class="calamus cl-zhaopian2" type="default" bindtap="chooseImg"> 选择图片</button> -->
+    <!-- <button size="mini" type="default" class="calamus cl-jiantouxia" bindtap="chooseModel"> 选择模板 </button> -->
+    <button class="calamus cl-xiazaidaoru" size="mini" style="width:160px" bindtap="downloadImg"> 保存头像</button>
+  </view>
+  <!-- 底部宣传图 -->
+  <view class="footer">
+    <image style="width:80%;" mode="widthFix" src="http://p3i10hjs7.bkt.clouddn.com/footer.png"></image>
+  </view>  
  </view>

@@ -1,59 +1,21 @@
 page{
-   /* background:linear-gradient(blue,blueviolet,white);    */
-  background-color: #dcdcdc;
+  background:url('http://p3i10hjs7.bkt.clouddn.com/bgn.png') no-repeat rgb(25,159,249);
+  background-size:100% auto;
   boxing-sizing:border-box;
 }
 
-.indexShow{
-  width: 100%;
-  display:flex; 
-  flex-direction:column; 
-  align-items:center; 
-}
-
-.title{
-  padding:30rpx;
-  font-size:35rpx;
-  font-weight: bold;
-}
+/* 标题 */
 .logo{
-  margin-top:65rpx; 
-  width:50%;
-  border-radius: 50%;
+  margin-top:130rpx;
 }
-label,text,rich-text{
-  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+.logo image{
+  width:80%;
 }
-.auth{
-  width:90%;
-  /* border-radius: 50%; */
-  margin-top:30rpx;
-  /* position:fixed;
-  bottom:50rpx; */
-}
-.hand{
-  z-index:100;
-  position: fixed;
-  bottom:0;
-  left:120rpx;
-  width:150rpx; 
-}
-
-.button-control{
-  display: flex;
-  justify-content: center;
-  margin-bottom:20px;
-}
-
-.modelImg{
-  width:80px;
-  height:80px;
-}
-
+/* 头像预览 */
 .preview-img{
   margin-top:30rpx;
-  width:240px; 
-  height: 240px;
+  width:180px; 
+  height: 180px;
   border:5rpx white solid;
   border-radius:30rpx;
 }
@@ -68,33 +30,59 @@ label,text,rich-text{
   flex-direction:row;
   justify-content:center;
 }
-
-.close-model{
-  display:flex;
-  justify-content: center;/*水平居中*/
+/* 模板 */
+.model-view{
+  width:100%;height:65px;white-space:nowrap;margin-top:30px;
+}
+.model-item{
+display:inline-block;
+margin-left:30rpx;
+}
+.modelImg{
+  border:2rpx white solid;
+  border-radius:10rpx;
+  width:60px;
+  height:60px;
 }
 .active:before{
   content: "\e63e";
-  color: white ;
+  color: blue ;
   font-size:20px;
 } 
 .active{
   border:5rpx  blue  solid;
   border-radius:5px;
 }
-
-
-.show{
-  display:block;
+/* 按钮 */
+.button-control{
+  display: flex;
+  justify-content: center;
+  margin-bottom:20px;
 }
-.hide{
-  display:none;
+
+/* 透明度 */
+.alpha-view{
+  position: absolute;
+  margin-top:30rpx;
+  flex-direction:column;
+  width:40px;
 }
+.alpha{
+width:4px;height:150px;border-radius:9px;background-color:white;
+}
+.alpha-item{
+border-radius:50%;border:2px solid white;height:18px; width: 18px;background-color:#dcdcdc;
+}
+
+/* 滚动条 */
+.scroll-bar{
+  margin:10px auto;width:160px;height:2px;border-radius:9px;background-color:white;
+}
+.scroll-bar-item{
+  height:2px; width: 100px;background-color:rgb(193,27,124);
+}
+/* 底部图片 */
 .footer{
-  position: fixed;
-  right:20rpx;
-  padding-left:-50%; 
-  bottom:0px;
-  font-size:24rpx;
-  color:#8d8d8d;
+  display: flex;
+  justify-content: center;
 }

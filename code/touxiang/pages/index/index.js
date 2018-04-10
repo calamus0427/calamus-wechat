@@ -1,72 +1,85 @@
-//utils.js
-// const util = require('../../utils/util.js')
-var app = getApp();
 Page({
   data: {
-/*轮播图*/
-    imgUrls: [
-      {
-        link: '/pages/index/index',
-        url: 'http://p3i10hjs7.bkt.clouddn.com/SKYWORTH_30th.png'
-      }, {
-        link: '/pages/index/index',
-        url: 'http://img3.coocaa.com/goods/skyworth/banner/8/hz1.jpg'
-      }
-    ],
-    indicatorDots: true,
-    autoplay: true,
-    interval: 5000,
-    duration: 1000,
-/*轮播图*/
-    showChange:true,
-    src:'http://p3i10hjs7.bkt.clouddn.com/coocaa.jpg',
-    is_modal_Hidden: false,
-    is_modal_Msg: '我是一个自定义组件',
-    showModel:true,
-    modelList: [{ 'id': 'template_angel_red1.png', width: '66px', height: '66px', direction: 'all', 'modelUrl': 'http://p3i10hjs7.bkt.clouddn.com/show-red1.png', 'url': 'http://p3i10hjs7.bkt.clouddn.com/red1.png' }, 
-      { 'id': 'template_angel_red2.png', width: '66px', height: '66px', direction: 'all', 'modelUrl': 'http://p3i10hjs7.bkt.clouddn.com/show-red2.png', 'url': 'http://p3i10hjs7.bkt.clouddn.com/red2.png' },
-      { 'id': 'template_angel_blue1.png', width: '66px', height: '66px', direction: 'all', 'modelUrl': 'http://p3i10hjs7.bkt.clouddn.com/show-blue1.png', 'url': 'http://p3i10hjs7.bkt.clouddn.com/blue1.png' }, 
-      { 'id': 'template_angel_blue2.png', width: '66px', height: '66px', direction: 'all', 'modelUrl': 'http://p3i10hjs7.bkt.clouddn.com/show-blue2.png', 'url': 'http://p3i10hjs7.bkt.clouddn.com/blue2.png' },
-      { 'id': 'template_angel_purple1.png', width: '66px', height: '66px', direction: 'all', 'modelUrl': 'http://p3i10hjs7.bkt.clouddn.com/show-purple1.png', 'url': 'http://p3i10hjs7.bkt.clouddn.com/purple1.png' },
-      { 'id': 'template_angel_purple2.png', width: '66px', height: '66px', direction: 'all', 'modelUrl': 'http://p3i10hjs7.bkt.clouddn.com/show-purple2.png', 'url': 'http://p3i10hjs7.bkt.clouddn.com/purple2.png' },
-      { 'id': 'template_bottom1.png', width: '100%', height: '100%', direction: 'none', 'modelUrl': 'http://p3i10hjs7.bkt.clouddn.com/show-bottom1.png', 'url': 'http://p3i10hjs7.bkt.clouddn.com/bottom1.png' },
-      { 'id': 'template_bottom2.png', width: '100%', height: '100%', direction: 'none', 'modelUrl': 'http://p3i10hjs7.bkt.clouddn.com/show-bottom2.png', 'url': 'http://p3i10hjs7.bkt.clouddn.com/bottom2.png' },
-      { 'id': 'template_bottom3.png', width: '100%', height: '100%', direction: 'none', 'modelUrl': 'http://p3i10hjs7.bkt.clouddn.com/show-bottom3.png', 'url': 'http://p3i10hjs7.bkt.clouddn.com/bottom3.png' },
-      { 'id': 'template_top1.png', width: '100%', height: '100%', direction: 'none', 'modelUrl': 'http://p3i10hjs7.bkt.clouddn.com/show-top1.png', 'url': 'http://p3i10hjs7.bkt.clouddn.com/top1.png' }],
-    currentModel: 'template_angel_red1.png',
-    currentModelUrl: 'http://p3i10hjs7.bkt.clouddn.com/red1.png',
-    currentHeight:'66px',
-    currentWidth:'66px',
+    src:'',
+    modelList: [{ 'id': 'template_bottom1.png', width: '100%', height: '100%', direction: 'none', 'modelUrl': 'http://p3i10hjs7.bkt.clouddn.com/show-bottom11.png', 'url': 'http://p3i10hjs7.bkt.clouddn.com/bottom1.png' },
+    { 'id': 'template_bottom2.png', width: '100%', height: '100%', direction: 'none', 'modelUrl': 'http://p3i10hjs7.bkt.clouddn.com/show-bottom12.png', 'url': 'http://p3i10hjs7.bkt.clouddn.com/bottom2.png' },
+    { 'id': 'template_bottom3.png', width: '100%', height: '100%', direction: 'none', 'modelUrl': 'http://p3i10hjs7.bkt.clouddn.com/show-bottom13.png', 'url': 'http://p3i10hjs7.bkt.clouddn.com/bottom3.png' },
+    { 'id': 'template_top1.png', width: '100%', height: '100%', direction: 'none', 'modelUrl': 'http://p3i10hjs7.bkt.clouddn.com/show-top11.png', 'url': 'http://p3i10hjs7.bkt.clouddn.com/top1.png' },{ 'id': 'template_angel_red1.png', width: '45px', height: '45px', direction: 'all', 'modelUrl': 'http://p3i10hjs7.bkt.clouddn.com/show-red11.png', 'url': 'http://p3i10hjs7.bkt.clouddn.com/red1.png' }, 
+      { 'id': 'template_angel_red2.png', width: '45px', height: '45px', direction: 'all', 'modelUrl': 'http://p3i10hjs7.bkt.clouddn.com/show-red12.png', 'url': 'http://p3i10hjs7.bkt.clouddn.com/red2.png' },
+      { 'id': 'template_angel_blue1.png', width: '45px', height: '45px', direction: 'all', 'modelUrl': 'http://p3i10hjs7.bkt.clouddn.com/show-blue11.png', 'url': 'http://p3i10hjs7.bkt.clouddn.com/blue1.png' }, 
+      { 'id': 'template_angel_blue2.png', width: '45px', height: '45px', direction: 'all', 'modelUrl': 'http://p3i10hjs7.bkt.clouddn.com/show-blue12.png', 'url': 'http://p3i10hjs7.bkt.clouddn.com/blue2.png' },
+      { 'id': 'template_angel_purple1.png', width: '45px', height: '45px', direction: 'all', 'modelUrl': 'http://p3i10hjs7.bkt.clouddn.com/show-purple11.png', 'url': 'http://p3i10hjs7.bkt.clouddn.com/purple1.png' },
+      { 'id': 'template_angel_purple2.png', width: '45px', height: '45px', direction: 'all', 'modelUrl': 'http://p3i10hjs7.bkt.clouddn.com/show-purple12.png', 'url': 'http://p3i10hjs7.bkt.clouddn.com/purple2.png' }],
+    currentModel: 'template_bottom1.png',
+    currentModelUrl: 'http://p3i10hjs7.bkt.clouddn.com/bottom1.png',
+    currentHeight:'100%',
+    currentWidth:'100%',
     currentDirection:'none',
     getImgUrl:"https://thirty.coocaa.com/index",
     urlRequest: "https://thirty.coocaa.com/file/upload_img",
-    //TODO:可拖动头像参数
+    //可拖动头像参数
     x:0, 
     y:0,
     //透明度
     alpha:1,
-    // transform:0,
     //动画
     animationData:{},
     openID:'',
     appId: 'wx962b62db6998d015',
     appSecret: '0e1fc9230d701c333d013b557bd34033',
-    // transformAnimation:{}
+    // 滚动条
+    scrollLeft:0 ,
+    scrollX:0,
+    windowWidth:''
   },
   onLoad:function(){    
     var _this = this;
-    wx.request({
-      url: this.data.getImgUrl,
-      method: 'GET',
+    wx.getSystemInfo({
       success: function (res) {
         _this.setData({
-          'imgUrls[1].url': res.data
+          windowWidth: (res.windowWidth - 180) / 2 + 180
         })
+      }
+    })   
+    wx.getUserInfo({
+      success: function (res) {
+        var userInfo = res.userInfo
+        var nickName = userInfo.nickName
+        var avatarUrl = userInfo.avatarUrl
+        _this.setData({
+          src: avatarUrl
+        });
       },
-      fail: function(res){
-        console.log("fail")
+      fail: function () {
+        _this.setData({
+          src: 'http://p3i10hjs7.bkt.clouddn.com/coocaa.jpg',
+        });
+        var that = _this ;
+        wx.showModal({
+          title: '警告',
+          content: '您拒绝授权访问您的头像信息，将无法编辑头像。请重新授权或使用默认头像~',
+          success: function (res) {
+            wx.openSetting({
+              success: (res) => {
+                console.log(res);
+                wx.getUserInfo({
+                  success: function (res) {
+                    var userInfo = res.userInfo
+                    var nickName = userInfo.nickName
+                    var avatarUrl = userInfo.avatarUrl
+                    that.setData({
+                      src: avatarUrl
+                    });
+                  }
+                })
+              }
+            })
+          }
+        })
+        
       }
     })
+    this.authUser();
     wx.login({
       success: function (res) {
         if (res.code) {
@@ -77,14 +90,11 @@ Page({
               code: res.code
             },
             success: function (res) {
-              console.log(res);
               _this.setData({
                 openID:res.data.openid
               })
             },
             fail: function (res) {
-              console.log("openId",res)
-              // this.globalData.openId = res.data.openid;
             },
           })
         } else {
@@ -93,32 +103,38 @@ Page({
       }
     });  
   },
+  // 滚动条
+  getleft(e) {
+    this.setData({
+      scrollX:(e.detail.scrollLeft/e.detail.scrollWidth)*120
+    })
+  } ,
   changePosition(e) {
-    console.log(e.detail.y)
-   if (e.detail.y <= 17.8){
+   if (e.detail.y <= 12.8){
       this.setData({
         alpha: 0.10
       })
     }else{
       this.setData({
-        alpha: (e.detail.y / 178).toFixed(2)
+        alpha: (e.detail.y / 128).toFixed(2)
       })
     }
   },
   changeHat(e) {
     this.setData({
-      x: (e.detail.x/174).toFixed(2),
-      y: (e.detail.y / 174).toFixed(2)
+      x: (e.detail.x/135).toFixed(2),
+      y: (e.detail.y/135).toFixed(2)
     })
   },
   authUser:function(){
+    
     var _this = this ;
-    wx.getSetting({
+    wx.getSetting({     
       success(res) {
         if (!res.authSetting['scope.userInfo']) {
           wx.authorize({
             scope: 'scope.userInfo',
-            success() {
+            success:function(res) {
               var that = _this;
               wx.getUserInfo({
                 success: function (res) {
@@ -128,16 +144,62 @@ Page({
                   that.setData({
                     src: avatarUrl
                   });
+                },
+                fail:function(res){
+                  wx.showModal({
+                    title: '警告',
+                    content: '您拒绝授权访问您的头像信息，将无法编辑头像。请重新授权或使用默认头像~',
+                    success: function (res) {
+                      wx.openSetting({
+                        success: (res) => {
+                          console.log(res);
+                          wx.getUserInfo({
+                            success: function (res) {
+                              var userInfo = res.userInfo
+                              var nickName = userInfo.nickName
+                              var avatarUrl = userInfo.avatarUrl
+                              that.setData({
+                                src: avatarUrl
+                              });
+                            }
+                          })
+                        }
+                      })
+                    }
+                  })
                 }
               })
             },
-            fail(){
+            fail:function(res){
+              console.log("error",res);
+              var that = _this ;
               _this.setData({
-                src: "http://p3i10hjs7.bkt.clouddn.com/user.jpg"
+                src: "http://p3i10hjs7.bkt.clouddn.com/coocaa.jpg"
+              })
+              wx.showModal({
+                title: '警告',
+                content: '您拒绝授权访问您的头像信息，将无法编辑头像。请重新授权或使用默认头像~',
+                success: function (res) {
+                  wx.openSetting({
+                    success: (res) => {
+                      console.log(res);
+                      wx.getUserInfo({                    
+                        success: function (res) {
+                          var userInfo = res.userInfo
+                          var nickName = userInfo.nickName
+                          var avatarUrl = userInfo.avatarUrl
+                          that.setData({
+                            src: avatarUrl
+                          });
+                        }
+                      })
+                    }
+                  })
+                }
               })
             }
           })
-        }else{
+        }else{         
           wx.getUserInfo({
             success: function (res) {
               var userInfo = res.userInfo
@@ -146,72 +208,19 @@ Page({
               _this.setData({
                 src: avatarUrl
               });
+            },
+            fail:function(res){
+              wx.showModal({
+                title: '警告',
+                content: '获取用户信息失败，将使用默认头像'
+              })
             }
           })
         }
-        _this.setData({
-          showChange:false
-        })
       },
       fail(res){
         console.log(res);
       }
-
-    })
-    wx.getUserInfo({
-      success: function (res) {
-        var userInfo = res.userInfo
-        var nickName = userInfo.nickName
-        var avatarUrl = userInfo.avatarUrl
-        _this.setData({
-          src: avatarUrl,
-          showChange: false
-        });
-      },
-      fail:function(){
-        _this.setData({
-          src: 'http://p3i10hjs7.bkt.clouddn.com/coocaa.jpg',
-          showChange: false
-        });
-      }
-    })
-    var animation = wx.createAnimation({
-      duration: 1000,
-      timingFunction: "ease",
-    })
-
-    this.animation = animation
-    animation.rotate(45).scale(3, 3).step()
-    animation.translate(0, 0).step({ duration: 1000 })
-    this.setData({
-      animationData: animation.export()
-    })
-  },
-  chooseImg: function () {
-    var _this = this ;
-    wx.chooseImage({
-      ount: 1,   
-      sizeType: ['compressed'], 
-      sourceType: ['album', 'camera'], 
-      success: function (res) { 
-        console.log(res.tempFilePaths[0]);         
-        _this.setData({
-          src: res.tempFilePaths[0]
-        })
-      },
-      fail: function (res) {
-        wx.showModal({
-          title: '错误提示',
-          content: '上传图片失败',
-          showCancel: false,
-          success: function (res) { }
-        })
-      } 
-  })
-  },
-  chooseModel: function(){
-    this.setData({
-      showModel: this.data.showModel == true ? false : true
     })
   },
   submitModel: function (event) {
@@ -246,6 +255,7 @@ Page({
   },
   downloadImg: function () {
     var _this = this ;
+    // var fenxiang = '';
     var alpha = 1 ;
     wx.showToast({
       title: '下载中...',
@@ -260,22 +270,20 @@ Page({
     }
     wx.request({
       url: this.data.urlRequest,
-      // filePath: _this.data.src,
-      // name: 'uploadfile_ant',
       data: {
         avatarUrl: this.data.src,
         openID:this.data.openID,    
         position: this.data.currentModel,
         alpha: alpha,
-        // transform: this.data.transform,
         x: this.data.x,
         y: this.data.y,
       },
       header: {
         'content-type': 'application/x-www-form-urlencoded'
       },
-      success: function (res) {
-        var data = res.data;
+      success: function (res) {        
+        var data = res.data[0];
+        var fenxiang = res.data[1];
         wx.hideToast();
         wx.downloadFile({
           url: data,
@@ -283,43 +291,63 @@ Page({
             wx.saveImageToPhotosAlbum({
               filePath: res.tempFilePath,
               success: function (res) {
-                console.log(res)
+                wx.showToast({
+                  title: '头像保存成功',
+                  icon: 'success',
+                  duration: 1000,
+                  complete:function(){
+                    setTimeout(function(){
+                      wx.previewImage({
+                        current: fenxiang, 
+                        urls: [fenxiang], 
+                      })
+                    },1000)
+                    
+                  }
+                })
+                
               },
               fail: function (res) {
-                wx.showModal({
-                  title: '警告',
-                  content: '您点击了拒绝授权，将无法正常保存图片。请10分钟后再次点击授权，或者删除小程序重新进入。',
-                  success: function (res) {
-                    if (res.confirm) {
-                      console.log('用户点击确定')
-                      wx.openSetting({
-                        success: (res) => {
-                          console.log(res);
+                wx.getSetting({
+                  success(res) {
+                    if (!res.authSetting['scope.writePhotosAlbum']) {
+                      wx.showModal({
+                        title: '警告',
+                        content: '您拒绝授权保存到相册，将无法保存图片。',
+                        success: function (res) {                         
+                          if (res.confirm) {
+                            wx.openSetting({
+                              success: (res) => {
+                                console.log(res);
+                              }
+                            })
+                          }                          
+                        },
+                        fail:function(res){
                         }
-                      })
+                      }) 
+                    }else{
+                      wx.showModal({
+                        title: '提示',
+                        content: '取消下载头像'
+                      }) 
                     }
-                  }
-                })                
+                  }                  
+                })
+                              
               }
-            })
+            })         
           },
           fail: function () {
             wx.showModal({
-              title: '警告',
-              content: '您点击了拒绝授权，将无法正常保存图片。请10分钟后再次点击授权，或者删除小程序重新进入。',
+              title: '错误',
+              content: '下载失败，请重试',
               success: function (res) {
-                if (res.confirm) {
-                  console.log('用户点击确定')
-                }
               }
-            })
-            wx.openSetting({
-              success: (res) => {
-                console.log(res);
-              }
-            })
+            })       
           }
         }) 
+        
       },
       fail: function (res) {
         wx.hideToast();
