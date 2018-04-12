@@ -14,6 +14,15 @@ const formatNumber = n => {
   return n[1] ? n : '0' + n
 }
 
+function canvasContext () {
+  var name = "calamus"
+  function draw(){
+      return "1"
+  }
+  return this;
+}
+
 module.exports = {
-  formatTime: formatTime
+  formatTime: formatTime,
+  ctx: canvasContext
 }

@@ -1,300 +1,117 @@
-//utils.js
-// const util = require('../../utils/util.js')
-var app = getApp();
+// 使用 wx.createContext 获取绘图上下文 context
+// const ctx = wx.createCanvasContext('canvas')
+import util from '../../utils/util.js'
+
+const ctx = wx.createCanvasContext('canvas')
+const grd = ctx.createLinearGradient(0, 0, 400, 0)
+const img = "../../img/uesr.jpg";
+const img2 = "../../img/red1.png";
+
 Page({
-  data: {
-/*轮播图*/
-    imgUrls: [
-      {
-        link: '/pages/index/index',
-        url: 'http://p3i10hjs7.bkt.clouddn.com/SKYWORTH_30th.png'
-      }, {
-        link: '/pages/index/index',
-        url: 'http://img3.coocaa.com/goods/skyworth/banner/8/hz1.jpg'
-      }
-    ],
-    indicatorDots: true,
-    autoplay: true,
-    interval: 5000,
-    duration: 1000,
-/*轮播图*/
-    showChange:true,
-    src:'http://p3i10hjs7.bkt.clouddn.com/coocaa.jpg',
-    is_modal_Hidden: false,
-    is_modal_Msg: '我是一个自定义组件',
-    showModel:true,
-    modelList: [{ 'id': 'top', 'modelUrl': 'http://p3i10hjs7.bkt.clouddn.com/topShow.png', 'url': 'http://p3i10hjs7.bkt.clouddn.com/top.png' }, 
-      { 'id': 'right', 'modelUrl': 'http://p3i10hjs7.bkt.clouddn.com/rightShow.png', 'url': 'http://p3i10hjs7.bkt.clouddn.com/right.png' },
-      { 'id': 'bottom', 'modelUrl': 'http://p3i10hjs7.bkt.clouddn.com/bottomShow.png', 'url': 'http://p3i10hjs7.bkt.clouddn.com/bottom.png' }, 
-      { 'id': 'left', 'modelUrl': 'http://p3i10hjs7.bkt.clouddn.com/leftShow.png', 'url': 'http://p3i10hjs7.bkt.clouddn.com/left.png' }],
-    currentModel:'top',
-    currentModelUrl: 'http://p3i10hjs7.bkt.clouddn.com/top.png',
-    // currentModelWidth:'100%',
-    // currentModelHeight:'100rpx',
-    // urlRequest: "http://www.calamus.xyz/api/getUserMsg.php",
-    getImgUrl:"https://thirty.coocaa.com/index",
-    urlRequest: "https://thirty.coocaa.com/file/upload_img",
-    //TODO:可拖动头像参数
-    x:0, 
-    y:0,
-    //透明度
-    alpha:1,
-    //动画
-    animationData:{},
-    openID:'',
-    appId: 'wx962b62db6998d015',
-    appSecret: '0e1fc9230d701c333d013b557bd34033'
+  data:{
+    canvasWidth:300,
+    canvasHeight:200,
+    //canvas坐标
+    x: 0,
+    y: 0,
+    status:''
   },
-  onLoad:function(){    
-    var _this = this;
-    wx.request({
-      url: this.data.getImgUrl,
-      method: 'GET',
+  canvasIdErrorCallback: function (e) {
+    console.error(e.detail.errMsg)
+  },
+  onReady: function (e) {
+    console.log(util.ctx);
+
+    // Create linear gradient
+    grd.addColorStop(0, 'white')
+    grd.addColorStop(1, 'red')
+
+    // let img = "../../img/red1.png";
+
+    // Fill with gradient
+    ctx.setFillStyle(grd)
+    ctx.fillRect(0, 0, 300, 200)
+    // ctx.draw()
+    
+    ctx.setStrokeStyle("#00ff00")
+    ctx.setLineWidth(5)
+    ctx.rect(0, 0, 200, 200)
+    ctx.stroke()
+    ctx.setStrokeStyle("#ff0000")
+    ctx.setLineWidth(2)
+    ctx.moveTo(160, 100)
+    ctx.arc(100, 100, 60, 0, 2 * Math.PI, true)
+    ctx.moveTo(140, 100)
+    ctx.arc(100, 100, 40, 0, Math.PI, false)
+    ctx.moveTo(85, 80)
+    ctx.arc(80, 80, 5, 0, 2 * Math.PI, true)
+    ctx.moveTo(125, 80)
+    ctx.arc(120, 80, 5, 0, 2 * Math.PI, true)
+    ctx.stroke()
+    // ctx.draw()    
+    // ctx.drawImage(img, 120, 20, 66, 66)     
+    // ctx.drawImage(img, 200, 20, 66, 66)     
+    
+    // ctx.drawImage('../../img/red2.png', 10, 20, 66, 66) 
+    // ctx.draw()
+    // this.drawText()
+  },
+  saveImg:function(){
+    wx.canvasToTempFilePath({
+      // x: 0,
+      // y: 0,
+      // width: 200,
+      // height: 200,
+      // destWidth: 100,
+      // destHeight: 100,
+      canvasId: 'canvas',
+      // fileType:'jpg',
       success: function (res) {
-        _this.setData({
-          'imgUrls[1].url': res.data
-        })
-      },
-      fail: function(res){
-        console.log("fail")
-      }
-    })
-    wx.login({
-      success: function (res) {
-        if (res.code) {
-          //发起网络请求
-          wx.request({
-            url: 'https://api.weixin.qq.com/sns/jscode2session?appid=' + _this.data.appId + '&secret=' + _this.data.appSecret+'&js_code=' + res.code + '&grant_type=authorization_code',
-            data: {
-              code: res.code
-            },
-            success: function (res) {
-              console.log(res);
-              _this.setData({
-                openID:res.data.openid
-              })
-            },
-            fail: function (res) {
-              console.log("openId",res)
-              // this.globalData.openId = res.data.openid;
-            },
-          })
-        } else {
-          console.log('登录失败！' + res.errMsg)
-        }
-      }
-    });  
-  },
-  changePosition(e) {
-    console.log(e.detail.x)
-    if (e.detail.x <= 16.2){
-      this.setData({
-        alpha: 0.10
-      })
-    }else{
-      this.setData({
-        alpha: (e.detail.x / 162).toFixed(2)
-      })
-    }
-  },
-  authUser:function(){
-    var _this = this ;
-    wx.getSetting({
-      success(res) {
-        if (!res.authSetting['scope.userInfo']) {
-          wx.authorize({
-            scope: 'scope.userInfo',
-            success() {
-              var that = _this;
-              wx.getUserInfo({
-                success: function (res) {
-                  var userInfo = res.userInfo 
-                  var nickName = userInfo.nickName
-                  var avatarUrl = userInfo.avatarUrl
-                  console.log("11",avatarUrl)
-                  that.setData({
-                    src: avatarUrl
-                  });
-                }
-              })
-            },
-            fail(){
-              _this.setData({
-                src: "http://p3i10hjs7.bkt.clouddn.com/user.jpg"
-              })
-            }
-          })
-        }else{
-          wx.getUserInfo({
-            success: function (res) {
-              var userInfo = res.userInfo
-              var nickName = userInfo.nickName
-              var avatarUrl = userInfo.avatarUrl
-              _this.setData({
-                src: avatarUrl
-              });
-            }
-          })
-        }
-        _this.setData({
-          showChange:false
+        console.log(res.tempFilePath)
+        wx.previewImage({
+          urls: [res.tempFilePath],
         })
       },
       fail(res){
-        console.log(res);
-      }
-
-    })
-    wx.getUserInfo({
-      success: function (res) {
-        var userInfo = res.userInfo
-        var nickName = userInfo.nickName
-        var avatarUrl = userInfo.avatarUrl
-        console.log("11", avatarUrl)
-        _this.setData({
-          src: avatarUrl,
-          showChange: false
-        });
-      },
-      fail:function(){
-        _this.setData({
-          src: 'http://p3i10hjs7.bkt.clouddn.com/coocaa.jpg',
-          showChange: false
-        });
+        console.log(res)
       }
     })
-    var animation = wx.createAnimation({
-      duration: 1000,
-      timingFunction: "ease",
-    })
-
-    this.animation = animation
-
-    // animation.scale(2, 2).rotate(45).step();
-    animation.rotate(45).scale(3, 3).step()
-    animation.translate(0, 0).step({ duration: 1000 })
+  },
+  start: function (e) {
     this.setData({
-      animationData: animation.export()
+      status:'start',
+      x: e.touches[0].x,
+      y: e.touches[0].y
     })
   },
-  chooseImg: function () {
-    var _this = this ;
-    wx.chooseImage({
-      ount: 1,   
-      sizeType: ['compressed'], 
-      sourceType: ['album', 'camera'], 
-      success: function (res) { 
-        console.log(res.tempFilePaths[0]);         
-        _this.setData({
-          src: res.tempFilePaths[0]
-        })
-      },
-      fail: function (res) {
-        wx.showModal({
-          title: '错误提示',
-          content: '上传图片失败',
-          showCancel: false,
-          success: function (res) { }
-        })
-      } 
-  })
+  move: function (e) {
+    this.setData({     
+      status:'move',
+      x: e.touches[0].x,
+      y: e.touches[0].y
+    })
+    if (this.data.x < 150 || this.data.y < 100 || this.data.x > 267|| this.data.y>167){
+      console.log("超出屏幕")
+    }else{
+      this.drawImage(img, this.data.x - 150, this.data.y - 100, 300, 200) 
+      this.drawImage(img2, this.data.x - 33, this.data.y - 33, 66, 66)   
+        
+      ctx.draw()
+        
+    }    
   },
-  chooseModel: function(){
+  end: function (e) {
     this.setData({
-      showModel: this.data.showModel == true ? false : true
+      status:'end',
+      hidden: true
     })
   },
-  submitModel: function (event) {
-    this.setData({
-      currentModel: event.target.dataset.id,
-      currentModelUrl: event.target.dataset.url,
-      // currentModelHeight: event.target.dataset.height,
-      // currentModelWidth: event.target.dataset.width
-    })
-    if (event.target.dataset.id == "top"){
-      this.setData({
-        x: 0,
-        y: 0
-      })
-    } else if (event.target.dataset.id == "right") {
-      this.setData({
-        x: 240,
-        y: 0
-      })
-    } else if (event.target.dataset.id == "bottom") {
-      this.setData({
-        x: 0,
-        y: 240
-      })
-    } else if (event.target.dataset.id == "left") {
-      this.setData({
-        x: 0,
-        y: 0
-      })
-    }
+  drawText: function (text, x, y, maxWidth){
+    ctx.fillText("Hello World!", 200, 50)
+    ctx.draw()
   },
-  downloadImg: function () {
-    var _this = this ;
-    wx.showToast({
-      title: '下载中...',
-      icon: 'loading',
-      mask: true,
-      duration: 10000
-    })
-    wx.request({
-      url: this.data.urlRequest,
-      // filePath: _this.data.src,
-      // name: 'uploadfile_ant',
-      data: {
-        avatarUrl: this.data.src,
-        openID:this.data.openID,    
-        position: this.data.currentModel,
-        alpha:this.data.alpha
-      },
-      header: {
-        'content-type': 'application/x-www-form-urlencoded'
-      },
-      success: function (res) {
-        var data = res.data;
-        wx.hideToast();
-        wx.downloadFile({
-          url: data,
-          success: function (res) {
-            console.log("down",res)
-            wx.saveImageToPhotosAlbum({
-              filePath: res.tempFilePath,
-              success: function (res) {
-                console.log(res)
-              },
-              fail: function (res) {
-                wx.showModal({
-                  title: '错误提示',
-                  content: '取消下载',
-                  showCancel: false,
-                  success: function (res) { }
-                })
-              }
-            })
-          },
-          fail: function () {
-            wx.showModal({
-              title: '错误提示',
-              content: '下载图片失败,请重试',
-              showCancel: false,
-              success: function (res) { }
-            })
-          }
-        }) 
-      },
-      fail: function (res) {
-        wx.hideToast();
-        wx.showModal({
-          title: '错误提示',
-          content: '获取更改图片失败,请重试',
-          showCancel: false,
-          success: function (res) { }
-        })
-      }
-    }); 
-  },
-});
+  drawImage:function(image,x,y,width,height){
+    ctx.drawImage(image, x, y, width, height)
+    // ctx.draw()
+  }
+})

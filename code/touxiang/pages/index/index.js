@@ -2,19 +2,21 @@ Page({
   data: {
     src:'',
     modelList: [{ 'id': 'template_bottom1.png', width: '100%', height: '100%', direction: 'none', 'modelUrl': 'http://p3i10hjs7.bkt.clouddn.com/show-bottom11.png', 'url': 'http://p3i10hjs7.bkt.clouddn.com/bottom1.png' },
-    { 'id': 'template_bottom2.png', width: '100%', height: '100%', direction: 'none', 'modelUrl': 'http://p3i10hjs7.bkt.clouddn.com/show-bottom12.png', 'url': 'http://p3i10hjs7.bkt.clouddn.com/bottom2.png' },
-    { 'id': 'template_bottom3.png', width: '100%', height: '100%', direction: 'none', 'modelUrl': 'http://p3i10hjs7.bkt.clouddn.com/show-bottom13.png', 'url': 'http://p3i10hjs7.bkt.clouddn.com/bottom3.png' },
-    { 'id': 'template_top1.png', width: '100%', height: '100%', direction: 'none', 'modelUrl': 'http://p3i10hjs7.bkt.clouddn.com/show-top11.png', 'url': 'http://p3i10hjs7.bkt.clouddn.com/top1.png' },{ 'id': 'template_angel_red1.png', width: '45px', height: '45px', direction: 'all', 'modelUrl': 'http://p3i10hjs7.bkt.clouddn.com/show-red11.png', 'url': 'http://p3i10hjs7.bkt.clouddn.com/red1.png' }, 
-      { 'id': 'template_angel_red2.png', width: '45px', height: '45px', direction: 'all', 'modelUrl': 'http://p3i10hjs7.bkt.clouddn.com/show-red12.png', 'url': 'http://p3i10hjs7.bkt.clouddn.com/red2.png' },
-      { 'id': 'template_angel_blue1.png', width: '45px', height: '45px', direction: 'all', 'modelUrl': 'http://p3i10hjs7.bkt.clouddn.com/show-blue11.png', 'url': 'http://p3i10hjs7.bkt.clouddn.com/blue1.png' }, 
-      { 'id': 'template_angel_blue2.png', width: '45px', height: '45px', direction: 'all', 'modelUrl': 'http://p3i10hjs7.bkt.clouddn.com/show-blue12.png', 'url': 'http://p3i10hjs7.bkt.clouddn.com/blue2.png' },
-      { 'id': 'template_angel_purple1.png', width: '45px', height: '45px', direction: 'all', 'modelUrl': 'http://p3i10hjs7.bkt.clouddn.com/show-purple11.png', 'url': 'http://p3i10hjs7.bkt.clouddn.com/purple1.png' },
-      { 'id': 'template_angel_purple2.png', width: '45px', height: '45px', direction: 'all', 'modelUrl': 'http://p3i10hjs7.bkt.clouddn.com/show-purple12.png', 'url': 'http://p3i10hjs7.bkt.clouddn.com/purple2.png' }],
+      { 'id': 'template_bottom2.png', width: '100%', height: '100%', direction: 'none', 'modelUrl': 'http://p3i10hjs7.bkt.clouddn.com/show-bottom12.png', 'url': 'http://p3i10hjs7.bkt.clouddn.com/bottom2.png' },
+      { 'id': 'template_bottom3.png', width: '100%',  height: '100%', direction: 'none', 'modelUrl': 'http://p3i10hjs7.bkt.clouddn.com/show-bottom13.png', 'url': 'http://p3i10hjs7.bkt.clouddn.com/bottom3.png' },
+      { 'id': 'template_top1.png', width: '100%',  height: '100%', direction: 'none', 'modelUrl': 'http://p3i10hjs7.bkt.clouddn.com/show-top11.png', 'url': 'http://p3i10hjs7.bkt.clouddn.com/top1.png' },
+      { 'id': 'template_angel_red1.png',  width: '66px', height: '66px', direction: 'all', 'modelUrl': 'http://p3i10hjs7.bkt.clouddn.com/show-red11.png', 'url': 'http://p3i10hjs7.bkt.clouddn.com/red1.png' },
+      { 'id': 'template_angel_red2.png',  width: '66px', height: '66px', direction: 'all', 'modelUrl': 'http://p3i10hjs7.bkt.clouddn.com/show-red12.png', 'url': 'http://p3i10hjs7.bkt.clouddn.com/red2.png' },
+      { 'id': 'template_angel_blue1.png',  width: '66px', height: '66px', direction: 'all', 'modelUrl': 'http://p3i10hjs7.bkt.clouddn.com/show-blue11.png', 'url': 'http://p3i10hjs7.bkt.clouddn.com/blue1.png' },
+      { 'id': 'template_angel_blue2.png', width: '66px', height: '66px', direction: 'all', 'modelUrl': 'http://p3i10hjs7.bkt.clouddn.com/show-blue12.png', 'url': 'http://p3i10hjs7.bkt.clouddn.com/blue2.png' },
+      { 'id': 'template_angel_purple1.png', width: '66px', height: '66px', direction: 'all', 'modelUrl': 'http://p3i10hjs7.bkt.clouddn.com/show-purple11.png', 'url': 'http://p3i10hjs7.bkt.clouddn.com/purple1.png' },
+      { 'id': 'template_angel_purple2.png', width: '66px', height: '66px', direction: 'all', 'modelUrl': 'http://p3i10hjs7.bkt.clouddn.com/show-purple12.png', 'url': 'http://p3i10hjs7.bkt.clouddn.com/purple2.png' }],
     currentModel: 'template_bottom1.png',
     currentModelUrl: 'http://p3i10hjs7.bkt.clouddn.com/bottom1.png',
     currentHeight:'100%',
     currentWidth:'100%',
     currentDirection:'none',
+    tips:'拖动右边的进度条可以调节透明度哦~',
     getImgUrl:"https://thirty.coocaa.com/index",
     urlRequest: "https://thirty.coocaa.com/file/upload_img",
     //可拖动头像参数
@@ -30,7 +32,8 @@ Page({
     // 滚动条
     scrollLeft:0 ,
     scrollX:0,
-    windowWidth:''
+    windowWidth:'',
+    loading:false
   },
   onLoad:function(){    
     var _this = this;
@@ -41,44 +44,6 @@ Page({
         })
       }
     })   
-    wx.getUserInfo({
-      success: function (res) {
-        var userInfo = res.userInfo
-        var nickName = userInfo.nickName
-        var avatarUrl = userInfo.avatarUrl
-        _this.setData({
-          src: avatarUrl
-        });
-      },
-      fail: function () {
-        _this.setData({
-          src: 'http://p3i10hjs7.bkt.clouddn.com/coocaa.jpg',
-        });
-        var that = _this ;
-        wx.showModal({
-          title: '警告',
-          content: '您拒绝授权访问您的头像信息，将无法编辑头像。请重新授权或使用默认头像~',
-          success: function (res) {
-            wx.openSetting({
-              success: (res) => {
-                console.log(res);
-                wx.getUserInfo({
-                  success: function (res) {
-                    var userInfo = res.userInfo
-                    var nickName = userInfo.nickName
-                    var avatarUrl = userInfo.avatarUrl
-                    that.setData({
-                      src: avatarUrl
-                    });
-                  }
-                })
-              }
-            })
-          }
-        })
-        
-      }
-    })
     this.authUser();
     wx.login({
       success: function (res) {
@@ -103,6 +68,12 @@ Page({
       }
     });  
   },
+  onReady:function(){
+      this.setData({
+        loading:false
+      })
+      
+  },
   // 滚动条
   getleft(e) {
     this.setData({
@@ -122,8 +93,18 @@ Page({
   },
   changeHat(e) {
     this.setData({
-      x: (e.detail.x/135).toFixed(2),
-      y: (e.detail.y/135).toFixed(2)
+      x: (e.detail.x/114).toFixed(2),
+      y: (e.detail.y/114).toFixed(2)
+    })
+  },
+  goAd: function () {
+    wx.navigateTo({
+      url: '../out/index', //  
+      success: function () {
+
+      },       //成功后的回调；  
+      fail: function () { },         //失败后的回调；  
+      complete: function () { }      //结束后的回调(成功，失败都会执行)  
     })
   },
   authUser:function(){
@@ -224,32 +205,22 @@ Page({
     })
   },
   submitModel: function (event) {
+    var model = event.target.dataset.id;
+    var currentDirection = event.target.dataset.direction;
     this.setData({
       currentModel: event.target.dataset.id,
       currentModelUrl: event.target.dataset.url,
       currentWidth: event.target.dataset.width,
       currentHeight: event.target.dataset.height,
-      currentDirection: event.target.dataset.direction        
+      currentDirection: event.target.dataset.direction                  
     })
-    if (event.target.dataset.id == "top"){
+    if (currentDirection == 'none' ){
       this.setData({
-        x: 0,
-        y: 0
+        tips:'拖动右边的进度条可以调节透明度哦~'
       })
-    } else if (event.target.dataset.id == "right") {
+    }else{
       this.setData({
-        x: 240,
-        y: 0
-      })
-    } else if (event.target.dataset.id == "bottom") {
-      this.setData({
-        x: 0,
-        y: 240
-      })
-    } else if (event.target.dataset.id == "left") {
-      this.setData({
-        x: 0,
-        y: 0
+        tips: '帽子是可以移动的~'
       })
     }
   },
