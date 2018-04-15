@@ -5,12 +5,12 @@ Page({
       { 'id': 'template_bottom2.png', width: '100%', height: '100%', direction: 'none', 'modelUrl': 'http://p3i10hjs7.bkt.clouddn.com/show-bottom12.png', 'url': 'http://p3i10hjs7.bkt.clouddn.com/bottom2.png' },
       { 'id': 'template_bottom3.png', width: '100%',  height: '100%', direction: 'none', 'modelUrl': 'http://p3i10hjs7.bkt.clouddn.com/show-bottom13.png', 'url': 'http://p3i10hjs7.bkt.clouddn.com/bottom3.png' },
       { 'id': 'template_top1.png', width: '100%',  height: '100%', direction: 'none', 'modelUrl': 'http://p3i10hjs7.bkt.clouddn.com/show-top11.png', 'url': 'http://p3i10hjs7.bkt.clouddn.com/top1.png' },
-      { 'id': 'template_angel_red1.png',  width: '66px', height: '66px', direction: 'all', 'modelUrl': 'http://p3i10hjs7.bkt.clouddn.com/show-red11.png', 'url': 'http://p3i10hjs7.bkt.clouddn.com/red1.png' },
-      { 'id': 'template_angel_red2.png',  width: '66px', height: '66px', direction: 'all', 'modelUrl': 'http://p3i10hjs7.bkt.clouddn.com/show-red12.png', 'url': 'http://p3i10hjs7.bkt.clouddn.com/red2.png' },
-      { 'id': 'template_angel_blue1.png',  width: '66px', height: '66px', direction: 'all', 'modelUrl': 'http://p3i10hjs7.bkt.clouddn.com/show-blue11.png', 'url': 'http://p3i10hjs7.bkt.clouddn.com/blue1.png' },
-      { 'id': 'template_angel_blue2.png', width: '66px', height: '66px', direction: 'all', 'modelUrl': 'http://p3i10hjs7.bkt.clouddn.com/show-blue12.png', 'url': 'http://p3i10hjs7.bkt.clouddn.com/blue2.png' },
-      { 'id': 'template_angel_purple1.png', width: '66px', height: '66px', direction: 'all', 'modelUrl': 'http://p3i10hjs7.bkt.clouddn.com/show-purple11.png', 'url': 'http://p3i10hjs7.bkt.clouddn.com/purple1.png' },
-      { 'id': 'template_angel_purple2.png', width: '66px', height: '66px', direction: 'all', 'modelUrl': 'http://p3i10hjs7.bkt.clouddn.com/show-purple12.png', 'url': 'http://p3i10hjs7.bkt.clouddn.com/purple2.png' }],
+      { 'id': 'template_angel_red1.png',  width: '60px', height: '60px', direction: 'all', 'modelUrl': 'http://p3i10hjs7.bkt.clouddn.com/show-red11.png', 'url': 'http://p3i10hjs7.bkt.clouddn.com/red1.png' },
+      { 'id': 'template_angel_red2.png',  width: '60px', height: '60px', direction: 'all', 'modelUrl': 'http://p3i10hjs7.bkt.clouddn.com/show-red12.png', 'url': 'http://p3i10hjs7.bkt.clouddn.com/66-red2.png' },
+      { 'id': 'template_angel_blue1.png',  width: '60px', height: '60px', direction: 'all', 'modelUrl': 'http://p3i10hjs7.bkt.clouddn.com/show-blue11.png', 'url': 'http://p3i10hjs7.bkt.clouddn.com/blue1.png' },
+      { 'id': 'template_angel_blue2.png', width: '60px', height: '60px', direction: 'all', 'modelUrl': 'http://p3i10hjs7.bkt.clouddn.com/show-blue12.png', 'url': 'http://p3i10hjs7.bkt.clouddn.com/66-blue2.png' },
+      { 'id': 'template_angel_purple1.png', width: '60px', height: '60px', direction: 'all', 'modelUrl': 'http://p3i10hjs7.bkt.clouddn.com/show-purple11.png', 'url': 'http://p3i10hjs7.bkt.clouddn.com/purple1.png' },
+      { 'id': 'template_angel_purple2.png', width: '60px', height: '60px', direction: 'all', 'modelUrl': 'http://p3i10hjs7.bkt.clouddn.com/show-purple12.png', 'url': 'http://p3i10hjs7.bkt.clouddn.com/purple2.png' }],
     currentModel: 'template_bottom1.png',
     currentModelUrl: 'http://p3i10hjs7.bkt.clouddn.com/bottom1.png',
     currentHeight:'100%',
@@ -27,6 +27,7 @@ Page({
     //动画
     animationData:{},
     openID:'',
+    code:'',
     appId: 'wx962b62db6998d015',
     appSecret: '0e1fc9230d701c333d013b557bd34033',
     // 滚动条
@@ -47,6 +48,9 @@ Page({
     this.authUser();
     wx.login({
       success: function (res) {
+        _this.setData({
+          code:res.code
+        })
         if (res.code) {
           //发起网络请求
           wx.request({
@@ -93,8 +97,8 @@ Page({
   },
   changeHat(e) {
     this.setData({
-      x: (e.detail.x/114).toFixed(2),
-      y: (e.detail.y/114).toFixed(2)
+      x: (e.detail.x/120).toFixed(2),
+      y: (e.detail.y/120).toFixed(2)
     })
   },
   goAd: function () {
@@ -119,6 +123,7 @@ Page({
               var that = _this;
               wx.getUserInfo({
                 success: function (res) {
+                  console.log("url", res.userInfo.avatarUrl)
                   var userInfo = res.userInfo 
                   var nickName = userInfo.nickName
                   var avatarUrl = userInfo.avatarUrl
@@ -136,9 +141,10 @@ Page({
                           console.log(res);
                           wx.getUserInfo({
                             success: function (res) {
+                              console.log("url", res.userInfo.avatarUrl)
                               var userInfo = res.userInfo
                               var nickName = userInfo.nickName
-                              var avatarUrl = userInfo.avatarUrl
+                              var avatarUrl = userInfo.avatarUrl 
                               that.setData({
                                 src: avatarUrl
                               });
@@ -166,6 +172,7 @@ Page({
                       console.log(res);
                       wx.getUserInfo({                    
                         success: function (res) {
+                          console.log("url", res.userInfo.avatarUrl)
                           var userInfo = res.userInfo
                           var nickName = userInfo.nickName
                           var avatarUrl = userInfo.avatarUrl
@@ -183,9 +190,10 @@ Page({
         }else{         
           wx.getUserInfo({
             success: function (res) {
+              console.log("url", res.userInfo.avatarUrl)
               var userInfo = res.userInfo
               var nickName = userInfo.nickName
-              var avatarUrl = userInfo.avatarUrl
+              var avatarUrl = userInfo.avatarUrl 
               _this.setData({
                 src: avatarUrl
               });
@@ -243,6 +251,7 @@ Page({
       url: this.data.urlRequest,
       data: {
         avatarUrl: this.data.src,
+        code:this.data.code,
         openID:this.data.openID,    
         position: this.data.currentModel,
         alpha: alpha,
