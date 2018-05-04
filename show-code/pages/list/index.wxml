@@ -1,5 +1,17 @@
-<view class="lists">
-    <block wx:for="{{lists}}" wx:key="" wx:item="item">
+<view class="title">
+<text >常用组件</text>
+</view>
+<view class="lists">   
+    <block wx:for="{{lists1}}" wx:key="" wx:item="item">
+        <navigator class="list-item" url="{{item.url}}" hover-class="navigator-hover">{{item.name}}</navigator>
+    </block>
+</view>
+<view class="title">
+<text>常用api</text>
+</view>
+
+<view class="lists"> 
+    <block wx:for="{{lists2}}" wx:key="" wx:item="item">
         <navigator class="list-item" url="{{item.url}}" hover-class="navigator-hover">{{item.name}}</navigator>
     </block>
 </view>

@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    lists: [
+    lists1: [
       {
         url: '../icon/index',
         name: 'icon'
@@ -37,42 +37,44 @@ Page({
       {
         url: '../web-view/index',
         name: 'web-view'
-      },
+      }
+    ],
+    lists2: [
       {
         url: '../wx.auth/index',
-        name: 'wx.auth'
+        name: '授权'
       },
       {
         url: '../wx.file/index',
-        name: 'wx.file'
+        name: '文件'
       },
       {
         url: '../wx.location/index',
-        name: 'wx.location'
+        name: '位置'
       },
       {
         url: '../wx.preImg/index',
-        name: 'wx.preImg'
+        name: '预览图片'
       },
       {
         url: '../wx.request/index',
-        name: 'wx.request'
+        name: '调用接口'
       },
       {
         url: '../wx.saveImg/index',
-        name: 'wx.saveImg'
+        name: '保存图片'
       },
       {
         url: '../wx.template/index',
-        name: 'wx.template'
+        name: '自定义组件'
       },
       {
         url: '../wx.toast/index',
-        name: 'wx.toast'
+        name: '界面'
       },
       {
         url: '../wx.userInfo/index',
-        name: 'wx.userInfo'
+        name: '获取用户信息'
       },
 
     ]
