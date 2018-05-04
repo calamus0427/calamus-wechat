@@ -1,1 +1,5 @@
-<text>list</text>
+<view class="lists">
+    <block wx:for="{{lists}}" wx:key="" wx:item="item">
+        <navigator class="list-item" url="{{item.url}}" hover-class="navigator-hover">{{item.name}}</navigator>
+    </block>
+</view>
