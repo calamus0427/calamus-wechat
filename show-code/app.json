@@ -1,0 +1,30 @@
+{
+  "pages":[
+    "pages/list/index",
+    "pages/index/index",   
+    "pages/logs/logs",
+    "pages/icon/index",
+    "pages/movable-view/index",
+    "pages/progress/index",
+    "pages/scroll-view/index",
+    "pages/slider/index",
+    "pages/swiper/index",
+    "pages/view/index",
+    "pages/web-view/index",
+    "pages/wx.auth/index",
+    "pages/wx.file/index",
+    "pages/wx.location/index",
+    "pages/wx.preImg/index",
+    "pages/wx.request/index",
+    "pages/wx.saveImg/index",
+    "pages/wx.template/index",
+    "pages/wx.toast/index",
+    "pages/wx.userInfo/index"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle":"black"
+  }
+}

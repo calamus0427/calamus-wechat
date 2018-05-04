@@ -1,0 +1,74 @@
+<view > 
+<block wx:if="{{loading}}">
+<view class="loading"></view>
+</block>
+
+<!-- 头像标题 -->
+  <view class="logo center">
+    <image mode="widthFix" src="http://p3i10hjs7.bkt.clouddn.com/title1.png"></image>
+  </view>
+
+  <!-- 预览图 -->
+  <view class="preImg">
+    <!-- 头像预览 -->
+    <movable-area class="preview-img" >
+          <image alr="coocaa" src="{{src}}"></image>
+          <block wx:if="{{currentModel == 'template_top1.png' || currentModel == 'template_bottom1.png' || currentModel == 'template_bottom2.png' || currentModel == 'template_bottom3.png'  }}">
+            <movable-view class="cover"  bindchange="changeHat" direction="none" style="border-radius:30rpx;height: {{currentHeight}}; width: {{currentWidth}};background-image:url({{currentModelUrl}});opacity:{{alpha}};">
+            </movable-view>
+          </block>
+          <block wx:else>
+          <movable-view bindchange="changeHat" direction="all" class="cover"
+          style="height:{{currentHeight}}; width: {{currentWidth}};background-image:url({{currentModelUrl}});opacity:1;">
+          </movable-view>
+          </block>          
+    </movable-area> 
+    <!-- 透明度 -->
+    <block wx:if="{{currentModel == 'template_top1.png' || currentModel == 'template_bottom1.png' || currentModel == 'template_bottom2.png' || currentModel == 'template_bottom3.png'  }}">
+        <view class="alpha-view center" style="left:{{windowWidth}}px">
+          <text class="calamus cl-icon--" style="color:white"></text>
+          <movable-area class="alpha">
+              <movable-view class="alpha-item" bindchange="changePosition" direction="vertical"  x="-9" y="128">
+            </movable-view>
+          </movable-area>
+          <text class="calamus cl-taiyang" style="color:white"></text>
+        </view> 
+    </block>
+  </view>       
+  <!-- 模板 -->
+   <view class="chooseModel calamus cl-jiantouxia"> 
+   <text class="modelTips">选择模板</text>
+   <text class="tips" style="display:block">Tips:{{tips}}</text>
+   </view> 
+
+  <scroll-view class="model-view" scroll-with-animation="true" scroll-left="{{scrollLeft}}" bindscroll="getleft" scroll-x="true">
+      <block wx:for="{{modelList}}" wx:key="index"> 
+        <view class="model-item" >
+          <image bindtap="submitModel" 
+          data-id="{{item.id}}"  
+          data-height="{{item.height}}"
+          data-width="{{item.width}}"
+          data-direction="{{item.direction}}"              
+          data-url="{{item.url}}" 
+          style="background-image:url({{item.modelUrl}});order: {{index}};opacity:{{currentModel==item.id?'1':'0.8'}}" class="modelImg cover calamus {{currentModel==item.id?'active':''}}"  alt="calamus"></image>
+        </view>           
+      </block>               
+  </scroll-view>
+  <!-- 滚动条 -->
+  <!-- <movable-area class="scroll-bar" style="">
+          <movable-view  direction="horizontal" class="scroll-bar-item" x="{{scrollX}}">
+        </movable-view>
+  </movable-area> -->
+
+  <!-- 按钮 -->
+  <view class="button-control">
+    <!-- <button size="mini" class="calamus cl-zhaopian2" type="default" bindtap="chooseImg"> 选择图片</button> -->
+    <!-- <button size="mini" type="default" class="calamus cl-jiantouxia" bindtap="chooseModel"> 选择模板 </button> -->
+    <button class="calamus cl-xiazaidaoru" size="default" style="width:160px" bindtap="downloadImg"> 
+    <text style="font-size:35rpx;">保存头像</text></button>
+  </view>
+  <!-- 底部宣传图 -->
+  <view class="footer">     
+    <image style="width:80%;" mode="widthFix" src="http://p3i10hjs7.bkt.clouddn.com/footer.png"></image>
+  </view>  
+ </view>

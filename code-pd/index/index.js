@@ -45,38 +45,11 @@ Page({
         })
       }
     })   
-    this.authUser();
-    wx.login({
-      success: function (res) {
-        _this.setData({
-          code:res.code
-        })
-        if (res.code) {
-          //发起网络请求
-          wx.request({
-            url: 'https://api.weixin.qq.com/sns/jscode2session?appid=' + _this.data.appId + '&secret=' + _this.data.appSecret+'&js_code=' + res.code + '&grant_type=authorization_code',
-            data: {
-              code: res.code
-            },
-            success: function (res) {
-              _this.setData({
-                openID:res.data.openid
-              })
-            },
-            fail: function (res) {
-            },
-          })
-        } else {
-          console.log('登录失败！' + res.errMsg)
-        }
-      }
-    });  
   },
   onReady:function(){
       this.setData({
         loading:false
-      })
-      
+      })    
   },
   // 滚动条
   getleft(e) {
@@ -96,122 +69,13 @@ Page({
     }
   },
   changeHat(e) {
-    console.log("res111",e.detail);
+    console.log("iphone6无法响应",e.detail);
     this.setData({
       x: (e.detail.x/120).toFixed(2),
       y: (e.detail.y/120).toFixed(2)
     })
   },
-  goAd: function () {
-    wx.navigateTo({
-      url: '../out/index', //  
-      success: function () {
-
-      },       //成功后的回调；  
-      fail: function () { },         //失败后的回调；  
-      complete: function () { }      //结束后的回调(成功，失败都会执行)  
-    })
-  },
   authUser:function(){
-    
-    var _this = this ;
-    wx.getSetting({     
-      success(res) {
-        if (!res.authSetting['scope.userInfo']) {
-          wx.authorize({
-            scope: 'scope.userInfo',
-            success:function(res) {
-              var that = _this;
-              wx.getUserInfo({
-                success: function (res) {
-                  console.log("url", res.userInfo.avatarUrl)
-                  var userInfo = res.userInfo 
-                  var nickName = userInfo.nickName
-                  var avatarUrl = userInfo.avatarUrl
-                  that.setData({
-                    src: avatarUrl
-                  });
-                },
-                fail:function(res){
-                  wx.showModal({
-                    title: '警告',
-                    content: '您拒绝授权访问您的头像信息，将无法编辑头像。请重新授权或使用默认头像~',
-                    success: function (res) {
-                      wx.openSetting({
-                        success: (res) => {
-                          console.log(res);
-                          wx.getUserInfo({
-                            success: function (res) {
-                              console.log("url", res.userInfo.avatarUrl)
-                              var userInfo = res.userInfo
-                              var nickName = userInfo.nickName
-                              var avatarUrl = userInfo.avatarUrl 
-                              that.setData({
-                                src: avatarUrl
-                              });
-                            }
-                          })
-                        }
-                      })
-                    }
-                  })
-                }
-              })
-            },
-            fail:function(res){
-              console.log("error",res);
-              var that = _this ;
-              _this.setData({
-                src: "http://p3i10hjs7.bkt.clouddn.com/coocaa.jpg"
-              })
-              wx.showModal({
-                title: '警告',
-                content: '您拒绝授权访问您的头像信息，将无法编辑头像。请重新授权或使用默认头像~',
-                success: function (res) {
-                  wx.openSetting({
-                    success: (res) => {
-                      console.log(res);
-                      wx.getUserInfo({                    
-                        success: function (res) {
-                          console.log("url", res.userInfo.avatarUrl)
-                          var userInfo = res.userInfo
-                          var nickName = userInfo.nickName
-                          var avatarUrl = userInfo.avatarUrl
-                          that.setData({
-                            src: avatarUrl
-                          });
-                        }
-                      })
-                    }
-                  })
-                }
-              })
-            }
-          })
-        }else{         
-          wx.getUserInfo({
-            success: function (res) {
-              console.log("url", res.userInfo.avatarUrl)
-              var userInfo = res.userInfo
-              var nickName = userInfo.nickName
-              var avatarUrl = userInfo.avatarUrl 
-              _this.setData({
-                src: avatarUrl
-              });
-            },
-            fail:function(res){
-              wx.showModal({
-                title: '警告',
-                content: '获取用户信息失败，将使用默认头像'
-              })
-            }
-          })
-        }
-      },
-      fail(res){
-        console.log(res);
-      }
-    })
   },
   submitModel: function (event) {
     var model = event.target.dataset.id;

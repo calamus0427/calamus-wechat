@@ -9,8 +9,8 @@
   padding: 200rpx 0;  
   box-sizing: border-box;
 
-  background-color:blue;
-  background-image: url(http://p3i10hjs7.bkt.clouddn.com/436d0003359aa29fc928.png);
+  background-color:#00ced1;
+  /* background-image: url(http://p3i10hjs7.bkt.clouddn.com/436d0003359aa29fc928.png); */
    background-attachment:fixed; 
    background-size:contain; 
    background-repeat: round; 

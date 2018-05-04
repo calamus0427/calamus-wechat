@@ -2,9 +2,7 @@
 
 <view class="container">
   <view class="userinfo">
-    <block wx:if="{{!hasUserInfo && canIUse}}">
-        <a class="userinfo-waiting"  open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 等晴天 </a>
-    </block>
+    <block wx:if="{{!hasUserInfo && canIUse}}">    </block>
 
     <block wx:else>
       <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
