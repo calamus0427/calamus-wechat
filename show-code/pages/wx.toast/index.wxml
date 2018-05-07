@@ -1,5 +1,10 @@
 <!--logs.wxml-->
 <view class="container log-list">
-<button bindtap='showToast'>showToast</button>
-<button>hideToast</button>
+  <button bindtap='showToast'>showToast</button>
+  <button bindtap='showToast1'>showToast1</button>
+  <button bindtap='hideToast'>hideToast</button>
+  <button bindtap='showLoading'>showLoading</button>
+  <button bindtap='hideLoading'>hideLoading</button>
+  <button bindtap='showModal'>showModal</button>
+  <button bindtap='showActionSheet'>showActionSheet</button>
 </view>
