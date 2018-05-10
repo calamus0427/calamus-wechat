@@ -1,0 +1,56 @@
+<style lang="scss">
+.header-top {
+    height: 100px;
+    box-sizing: border-box;
+    padding: 15px;
+    background-color: #ff7700;
+    position: relative;
+    .user {
+        background-color: #ff7700;
+        display: flex;
+        justify-content: flex-start;
+        image {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            border: 4px solid white;
+            margin-right: 10px;
+        }
+        text {
+            position: relative;
+            top: 27px;
+            color: white;
+            font-family: 'SimHei';
+        }
+    }
+}
+</style>
+<template>
+    <view class="header-top">
+        <view class="user">
+            <image src="{{userInfo.avatarUrl}}"></image>
+            <text>{{userInfo.nickName}}</text>
+        </view>
+    </view>
+</template>
+<script>
+import wepy from 'wepy'
+// import interfaces from '../../interfaces/index'
+export default class header extends wepy.component {
+
+    components = {
+
+    }
+    data = {
+        userInfo: {
+
+        }
+    }
+    methods = {
+    }
+
+    async onLoad() {
+        console.log('classify-header')
+    }
+}
+</script>

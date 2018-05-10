@@ -6,6 +6,7 @@ Page({
     ],
     iconType: [
       'success', 'success_no_circle', 'info', 'warn', 'waiting', 'cancel', 'download', 'search', 'clear'
-    ]
+    ],
+    iconUser: ['cl-picture', 'cl-tianjia', 'cl-shanchudelete30', 'cl-tianjiajiahaowubiankuang', 'cl-zhaopian2', 'cl-xuanze', 'cl-taiyang', 'cl-xiazaidaoru', 'cl-quanping', 'cl-jiantoushang', 'cl-jiantouxia','cl-icon--']
   }
 })

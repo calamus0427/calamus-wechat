@@ -1,0 +1,389 @@
+<style lang="scss">
+.bagCar {
+    icon {
+        height: 50rpx;
+        width: 50rpx;
+        z-index: 999;
+        margin-right: 16rpx
+    } // padding-top: 10vh;
+    .footer {
+        box-sizing: border-box;
+        background: white;
+        height: 10vh;
+        width: 100%;
+        bottom: 10vh;
+        box-sizing: border-box;
+        display: flex;
+        z-index: 10;
+        .footer-left {
+            padding: 16rpx;
+            box-sizing: border-box;
+            flex: 1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            .footer-left-box {
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                color: grey;
+                font-size: 28rpx;
+            }
+            .footer-right-box {
+                font-size: 36rpx;
+                font-weight: bold;
+            }
+        }
+        .footer-right {
+            background-image: linear-gradient(to right, #ff7700, #FFFACD);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20rpx;
+            font-family: 'SimHei';
+            font-size: 30rpx;
+            color: white;
+        }
+    }
+    .header {
+        z-index: 10;
+
+        box-sizing: border-box;
+        background: white;
+        height: 10vh;
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        justify-content: center;
+        padding: 16rpx;
+        border-bottom: 2rpx solid lightgray;
+        .header-info {
+            flex: 1;
+            display: flex;
+            font-size: 28rpx;
+            font-weight: bold;
+            justify-content: flex-start;
+            align-items: center;
+            letter-spacing: 1rpx;
+        }
+    }
+    .content {
+        height: 70vh;
+        box-sizing: border-box;
+        .icon {
+            z-index: 0;
+        }
+        .content-box {
+            background: white;
+            box-sizing: border-box;
+            height: 25vh;
+            padding: 16rpx;
+            display: flex;
+            border-bottom: 2rpx solid lightgray;
+            .content-box-left {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .content-box-right {
+                flex: 1;
+                display: flex;
+                .bookimg {
+                    width: 200rpx;
+                    height: 100%;
+                    margin-right: 40rpx;
+                }
+                .bookInfo {
+                    flex: 1;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: flex-start;
+                    box-sizing: border-box;
+                    position: relative;
+                    text {
+                        margin-bottom: 8rpx;
+                    }
+                    text:nth-child(1) {
+                        font-size: 30rpx;
+                    }
+                    text:nth-child(2) {
+                        font-size: 28rpx;
+                        color: lightgray;
+                    }
+                    text:nth-child(3) {
+                        font-size: 28rpx;
+                        color: lightgray;
+                    }
+                    text:nth-child(4) {
+                        font-size: 28rpx;
+                        color: #ff7700;
+                    }
+                    text:nth-child(5) {
+                        font-size: 34rpx;
+                        color: red;
+                    }
+                    .delete {
+                        width: 50rpx;
+                        height: 50rpx;
+                        position: absolute;
+                        top: calc(50% - 25rpx);
+                        right: 10rpx;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.bagCar-wrap {
+    position: relative;
+    height: 90vh;
+    width: 100%;
+}
+
+.barCode {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 90vh;
+    .pay {
+        align-self: flex-start;
+    }
+    image {
+        width: 80vw;
+        height: 50vh;
+        margin-bottom: 20rpx;
+        margin-top: 40rpx;
+    }
+}
+</style>
+<template>
+    <view class="bagCar-wrap">
+        <view class="bagCar" wx:if="{{!barCode.show}}">
+            <view class="header">
+                <view class='header-info'>
+                    <icon bindtap="CheckAll" type="success" color="{{allCheck?'#ff7700' :'lightgrey'}}" />
+                    <text>您当前还可以借阅{{canBorrowCount}}本</text>
+                </view>
+                <text style="font-size:28rpx; ">编辑</text>
+            </view>
+            <scroll-view scroll-y style="height: 70vh;">
+                <view class="content">
+                    <block wx:for="{{carBooks}}" wx:key="{{index}}">
+                        <view class="content-box">
+                            <view class="content-box-left">
+                                <icon type="success" color="{{check[index]?'#ff7700':'lightgrey'}}" bindtap="CheckItem('{{index}}')" />
+                            </view>
+                            <view class="content-box-right">
+                                <image class="bookimg" src="{{item.imageurl}}"></image>
+                                <view class="bookInfo">
+                                    <text>{{item.name}}</text>
+                                    <text>{{item.author}}</text>
+                                    <text>{{item.publish}}</text>
+                                    <text>isbn: {{item.isbn}}</text>
+                                    <text>¥ 20</text>
+                                    <image class="delete" src="../resources/icons/delete.png" @tap="deleteItem('{{item.bookId}}')"></image>
+                                </view>
+                            </view>
+                        </view>
+                    </block>
+                </view>
+            </scroll-view>
+
+            <view class="footer">
+                <view class="footer-left">
+                    <view class="footer-left-box">
+                        <icon bindtap="CheckAll" type="success" color="{{allCheck?'#ff7700' :'lightgrey'}}" />
+                        <text>全选</text>
+                    </view>
+                    <text class="footer-right-box">合计 0</text>
+                </view>
+                <view class="footer-right" @tap="borrowBook">
+                    生成借书二维码
+                </view>
+            </view>
+        </view>
+        <view class="barCode" wx:if="{{barCode.show}}">
+            <button class="pay" @tap="pay">支付</button>
+            <image src="{{barCode.url}}" bindload="hideLoading"></image>
+            <icon @tap="cancel" type="cancel" size="40" />
+        </view>
+    </view>
+</template>
+<script>
+import wepy from 'wepy'
+// import interfaces from '../../../interfaces/index'
+import login from '../../mixins/login'
+import { api } from '../../../config'
+export default class Message extends wepy.component {
+
+    components = {
+
+    }
+    data = {
+        carBooks: [],
+        allCheck: false,
+        check: [],
+        count: '',
+        canBorrowCount: '',
+        barCode: {
+            show: false,
+            url: ''
+        },
+    }
+    methods = {
+        CheckAll() {
+            this.allCheck = !this.allCheck
+            let array = new Array(this.count)
+            array.fill(this.allCheck)
+            this.check = array
+            this.$apply()
+        },
+        CheckItem(index) {
+            this.check[index] = !this.check[index]
+        },
+        borrowBook() {
+            if (this.canBorrowCount === 0) {
+                wx.showToast({
+                    title: `您当前可借书的数量为${this.canBorrowCount}`,
+                    icon: '../resources/icons/plus.png',
+                    duration: 2000
+                })
+                return false
+            }
+            let isCheck = this.check.some((item) => {
+                return item === true
+            })
+            if (!isCheck) {
+                wx.showToast({
+                    title: `请选择要借阅的书籍`,
+                    icon: '../resources/icons/plus.png',
+                    duration: 2000
+                })
+                return false
+            }
+            let str = '',
+                str1 = '',
+                checkNum = 0
+            this.check.forEach((item, index) => {
+                if (item) {
+                    str += '$book=' + this.carBooks[index].bookId + '$costmoney=' + '20'
+                    str1 += '$book=' + this.carBooks[index].bookId
+                    checkNum += 1
+                }
+            })
+            str = str.slice(1)
+            str1 = str1.slice(1)
+            console.log(str, str1, checkNum, this.canBorrowCount)
+            if (checkNum > this.canBorrowCount) {
+                wx.showToast({
+                    title: `您当前可借书的数量为${this.canBorrowCount}`,
+                    icon: '../resources/icons/plus.png',
+                    duration: 2000
+                })
+                return false
+            }
+
+            this.barCode.url = 'http://qr.liantu.com/api.php?text=' + this.userId + '/?' + str + '!?' + str1
+            this.barCode.show = true
+            wx.showLoading({
+                title: '正在生成二维码...',
+
+            })
+            this.$apply()
+        },
+        cancel() {
+            this.onLoad()
+        },
+        pay() {
+            wx.redirectTo({
+                url: 'pay'
+            })
+        },
+        hideLoading() {
+            wx.hideLoading()
+        },
+        deleteItem(bookId) {
+            wx.showModal({
+                title: '提示',
+                content: '确认从购物车里删除?',
+                success: async (res) => {
+                    //  点击确定
+                    if (res.confirm) {
+                        await wepy.request({
+                            url: `${api.lendBook.deleteBooksFromCar.url}/${this.userId}/?book=${bookId}`,
+                            method: api.lendBook.deleteBooksFromCar.method
+                        })
+                        wx.showToast({
+                            title: '删除成功',
+                            icon: 'success',
+                            duration: 2000
+                        })
+                        this.onLoad()
+                    }
+                }
+            })
+            // wx.showModal({
+            //     title: '提示?',
+            //     content: '确认从购物车里删除?',
+            //     success: function(res) {
+            //         if (res.confirm) {
+            //             wx.request({
+            //                 url: 'https://www.learningwang.cn/books/deleteBooksFromCar/' + that.data.userid + '/?book=' + bookid,
+            //                 success: function(res) {
+            //                     console.log(res.data)
+            //                     that.setData({
+            //                         car: res.data.cart_Lend_BookCustoms
+            //                     })
+            //                     wx.showToast({
+            //                         title: '删除成功',
+            //                         icon: '../resources/icons/plus.png',
+            //                         duration: 2000
+            //                     })
+            //                 }
+            //             })
+            //         } else if (res.cancel) {
+            //             return;
+            //         }
+            //     }
+            // })
+        }
+    }
+    mixins = [login]
+
+    async onLoad() {
+        try {
+            // 获取用户id
+            await this.getStoreById()
+
+            // 获取购物车书籍
+            let carBooks = await wepy.request({
+                url: api.lendBook.getBooksFromCar.url + this.userId,
+                method: api.lendBook.getBooksFromCar.method
+            })
+            // 获取已借阅数量
+            let lendBooks = await wepy.request({
+                url: api.lendBook.getLendBooks.url + this.userId,
+                method: api.lendBook.getLendBooks.method
+            })
+            let canBorrowCount = 2 - lendBooks.data.dateCount
+            let count = carBooks.data.dataCount
+            let fillArray = new Array(count)
+            this.canBorrowCount = canBorrowCount
+            this.count = count
+            this.check = fillArray.fill(false)
+            this.carBooks = carBooks.data.cart_Lend_BookCustoms
+            this.barCode.show = false
+            this.$apply()
+        } catch (error) {
+            console.log(error)
+        }
+        console.log('bagCar')
+    }
+
+}
+</script>

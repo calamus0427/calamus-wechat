@@ -1,0 +1,127 @@
+<style lang="scss">
+.bookList {
+    .item-list {
+        display: flex;
+        flex-direction: column;
+        border-top: 1px solid lightgray;
+        .item {
+            display: flex;
+            margin: 15px;
+        }
+        .left image {
+            width: 100px;
+            height: 120px;
+        }
+        .right {
+            display: flex;
+            flex-direction: column;
+            margin-left: 20px;
+            text:first-child {
+                font-family: 'SimHei';
+                font-weight: bold;
+                font-size: 20px;
+                margin-bottom: 10px;
+            }
+            text:nth-child(2) {
+                font-family: 'SimHei';
+                font-size: 13px;
+                color: gray;
+            }
+            text:nth-child(3) {
+                font-family: 'SimeHei';
+                font-size: 13px;
+                color: gray;
+            }
+        }
+    }
+}
+</style>
+<template>
+    <view class="bookList">
+        <block wx:for="{{books}}" wx:key="{{index}}">
+            <view class="item-list">
+                <view class="item" @tap="gotodetail('{{item.isbn}}','{{item.typeId}}','{{item.id}}')">
+                    <view class="left">
+                        <image src="{{item.imageurl}}"></image>
+                    </view>
+                    <view class="right">
+                        <text>{{item.name}}</text>
+                        <text>{{item.author}}</text>
+                        <text> {{item.publish}}</text>
+                    </view>
+                </view>
+            </view>
+        </block>
+    </view>
+</template>
+
+<script>
+import wepy from 'wepy'
+import { api } from '../config'
+export default class BookList extends wepy.page {
+    config = {
+        'navigationBarTitleText': '',
+        'navigationBarTextStyle': 'white',
+        'navigationBarBackgroundColor': '#ff7700'
+    }
+
+    components = {
+    }
+    data = {
+        books: []
+    }
+
+    methods = {
+        gotodetail(isbn, typeId, id) {
+            wepy.navigateTo({
+                url: 'bookDetail?isbn=' + isbn + '&typeId=' + typeId + '&id=' + id
+            })
+        }
+    }
+
+    onShow() {
+    }
+    async onLoad(params, data) {
+        let books = []
+        try {
+            if (params.searchValue) {
+                console.log('search逻辑')
+                books = await wepy.request({
+                    url: api.common.search.url + params.searchValue,
+                    method: api.common.search.methodk,
+                    header: {
+                        'Content-Type': 'json'
+                    },
+                })
+                wepy.setNavigationBarTitle({
+                    title: '搜索: ' + params.searchValue
+                })
+            } else if (params.classifyId) {
+                books = await wepy.request({
+                    url: api.common.classifyById.url + params.classifyId,
+                    method: api.common.classifyById.method,
+                    header: {
+                        'Content-Type': 'json'
+                    },
+                })
+                wx.setNavigationBarTitle({
+                    title: params.title
+                })
+            } else if (params.typeId) {
+                books = await wepy.request({
+                    url: api.common.relevant.url + params.typeId,
+                    method: api.common.relevant.method
+                })
+                console.log(books)
+            }
+            this.books = books.data.books
+            this.$apply()
+        } catch (error) {
+            console.log('bookList出错')
+        }
+
+    }
+    async
+
+}
+</script>

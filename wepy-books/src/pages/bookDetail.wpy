@@ -1,0 +1,82 @@
+<style lang="scss">
+
+</style>
+<template>
+    <view>
+        <view wx:if={{!wait}}>
+            <bookImage />
+            <bookInfo />
+            <bookOperation />
+            <bookDetailInfo />
+        </view>
+        <view wx:if={{wait}}>
+            <load />
+        </view>
+    </view>
+</template>
+
+<script>
+import wepy from 'wepy'
+import bookImage from '../components/BookDetailPage/bookImage'
+import bookInfo from '../components/BookDetailPage/bookInfo'
+import bookOperation from '../components/BookDetailPage/bookOperation'
+import bookDetailInfo from '../components/BookDetailPage/bookDetailInfo'
+import load from '../components/load'
+export default class BookDetail extends wepy.page {
+    config = {
+        'navigationBarTitleText': '书籍详情',
+        'navigationBarTextStyle': 'white',
+        'navigationBarBackgroundColor': '#ff7700'
+    }
+
+    components = {
+        bookImage,
+        bookInfo,
+        bookOperation,
+        bookDetailInfo,
+        load
+    }
+    data = {
+        wait: true,
+        loadData: [],
+        loadNum: 0
+    }
+    events = {
+        'loadComplete': (p1, $event) => {
+            let comLength = Object.getOwnPropertyNames(this.$com).length
+            // console.log(comLength,$event)
+            this.loadNum += 1
+            if (this.loadNum === comLength - 1) {
+                this.wait = false
+
+            }
+
+        }
+    }
+    methods = {
+    }
+
+    onShow() {
+        // this.$invoke('bookOperation',getUserInfo)
+    }
+    async onLoad(params) {
+        try {
+            let book = await wepy.request({
+                url: 'https://api.douban.com/v2/book/isbn/' + params.isbn,
+                header: {
+                    'Content-Type': 'json'
+                },
+            })
+            if (params.isbn === '9787115433145') {
+                params.id = 4086
+                params.typeId = 151
+            }
+            this.$broadcast('bookData', book.data, params.id, params.typeId)
+        } catch (error) {
+            console.log('豆瓣出错')
+        }
+        console.log('BookDetail页面加载')
+    }
+
+}
+</script>

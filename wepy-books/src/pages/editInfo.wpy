@@ -1,0 +1,210 @@
+<style lang="scss">
+.editInfo {
+
+    .header {
+        background-image: linear-gradient(to bottom, #ff7700, #FFFACD);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 180px;
+        position: relative;
+        button {
+            background: transparent;
+            border: 2rpx solid white;
+            color: white;
+            font-family: 'SimHei';
+        }
+    }
+    .header image {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+    }
+    .bottom {
+        background-color: #F8F8FF;
+        margin-bottom: 50px;
+    }
+    .know {
+        padding: 10px;
+        background-color: #fff;
+        margin-bottom: 20px;
+    }
+    .know-item {
+        border-bottom: 1px solid lightgray;
+        padding: 10px;
+        display: flex;
+    }
+    .know-item text {
+        font-family: 'SimHei';
+    }
+    .item-left {
+        margin-right: 10px;
+        flex: 1;
+    }
+    .item-right {
+        flex: 3;
+    }
+    .save {
+        width: 40%;
+        border-radius: 12px;
+        font-family: 'SimHei';
+        background-color: yellow;
+        box-shadow: 5px 5px 15px 5px #E0FFFF;
+    }
+}
+</style>
+<template>
+    <view class=".editInfo">
+        <form @submit="submitUserDetaiInfo">
+            <view class="header">
+                <image wx:if="{{isLogin === true}}" src="{{userInfo.avatarUrl}}"></image>
+                <button wx:if="{{isLogin === false}}" open-type="getUserInfo" bindgetuserinfo="userInfoHandler">获取微信头像</button>
+            </view>
+            <view class="bottom">
+                <view class="know">
+                    <view class="know-item">
+                        <text class="item-left">用户名</text>
+                        <input name="username" type="text" class="item-right" value="{{userDetaiInfo.user.username}}"></input>
+                    </view>
+                    <view class="know-item">
+                        <text class="item-left">地区</text>
+                        <input name="area" type="text" class="item-right" value="{{userDetaiInfo.user.area}}"></input>
+                    </view>
+                </view>
+                <view class="know">
+                    <view class="know-item">
+                        <text class="item-left">手机号</text>
+                        <input name="phone" type="text" class="item-right" value="{{userDetaiInfo.user.phone}}"></input>
+                    </view>
+                    <view class="know-item">
+                        <text class="item-left">Email</text>
+                        <input name="Email" type="text" class="item-right" value="{{userDetaiInfo.user.email}}"></input>
+                    </view>
+                    <view class="know-item">
+                        <text class="item-left">身份证号</text>
+                        <input name="idcard" type="text" class="item-right" value="{{userDetaiInfo.user.idcard}}"></input>
+                    </view>
+                </view>
+            </view>
+            <button class="save" form-type="submit">保存</button>
+        </form>
+    </view>
+</template>
+
+<script>
+import wepy from 'wepy'
+import { api } from '../config'
+import store from '../utils/storage'
+export default class EditInfo extends wepy.page {
+    config = {
+        'navigationBarTitleText': '个人信息',
+        'navigationBarTextStyle': 'white',
+        'navigationBarBackgroundColor': '#ff7700'
+    }
+
+    components = {
+
+    }
+
+    data = {
+        userInfo: {},
+        userDetaiInfo: {},
+        userId: '',
+        isLogin: ''
+    }
+
+    methods = {
+        async submitUserDetaiInfo(e) {
+            var that = this
+            var obj = e.detail.value
+            let content = ''
+            if (!(/^1[34578]\d{9}$/.test(obj.phone))) {
+                content += ' 手机号'
+            }
+            if (!(/^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{4}$/.test(obj.idcard))) {
+                content += ' 身份证号'
+            }
+            if (!(/^[_\.0-9a-z-]+@([0-9a-z][0-9a-z-]+\.){1,4}[a-z]{2,3}$/.test(obj.Email))) {
+                content += ' 邮箱'
+            }
+            if (content !== '') {
+                wx.showModal({
+                    title: '提示',
+                    content: `请输入正确的${content}`
+                })
+                return false
+            }
+            var str = ''
+            for (var val in obj) {
+                str += val
+                str += '='
+                str += obj[val]
+                str += '&'
+            }
+            str = str.substring(0, str.length - 1)
+            console.log(str)
+            wx.showModal({
+                title: '提示',
+                content: '确认提交?',
+                success: function(res) {
+                    if (res.confirm) {
+                        try {
+                            wepy.request({
+                                url: `${api.user.editInfo.url + that.userId}?${str}`,
+                                method: api.user.editInfo.method
+                            })
+                            wx.showToast({
+                                title: '提交成功',
+                                icon: '../resources//icons/plus',
+                                duration: 1000
+                            })
+                        } catch (error) {
+                            console.log(error)
+                        }
+                    } else if (res.cancel) {
+
+                    }
+                }
+            })
+        },
+        async userInfoHandler(e) {
+            if (e.errMsg !== 'getUserInfo:fail auth deny') {
+                let userInfo = JSON.parse(e.detail.rawData)
+                await store.setStorage({
+                    'userInfo': userInfo,
+                })
+                this.isLogin = true
+                this.userInfo = userInfo
+                this.$apply()
+            }
+        }
+    }
+    async onLoad() {
+        try {
+            let userId = await wepy.getStorage({
+                key: 'userId'
+            })
+            this.userId = userId.data
+            let userDetaiInfo = await wepy.request({
+                url: api.user.userInfo.url + userId.data,
+                method: api.user.userInfo.method
+            })
+            this.userDetaiInfo = userDetaiInfo.data
+            this.$apply()
+            let userInfo = await wepy.getStorage({
+                key: 'userInfo'
+            })
+            this.userInfo = userInfo.data
+            this.isLogin = true
+            this.$apply()
+        } catch (e) {
+            console.log(e)
+
+            this.isLogin = false
+            this.$apply()
+        }
+
+    }
+
+}
+</script>

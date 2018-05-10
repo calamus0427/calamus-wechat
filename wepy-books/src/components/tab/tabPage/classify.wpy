@@ -1,0 +1,36 @@
+<style lang="scss">
+
+</style>
+<template>
+    <view>
+        <classifyIndex />
+    </view>
+</template>
+<script>
+import wepy from 'wepy'
+// import header from '../../classify/header'
+// import tab from '../../classify/tab'
+// import classifyBook from '../../classify/classifyBook'
+import classifyIndex from '../../classify/classifyIndex'
+export default class Message extends wepy.component {
+
+    components = {
+        // userHeader: header,
+        // tab,
+        // classifyBook,
+        classifyIndex
+    }
+
+    data = {
+
+    }
+    methods = {
+
+    }
+
+    async onLoad() {
+        console.log('classify')
+
+    }
+}
+</script>

@@ -1,0 +1,69 @@
+<style lang="scss">
+.classify-tab {
+    height: 40px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-around;
+    border-bottom: 1px solid lightgray;
+    background-color: white!important;
+    .tab-item {
+        background-color: white!important;
+
+        flex-grow: 1;
+        text-align: center;
+        font-size: 16px;
+        font-family: 'SimHei';
+        padding: 10px;
+        line-height: 16px;
+        color: black;
+    }
+    .tab-hover {
+        color: black;
+        border-bottom: 2px solid #ff7700;
+        transition: color .5s ease .1s;
+    }
+}
+</style>
+<template>
+    <view class="classify-tab">
+        <view @tap="changeCurrent('a')" class="tab-item {{class[0]}}">文学</view>
+        <view @tap="changeCurrent('b')" class="tab-item {{class[1]}}">流行</view>
+        <view @tap="changeCurrent('c')" class="tab-item {{class[2]}}">文化</view>
+        <view @tap="changeCurrent('d')" class="tab-item {{class[3]}}">生活</view>
+        <view @tap="changeCurrent('e')" class="tab-item {{class[4]}}">经管</view>
+        <view @tap="changeCurrent('f')" class="tab-item {{class[5]}}">科技</view>
+    </view>
+</template>
+<script>
+import wepy from 'wepy'
+export default class tab extends wepy.component {
+
+    components = {
+
+    }
+    data = {
+        class: ['tab-hover', '', '', '', '', '', '']
+
+    }
+    methods = {
+        changeCurrent(currentTab) {
+            let num = currentTab.charCodeAt() - 97
+            let arr = this.class
+            for (var i = 0; i < arr.length; i++) {
+                if (i === num) {
+                    arr[i] = 'tab-hover'
+                } else {
+                    arr[i] = ''
+                }
+            }
+            this.class = arr
+            this.$invoke('../classifyBook', 'changeCurrent', currentTab)
+
+        }
+    }
+
+    onLoad() {
+        console.log('classify-tab')
+    }
+}
+</script>

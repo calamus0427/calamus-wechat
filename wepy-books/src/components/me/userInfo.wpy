@@ -1,0 +1,144 @@
+<style lang="scss">
+.userInfo {
+    box-sizing: border-box;
+    background-image: linear-gradient(to bottom, #ff7700, #FFFACD);
+    width: 100%;
+    height: 20vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 25rpx;
+    .icon {
+        width: 50rpx;
+        height: 50rpx;
+        align-self: flex-end;
+    }
+    .info {
+        align-self: flex-start;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        image {
+            width: 12vh;
+            height: 12vh;
+            border-radius: 50%;
+            margin-right: 40rpx;
+            border: 8rpx solid white;
+        }
+        button {
+            background: transparent;
+            border: 2rpx solid white;
+            color: white;
+            font-family: 'SimHei';
+        }
+        .nameCity {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin-right: 200rpx;
+            text:first-child {
+                font-family: 'SimHei';
+                font-size: 50rpx;
+                color: white
+            }
+            text:nth-child(2) {
+                font-family: 'SimHei';
+                font-size: 30rpx;
+                color: white
+            }
+        }
+
+        .personShow {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text {
+                font-family: 'SimHei';
+                font-size: 28rpx;
+                color: white;
+            }
+        }
+    }
+}
+</style>
+<template>
+    <view class="userInfo">
+        <image class="icon" src="../resources/icons/set.png"></image>
+        <view class="info">
+            <view class="info" wx:if="{{isLogin}}">
+                <image src="{{userInfo.avatarUrl}}"></image>
+                <view class="nameCity">
+                    <text>{{userInfo.nickName}}</text>
+                    <text>{{userInfo.city}}</text>
+                </view>
+                <view class="personShow">
+                    <switch checked="{{personShow}}" bindchange="personChange" color="#ff7700" />
+                    <text>个性化推荐</text>
+                </view>
+            </view>
+            <view class="info" wx:if="{{!isLogin}}">
+                <image src="../resources/images/loginfailed.jpg"></image>
+                <button open-type="getUserInfo" bindgetuserinfo="userInfoHandler">授权登录</button>
+            </view>
+        </view>
+    </view>
+</template>
+
+<script>
+import wepy from 'wepy'
+import store from '../../utils/storage'
+// import interfaces from '../../interfaces/index'
+export default class Me extends wepy.component {
+
+    components = {
+
+    }
+
+    data = {
+        userInfo: {},
+        isLogin: false,
+        personShow: true
+    }
+
+    methods = {
+        async userInfoHandler(e) {
+            if (e.errMsg !== 'getUserInfo:fail auth deny') {
+                let userInfo = JSON.parse(e.detail.rawData)
+                await store.setStorage({
+                    'userInfo': userInfo,
+                })
+                this.isLogin = true
+                this.userInfo = userInfo
+                this.$apply()
+            }
+        },
+        personChange(e) {
+            wx.setStorageSync('personShow', e.detail.value)
+        }
+    }
+    async onLoad() {
+        try {
+            let userInfo = await wepy.getStorage({
+                key: 'userInfo'
+            })
+            let Person = wx.getStorageSync('personShow')
+            console.log(Person)
+            if (Person !== '') {
+                this.personShow = Person
+            } else {
+                this.personShow = true
+            }
+            this.userInfo = userInfo.data
+            this.isLogin = true
+            this.$apply()
+        } catch (error) {
+            this.isLogin = false
+        }
+
+    }
+
+}
+</script>

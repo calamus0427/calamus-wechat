@@ -1,2 +1,3 @@
 <!--pages/wx.template/index.wxml-->
-<text>pages/wx.template/index.wxml</text>
+<modal modal-hidden="{{is_modal_Hidden}}" modal-msg="{{is_modal_Msg}}"/>  
+

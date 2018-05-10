@@ -7,42 +7,46 @@ Page({
   data: {
     lists1: [
       {
-        url: '../icon/index',
-        name: 'icon'
-      },
-      {
-        url: '../movable-view/index',
-        name: 'movable-view'
-      },
-      {
-        url: '../progress/index',
-        name: 'progress'
+        url: '../view/index',
+        name: 'view'
       },
       {
         url: '../scroll-view/index',
         name: 'scroll-view'
       },
       {
-        url: '../slider/index',
-        name: 'slider'
+        url: '../web-view/index',
+        name: 'web-view'
+      },
+      {
+        url: '../movable-view/index',
+        name: 'movable-view'
       },
       {
         url: '../swiper/index',
         name: 'swiper'
       },
       {
-        url: '../view/index',
-        name: 'view'
+        url: '../progress/index',
+        name: 'progress'
       },
       {
-        url: '../web-view/index',
-        name: 'web-view'
-      }
+        url: '../slider/index',
+        name: 'slider'
+      },
+      {
+        url: '../icon/index',
+        name: 'icon'
+      },
+      {
+        url: '../wx.template/index',
+        name: '自定义组件'
+      },
     ],
     lists2: [
       {
-        url: '../wx.auth/index',
-        name: '授权'
+        url: '../wx.request/index',
+        name: '调用接口'
       },
       {
         url: '../wx.file/index',
@@ -53,29 +57,25 @@ Page({
         name: '位置'
       },
       {
-        url: '../wx.preImg/index',
-        name: '预览图片'
-      },
-      {
-        url: '../wx.request/index',
-        name: '调用接口'
-      },
-      {
         url: '../wx.saveImg/index',
         name: '保存图片'
       },
       {
-        url: '../wx.template/index',
-        name: '自定义组件'
+        url: '../wx.preImg/index',
+        name: '预览图片'
       },
       {
-        url: '../wx.toast/index',
-        name: '界面'
+        url: '../wx.auth/index',
+        name: '授权'
       },
       {
         url: '../wx.userInfo/index',
         name: '获取用户信息'
       },
+      {
+        url: '../wx.toast/index',
+        name: '界面'
+      }
 
     ]
   },

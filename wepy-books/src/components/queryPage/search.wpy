@@ -1,0 +1,474 @@
+<style lang="scss">
+.searchHeader {
+    box-sizing: border-box;
+    border: 1px solid lightgrey;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 6px;
+    .icon {
+        width: 20px;
+        height: 20px;
+        margin-right: 8px;
+    }
+    .input {
+        flex: 1;
+        position: relative;
+        .clear {
+            position: absolute;
+            right: 10px;
+            z-index: 999;
+            bottom: calc(50% - 15px);
+        }
+    }
+    input {
+        font-family: "Microsoft YaHei";
+        font-size: 16px;
+        height: 30px;
+        padding: 3px 3px 3px 10px;
+        background: #EDEDED;
+        border-radius: 30px;
+    }
+
+    button {
+        margin-right: 0;
+        margin-left: 8px;
+        color: #fff;
+        background-color: #ff7700;
+        width: 50px;
+        height: 30px;
+        border-radius: 40px;
+        font-size: 14px;
+        text-align: center;
+        line-height: 30px;
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+
+.book-show {
+    height: 700px;
+    .book-list {
+        display: flex;
+        flex-direction: column;
+        border-bottom: 1px solid lightgray;
+        .hover-item {}
+        .book-list-image {
+            width: 70px;
+            height: 70px;
+        }
+        .book-list-item {
+            display: flex;
+            height: 70px;
+            margin-bottom: 15px;
+            padding: 10px;
+        }
+        .book-list-left {
+            margin-right: 10px
+        }
+
+        .book-list-right-style {
+            font-size: 14px;
+            font-family: 'SimHei';
+            margin-bottom: 5px;
+        }
+        .book-list-right-style1 {
+            color: gray;
+            font-size: 10px;
+        }
+        .hover-item {
+            background-color: #EDEDED;
+        }
+    }
+    .foot {
+        padding: 15px;
+        display: flex;
+        justify-content: space-between;
+    }
+    text:first-child {
+        font-size: 14px;
+        font-family: 'SimHei';
+        color: gray;
+    }
+}
+
+.history {
+    padding: 16rpx;
+    box-sizing: border-box;
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 16rpx;
+        text {
+            color: lightgray;
+            font-size: 30rpx;
+            font-family: 'SimHei'
+        }
+        image {
+            width: 50rpx;
+            height: 50rpx;
+        }
+    }
+    .content {
+        display: flex;
+        flex-wrap: wrap;
+        .historyItem {
+            box-sizing: border-box;
+            height: 60rpx;
+            padding: 10rpx;
+            border-radius: 15rpx;
+            background: #FAFAFA;
+            color: black;
+            font-size: 28rpx;
+            font-family: 'SiHei';
+            margin-right: 16rpx;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 16rpx;
+        }
+    }
+}
+
+.queryTop {}
+
+.serie {
+    background-color: #e6e6e6;
+    margin-top: 40rpx;
+    .serie-header {
+        display: flex;
+        justify-content: space-between;
+        position: relative;
+        margin-bottom: 10px;
+        background-color: #e6e6e6;
+        .serie-icon {
+            width: 10px;
+            height: 10px;
+            position: absolute;
+            top: 12px;
+            right: 0;
+        }
+        >text:first-child {
+            margin-top: 10px;
+            border-left: 4px solid #ff7700;
+            font-family: 'SimHei';
+            padding-left: 10px;
+            font-size: 15px;
+        }
+        >text:nth-child(2) {
+            color: darkgray;
+            margin-top: 10px;
+            padding-right: 10px;
+            font-size: 15px;
+            font-family: 'SimHei';
+        }
+    }
+    .bookview {
+        background-color: #e6e6e6;
+        white-space: nowrap;
+        padding: 10px;
+    }
+    scroll-view {
+        height: 340px;
+        white-space: nowrap;
+        box-sizing: border-box;
+    }
+    .item {
+        text {
+            font-size: 12px;
+            color: darkgrey;
+            margin-bottom: 10px;
+            font-family: 'SimHei';
+        }
+        width: 50%;
+        border-radius: 10px;
+        background-color: white;
+        margin-right: 15px;
+        overflow: hidden;
+        display: inline-block;
+        .item-img {
+            width: 100%;
+            height: 160px;
+            margin-right: 15px;
+        }
+        .item-intro {
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            box-sizing: border-box;
+            .bookimgurl {
+                font-size: 16px;
+                font-family: 'SimHei';
+                font-weight: bold;
+                margin-bottom: 10px;
+            }
+            .author_info {
+                display: flex;
+                .author_img {
+                    width: 50px;
+                    height: 50px;
+                    border-radius: 50%;
+                    margin-bottom: 10px;
+                    margin-right: 20px;
+                }
+                .item-info1 {
+                    display: flex;
+                    flex-direction: column;
+                }
+            }
+            .booklistend {
+                width: 100%;
+                border-radius: 5px;
+                border: 1px solid #ff7700;
+                text-align: center;
+                font-family: 'SimHei';
+                font-size: 15px;
+                font-weight: bold;
+                padding: 5px;
+                color: #ff7700;
+                box-sizing: border-box;
+            }
+        }
+    }
+}
+</style>
+<template>
+    <view class="queryTop">
+        <view class="searchHeader">
+            <image @tap="backToIndex" class="icon" src="../resources/icons/left.png">
+            </image>
+            <view class="input">
+                <input type="text" @input="inputChange" value='{{inputValue}}' placeholder="请输入关键字/全拼/isbn" placeholder-style=" color:#666666;font-size: 13px;font-family: 'SimHei';text-align:center">
+                <!-- <icon wx:if="{{clearShow}}" @tap="clearInput" class="clear" type="clear" size="30" /> -->
+            </view>
+            <button @tap="queryBook">搜索</button>
+        </view>
+        <view class="book-show" wx:if="{{clearShow}}">
+            <view class="book-list">
+                <block wx:for="{{searchBooks.books}}" wx:if="{{index < 3}}" wx:key="{{index}}">
+                    <view hover-class="hover-item" @tap="gotodetail('{{item.isbn}}','{{item.typeId}}','{{item.id}}','{{item.name}}')" hover-start-time="200" class="book-list-item">
+                        <view hover-start-time="200" class="book-list-left">
+                            <image class="book-list-image" hover-start-time="200" mode="aspectFit" src="{{item.imageurl}}"></image>
+                        </view>
+                        <view hover-start-time="200" class="book-list-right">
+                            <text hover-start-time="200" class="book-list-right-style">{{item.name}}\n</text>
+                            <text hover-start-time="200" class="book-list-right-style1">{{item.rating.average}}/{{item.author}}\n</text>
+                            <text hover-start-time="200" class="book-list-right-style1">馆藏数量: {{item.count}}</text>
+                        </view>
+                    </view>
+                </block>
+            </view>
+            <view class="foot" bindtap="queryBook">
+                <text>查看更多图书</text>
+                <text>></text>
+            </view>
+        </view>
+        <view class="history" wx:if="{{!clearShow}}">
+            <view class="header">
+                <text>历史记录</text>
+                <image src="../resources/icons/delete.png" @tap="clearHistory"></image>
+            </view>
+            <view class="content">
+                <block wx:for="{{historyArray}}" wx:key="{{index}}">
+                    <text class="historyItem" @tap="queryBookByHistory('{{item}}')">{{item}}</text>
+                </block>
+            </view>
+        </view>
+        <view class="serie" wx:if="{{personShow}}">
+            <view class="serie-header">
+                <text>个性化推荐</text>
+                <text></text>
+                <image class="serie-icon" src="../../resources/icons/right3.png"></image>
+            </view>
+            <view class="bookview">
+                <scroll-view scroll-x="true">
+                    <block wx:for="{{books}}" wx:key="index">
+                        <view class="item" wx:if={{item.isbn}}>
+                            <image class="item-img" mode="" src="{{item.imageurl}}" @tap="gotodetail('{{item.isbn}}','{{item.typeId}}','{{item.id}}')"></image>
+                            <view class="item-intro">
+                                <view class="bookimgurl">{{item.name}}</view>
+                                <text>库存:{{item.count}}本</text>
+                                <view class="author_info">
+                                    <image mode="aspectFit" class="author_img" src="{{item.imageurl}}" @tap="gotodetail" data-isbn="{{item.isbn}}" data-bookid="{{item.id}}" data-typeid="{{item.typeId}}"></image>
+                                    <view class="item-info1">
+                                        <text>{{item.author}}</text>
+                                        <text>{{item.publish}}</text>
+                                    </view>
+                                </view>
+                                <view class="booklistend" data-isbn="{{item.isbn}}" data-bookid="{{item.id}}" data-typeid="{{item.typeId}}" @tap="gotodetail('{{item.isbn}}','{{item.typeId}}','{{item.id}}')">点击查看</view>
+                            </view>
+                        </view>
+                    </block>
+                </scroll-view>
+            </view>
+        </view>
+    </view>
+</template>
+<script>
+import wepy from 'wepy'
+import { api } from '../../config'
+import login from '../../components/mixins/login'
+export default class search extends wepy.component {
+
+    data = {
+        clearShow: false,
+        inputValue: '',
+        searchBooks: [],
+        lastTime: '',
+        flag: false,
+        historyArray: [],
+        books: [],
+        personShow: true
+    }
+    mixins = [login]
+    methods = {
+        inputChange(e) {
+            this.inputValue = this.trim(e.detail.value)
+            e.detail.value !== '' ? this.clearShow = true : this.clearShow = false
+            if (this.trim(this.inputValue)) {
+                console.log(this.inputValue, '=inputValue')
+                this.throttle(this.findBooks, e.timestamp, 300, 500)()
+                this.lastTime = e.timestamp
+            }
+        },
+        clearInput() {
+            this.inputValue = ''
+            this.clearShow = false
+            console.log('clear')
+        },
+        queryBook() {
+            // console.log(this.$pages)
+            this.setHistory()
+            wepy.navigateTo({
+                url: 'bookList?searchValue=' + this.inputValue
+            })
+
+        },
+        queryBookByHistory(name) {
+            wepy.navigateTo({
+                url: 'bookList?searchValue=' + name
+            })
+        },
+        backToIndex() {
+            wepy.navigateBack({
+                delta: 1
+            })
+        },
+        gotodetail(isbn, typeId, id, bookName) {
+            this.setHistory(bookName)
+            wepy.navigateTo({
+                url: 'bookDetail?isbn=' + isbn + '&typeId=' + typeId + '&id=' + id
+            })
+        },
+        clearHistory() {
+            wx.showModal({
+                title: '提示',
+                content: '确认删除历史记录?',
+                success: (res) => {
+                    if (res.confirm) {
+                        this.historyArray = []
+                        this.$apply()
+                        wx.setStorageSync('historyArray', [])
+                    } else {
+                        return false
+                    }
+                }
+            })
+        }
+
+    }
+    async findBooks() {
+        try {
+
+            let searchBooks = await wepy.request({
+                url: api.common.search.url + this.inputValue,
+                method: api.common.search.method
+            })
+
+            if (searchBooks.data.books.length < 1000) {
+                this.searchBooks = searchBooks.data
+            }
+            this.$apply()
+        } catch (error) {
+            console.log('搜索图书出错')
+        }
+    }
+
+    async onLoad() {
+        await this.getStoreById()
+        this.getPerson()
+        this.getHistory()
+        await this.findPersonalBooks()
+        console.log('queryPage-searchHearder')
+    }
+    onShow() {
+
+        this.getHistory()
+        this.inputValue = ''
+        this.$apply()
+    }
+    throttle(method, time, delay, duration) {
+        var begin = time
+        var that = this
+        return function() {
+            var args = arguments
+            clearTimeout(method.tId)
+            console.log(time, '当前', that.lastTime, '开始', time - that.lastTime, '时间差')
+            if (begin - that.lastTime >= duration) {
+                console.log('进入了1')
+                method.apply(that, args)
+            } else {
+                method.tId = setTimeout(function() {
+                    console.log('进入了222 ')
+                    method.apply(that, args)
+                }, delay)
+            }
+        }
+    }
+    trim(str) {
+        if (str == null) {
+            str = ''
+        }
+        return str.replace(/(^\s*)|(\s*$)/g, '')
+    }
+    getHistory() {
+        let historyArray = wx.getStorageSync('historyArray') || []
+        this.historyArray = historyArray
+    }
+    getPerson() {
+
+        let Person = wx.getStorageSync('personShow')
+        console.log(Person)
+        if (Person !== '') {
+            this.personShow = Person
+        } else {
+            this.personShow = true
+        }
+        this.$apply()
+    }
+    setHistory(name) {
+        let array = this.historyArray
+        if (array.length > 10) {
+            array.pop()
+        }
+        array.unshift(name || this.inputValue)
+        this.historyArray = array
+        wx.setStorageSync('historyArray', array)
+    }
+    async findPersonalBooks() {
+        try {
+            let books = await wepy.request({
+                url: api.user.findPersonalBooks.url + this.userId,
+                method: api.user.findPersonalBooks.method
+            })
+            this.books = books.data.books
+            this.$apply()
+            console.log(books)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+}
+</script>

@@ -1,18 +1,24 @@
 <view class="group">
-  <block wx:for="{{iconSize}}">
+  <block wx:for="{{iconSize}}" wx:key="{{item}}">
     <icon type="success" size="{{item}}"/>
   </block>
 </view>
 
 <view class="group">
-  <block wx:for="{{iconType}}">
+  <block wx:for="{{iconType}}" wx:key="{{item}}">
     <icon type="{{item}}" size="40"/>
   </block>
 </view>
 
 
 <view class="group">
-  <block wx:for="{{iconColor}}">
+  <block wx:for="{{iconColor}}" wx:key="{{item}}">
     <icon type="success" size="40" color="{{item}}"/>
+  </block>
+</view>
+<view class="group">
+<text>自定义组件</text>
+  <block wx:for="{{iconUser}}" wx:key="{{item}}">
+    <text class="calamus {{item}}"></text>
   </block>
 </view>
