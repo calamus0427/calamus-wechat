@@ -1,0 +1,58 @@
+<template>
+<scroll-view class="scroll-view_H" scroll-x style="width: 100%">
+    <view id="green" class="scroll-view-item_H bc_green"></view>
+    <view id="red"  class="scroll-view-item_H bc_red"></view>
+    <view id="yellow" class="scroll-view-item_H bc_yellow"></view>
+    <view id="blue" class="scroll-view-item_H bc_blue"></view>
+  </scroll-view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+
+  export default class ads extends wepy.component {
+    props = {
+      list: {
+        type: Object,
+        default: []
+      }
+    }
+
+    data = {
+
+    }
+
+    computed = {
+
+    }
+
+    methods = {
+    }
+
+
+  }
+</script>
+
+<style type="less">
+.scroll-view-item_H{
+  height:100px;
+}
+.bc_red{
+  background-color: red;
+}
+.bc_green{
+  background-color: green;
+}
+swiper,
+.swiper{
+  width: 100%;
+}
+
+.swiper-image{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  transform: translate(-50%, -50%);
+}
+</style>
