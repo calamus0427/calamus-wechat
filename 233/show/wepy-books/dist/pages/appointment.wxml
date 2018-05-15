@@ -1,0 +1,64 @@
+
+    <view>
+        
+    <view class="load-warp {{$load$index == 1 ? ' index' : 'noindex'}}" wx:if="{{loadShow}}">
+        <view class="spinner">
+            <view class="spinner-container container1">
+                <view class="circle1"/>
+                <view class="circle2"/>
+                <view class="circle3"/>
+                <view class="circle4"/>
+            </view>
+            <view class="spinner-container container2">
+                <view class="circle1"/>
+                <view class="circle2"/>
+                <view class="circle3"/>
+                <view class="circle4"/>
+            </view>
+            <view class="spinner-container container3">
+                <view class="circle1"/>
+                <view class="circle2"/>
+                <view class="circle3"/>
+                <view class="circle4"/>
+            </view>
+        </view>
+
+    </view>
+
+        <view  wx:if="{{!loadShow}}">
+            <view class="appointment">
+
+                <view class="wrap_rel" wx:if="{{count > 0}}">
+                    <view class="rel_title">
+                        <text>我的预约</text>
+                        <view class="check">
+                            <text bindtap="CheckAll">全选</text>
+                            <icon bindtap="CheckAll" type="success" color="{{allCheck?'#ff7700' :'lightgrey'}}"/>
+                        </view>
+                    </view>
+                    <block wx:for="{{books}}" wx:key="{{index}}">
+                        <view class="rel">
+                            <view class="rel-left">
+                                <icon type="success" color="{{check[index]?'#ff7700':'lightgrey'}}" bindtap="CheckItem" data-wpycheckitem-a="{{index}}"/>
+                                <view class="rel_info">
+                                    <text>{{item.name}}</text>
+                                    <!-- <text>预约日期: {{item.appointmentTime}}</text>     -->
+                                    <text>截止日期: {{item.cancelTime}} </text>
+                                </view>
+                            </view>
+
+                            <image src="{{item.imageurl}}"/>
+                        </view>
+                    </block>
+                </view>
+
+                <view class="cancel" bindtap="cancelOrder" wx:if="{{count > 0}}">取消预约</view>
+
+            </view>
+            <view class="toptop" wx:if="{{count === 0}}">
+                <image src="../resources/images/book.jpg"/>
+                <text>您还没有预约任何图书哦</text>
+            </view>
+        </view>
+
+    </view>

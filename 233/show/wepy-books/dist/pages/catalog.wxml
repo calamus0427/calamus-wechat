@@ -1,0 +1,10 @@
+
+    <view>
+        <view class="gay">
+            <view class="header">目录</view>
+            <text>
+                {{catalog}}
+            </text>
+
+        </view>
+    </view>

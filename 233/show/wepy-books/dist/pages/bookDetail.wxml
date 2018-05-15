@@ -1,0 +1,130 @@
+
+    <view>
+        <view  wx:if="{{!wait}}">
+            
+    <view class="bookImage">
+        <view class="center">
+            <image mode="aspectFit" class="book-image" src="{{$bookImage$book.image}}"/>
+        </view>
+    </view>
+
+            
+    <view class="bookinfo">
+        <view class="information">
+            <text class="book_title">{{$bookInfo$book.title}}\n</text>
+            <text class="book_text_style">{{$bookInfo$book.author}}\n</text>
+            <text class="book_text_style">{{$bookInfo$book.publisher}}\n</text>
+            <text class="book_text_style">{{$bookInfo$book.pubdate}}\n</text>
+            <view class="book_num_info">
+                <text class="book_text_style">馆藏数量: {{$bookInfo$count.bookCount}} </text>
+                <text class="book_text_style">可借数量: {{$bookInfo$count.bookBorrowCount}}</text>
+            </view>
+        </view>
+        <view class="rank">
+            <view class="rank_style_text rank_style">豆瓣评分</view>
+            <view class="rank_style_num rank_style">{{$bookInfo$book.rating.average}}</view>
+            <view class="rank_style_rank rank_style">{{$bookInfo$rank}}</view>
+            <view class="rank_style_text rank_style">{{$bookInfo$book.rating.numRaters}}人</view>
+        </view>
+    </view>
+
+            
+    <view class="operation">
+        <view class="box {{$bookOperation$state.isCollect  ? ' active' : 'unactive'}}" bindtap="$bookOperation$collectBook">
+           {{$bookOperation$state.isCollect ? '已收藏': '收藏'}}
+        </view>
+        <view class="box {{$bookOperation$state.isInCar  ? ' active' : 'unactive'}}" bindtap="$bookOperation$lendBook">
+            {{$bookOperation$state.isInCar ? '已在书包' : '借阅'}}
+        </view>
+        <view class="box {{$bookOperation$state.isAppoint  ? ' active' : 'unactive'}}" bindtap="$bookOperation$orderBook">
+            {{$bookOperation$state.isAppoint ? '已预约' : '预约'}}
+        </view>
+    </view>
+
+            
+    <view class="detailInfo">
+        <view class="summary"  wx:if="{{$bookDetailInfo$book.summary}}">
+            <text>简介\n\n</text>
+            <text>{{$bookDetailInfo$book.summary}}</text>
+        </view>
+        <view bindtap="$bookDetailInfo$gotoAuthor" class="author"  wx:if="{{$bookDetailInfo$book.author_intro}}">
+            <text>作者简介\n\n</text>
+            <view class="author-detail">
+                <text>{{$bookDetailInfo$book.author_intro}}</text>
+                <image src="../components/resources/icons/right.png"/>
+            </view>
+
+        </view>
+        <view class="author" wx:if="{{$bookDetailInfo$book.catalog}}" bindtap="$bookDetailInfo$gotocatalog">
+            <text>目录\n\n</text>
+            <view class="author-detail">
+                <text>{{$bookDetailInfo$book.catalog}}</text>
+                <image src="../components/resources/icons/right.png"/>
+            </view>
+        </view>
+        <view class="wrap_rel" wx:if="{{$bookDetailInfo$isShow}}">
+            <view class="rel_title">
+                <text>相关推荐</text>
+                <text bindtap="$bookDetailInfo$gotoBookList">点击更多</text>
+            </view>
+            <view class="rel">
+
+                <image src="{{$bookDetailInfo$relevantBook.books[0].imageurl}}"/>
+                <view class="rel_info">
+                    <text>{{$bookDetailInfo$relevantBook.books[0].name}}</text>
+                    <text>作者: {{$bookDetailInfo$relevantBook.books[0].author}}</text>
+                    <text>出版社: {{$bookDetailInfo$relevantBook.books[0].publish}} </text>
+                </view>
+
+            </view>
+
+        </view>
+        <view class="bookview" wx:if="{{$bookDetailInfo$noteShow}}">
+            <text class="book-title">读书笔记</text>
+            <scroll-view scroll-x="true">
+                <block wx:for="{{$bookDetailInfo$noteBook}}" wx:key="{{index}}">
+                    <view class="fuck" bindtap="$bookDetailInfo$gotonote" data-index="{{index}}">
+                        <view class="abc" data-index="{{index}}">
+                            <view class="fuck1" data-index="{{index}}">
+                                <text data-index="{{index}}">{{item.chapter}}</text>
+                                <text data-index="{{index}}"> {{item.abstract}}</text>
+                            </view>
+
+                            <text class="bookview_auth" data-index="{{index}}"> {{item.author_user.name}}</text>
+                        </view>
+
+                    </view>
+                </block>
+            </scroll-view>
+        </view>
+    </view>
+
+        </view>
+        <view wx:if="{{wait}}">
+            
+    <view class="load-warp {{$load$index == 1 ? ' index' : 'noindex'}}">
+        <view class="spinner">
+            <view class="spinner-container container1">
+                <view class="circle1"/>
+                <view class="circle2"/>
+                <view class="circle3"/>
+                <view class="circle4"/>
+            </view>
+            <view class="spinner-container container2">
+                <view class="circle1"/>
+                <view class="circle2"/>
+                <view class="circle3"/>
+                <view class="circle4"/>
+            </view>
+            <view class="spinner-container container3">
+                <view class="circle1"/>
+                <view class="circle2"/>
+                <view class="circle3"/>
+                <view class="circle4"/>
+            </view>
+        </view>
+
+    </view>
+
+        </view>
+    </view>

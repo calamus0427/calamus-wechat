@@ -1,0 +1,331 @@
+
+    <view class="body">
+        <view class="tab_item tab_message" hidden="{{currentTab != 0}}">
+            
+    <view class="indexPage">
+        <view  wx:if="{{!$index$wait}}">
+            
+    <view class="search">
+        <view class="remind"  wx:if="{{$index$search$RemindShow}}" bindtap="$index$search$ReminToHide">
+            <text>您有最新的动态,请前往个人中心查看</text>
+            <image src="../../resources/icons/delete-white.png"/>
+        </view>
+        <view class="header-query">
+            <image class="icon" src="../../resources/icons/query.png" bindtap="$index$search$gotoquery"/>
+            <text bindtap="$index$search$gotoquery">请输入关键词进行搜索</text>
+        </view>
+        <image bindtap="$index$search$saoyisao" class="icon" src="../../resources/icons/saoyisao.png"/>
+    </view>
+
+            
+    <view class="swiper">
+        <swiper indicator-dots="true" autoplay="true" circular="true">
+            <block  wx:for="{{$index$topSwiper$imgUrls}}" wx:key="{{index}}">
+                <swiper-item>
+                    <image mode="scaleToFill" src="{{item}}" class="slide-image"/>
+                </swiper-item>
+            </block>
+        </swiper>
+    </view>
+
+            
+    <view class="hotbooks">
+        <block  wx:for="{{$index$rank$hootBooks}}" wx:key="{{index}}">
+            <view class="item">
+                <view class="header">
+                    Top
+                    <image src="{{item.topimgUrl}}"/>
+                </view>
+                <view class="book-list">
+                    <view class="book-info">
+                        <view class="book-info-header">
+                            <text>{{item.name}}</text>
+                            <text>作者:{{item.author}}</text>
+                            <text>出版社:{{item.publish}}</text>
+                        </view>
+                        <text class="book-list-footer">位置:{{item.location}}</text>
+                    </view>
+                    <image bindtap="$index$rank$gotodetail" src="{{item.imageurl}}" data-wpygotodetail-a="{{item.isbn}}" data-wpygotodetail-b="{{item.typeId}}" data-wpygotodetail-c="{{item.id}}"/>
+                </view>
+            </view>
+        </block>
+    </view>
+
+            
+    <view class="serie">
+        <view class="serie-header">
+            <text>今日推荐</text>
+            <text/>
+            <image class="serie-icon" src="../../../resources/icons/right3.png"/>
+        </view>
+        <view class="bookview">
+            <scroll-view scroll-x="true">
+                <block  wx:for="{{$index$recommend$recommendBooks}}" wx:key="index">
+                    <view class="item" wx:if="{{item.isbn}}">
+                        <image class="item-img" mode="" src="{{item.imageurl}}" bindtap="$index$recommend$gotodetail" data-wpygotodetail-a="{{item.isbn}}" data-wpygotodetail-b="{{item.typeId}}" data-wpygotodetail-c="{{item.id}}"/>
+                        <view class="item-intro">
+                            <view class="bookimgurl">{{item.name}}</view>
+                            <text>库存:{{item.count}}本</text>
+                            <view class="author_info">
+                                <image mode="aspectFit" class="author_img" src="{{item.imageurl}}" bindtap="$index$recommend$gotodetail" data-isbn="{{item.isbn}}" data-bookid="{{item.id}}" data-typeid="{{item.typeId}}"/>
+                                <view class="item-info1">
+                                    <text>{{item.author}}</text>
+                                    <text>{{item.publish}}</text>
+                                </view>
+                            </view>
+                            <view class="booklistend" data-isbn="{{item.isbn}}" data-bookid="{{item.id}}" data-typeid="{{item.typeId}}" bindtap="$index$recommend$gotodetail" data-wpygotodetail-a="{{item.isbn}}" data-wpygotodetail-b="{{item.typeId}}" data-wpygotodetail-c="{{item.id}}">点击查看</view>
+                        </view>
+                    </view>
+                </block>
+            </scroll-view>
+        </view>
+    </view>
+
+        </view>
+        <view  wx:if="{{$index$wait}}">
+            
+    <view class="load-warp {{$index$load$index == 1 ? ' index' : 'noindex'}}">
+        <view class="spinner">
+            <view class="spinner-container container1">
+                <view class="circle1"/>
+                <view class="circle2"/>
+                <view class="circle3"/>
+                <view class="circle4"/>
+            </view>
+            <view class="spinner-container container2">
+                <view class="circle1"/>
+                <view class="circle2"/>
+                <view class="circle3"/>
+                <view class="circle4"/>
+            </view>
+            <view class="spinner-container container3">
+                <view class="circle1"/>
+                <view class="circle2"/>
+                <view class="circle3"/>
+                <view class="circle4"/>
+            </view>
+        </view>
+
+    </view>
+
+        </view>
+    </view>
+
+        </view>
+        <view class="tab_item tab_contact" hidden="{{currentTab != 1}}">
+            
+    <view>
+        
+    <view class="container category-container">
+        <view class="category-box">
+            <view class="left-box">
+                <block  wx:for="{{$classify$classifyIndex$categoryTypeArr}}" wx:key="{{$classify$classifyIndex$_id}}">
+                    <view class="menu-item {{$classify$classifyIndex$currentMenuIndex==index?'selected':''}}" bindtap="$classify$classifyIndex$changeCategory" data-wpychangecategory-a="{{index}}">
+                        {{item}}
+                    </view>
+                </block>
+            </view>
+            <view class="right-box {{$classify$classifyIndex$transClassArr[$classify$classifyIndex$currentMenuIndex]}}">
+                <view class="foods-type-box">
+                    <block wx:for="{{$classify$classifyIndex$list}}" wx:for-index="$classify$classifyIndex$index" wx:for-item="$classify$classifyIndex$item" wx:key="$classify$classifyIndex$index">
+                        
+    <view class="category-detail-box" hidden="{{!$classify$classifyIndex$item}}">
+        <view class="category-title">
+            <text>{{$classify$classifyIndex$item.name}}</text>
+        </view>
+        <view class="category-main">
+            <block  wx:for="{{$classify$classifyIndex$item.data.bookTypeCustoms}}" wx:key="{{index}}">
+                <view wx:if="{{index < 24}}" class="category-goods-items {{index%3==1?'middle':''}}" bindtap="$classify$classifyIndex$classifyItem$gotoBookList" data-com-index="{{$classify$classifyIndex$index}}" data-wpygotobooklist-a="{{item.id}}" data-wpygotobooklist-b="{{item.typeName}}">
+                    <image src="../resources/icons/{{item.parentId}}/{{item.id}}.png" mode="aspectFill"/>
+                    <view>{{item.typeName}}</view>
+                </view>
+            </block>
+        </view>
+    </view>
+
+                    </block>
+                </view>
+            </view>
+
+        </view>
+    </view>
+
+    </view>
+
+        </view>
+        <view class="tab_item tab_discovery" hidden="{{currentTab != 2}}">
+            
+    <view class="bagCar-wrap">
+        <view class="bagCar"  wx:if="{{!$bagcar$barCode.show}}">
+            <view class="header">
+                <view class="header-info">
+                    <icon bindtap="$bagcar$CheckAll" type="success" color="{{$bagcar$allCheck?'#ff7700' :'lightgrey'}}"/>
+                    <text>您当前还可以借阅{{$bagcar$canBorrowCount}}本</text>
+                </view>
+                <text style="font-size:28rpx; ">编辑</text>
+            </view>
+            <scroll-view scroll-y style="height: 70vh;">
+                <view class="content">
+                    <block wx:for="{{$bagcar$carBooks}}" wx:key="{{index}}">
+                        <view class="content-box">
+                            <view class="content-box-left">
+                                <icon type="success" color="{{$bagcar$check[index]?'#ff7700':'lightgrey'}}" bindtap="$bagcar$CheckItem" data-wpycheckitem-a="{{index}}"/>
+                            </view>
+                            <view class="content-box-right">
+                                <image class="bookimg" src="{{item.imageurl}}"/>
+                                <view class="bookInfo">
+                                    <text>{{item.name}}</text>
+                                    <text>{{item.author}}</text>
+                                    <text>{{item.publish}}</text>
+                                    <text>isbn: {{item.isbn}}</text>
+                                    <text>¥ 20</text>
+                                    <image class="delete" src="../components/tab/resources/icons/delete.png" bindtap="$bagcar$deleteItem" data-wpydeleteitem-a="{{item.bookId}}"/>
+                                </view>
+                            </view>
+                        </view>
+                    </block>
+                </view>
+            </scroll-view>
+
+            <view class="footer">
+                <view class="footer-left">
+                    <view class="footer-left-box">
+                        <icon bindtap="$bagcar$CheckAll" type="success" color="{{$bagcar$allCheck?'#ff7700' :'lightgrey'}}"/>
+                        <text>全选</text>
+                    </view>
+                    <text class="footer-right-box">合计 0</text>
+                </view>
+                <view class="footer-right" bindtap="$bagcar$borrowBook">
+                    生成借书二维码
+                </view>
+            </view>
+        </view>
+        <view class="barCode"  wx:if="{{$bagcar$barCode.show}}">
+            <button class="pay" bindtap="$bagcar$pay">支付</button>
+            <image src="{{$bagcar$barCode.url}}" bindload="$bagcar$hideLoading"/>
+            <icon bindtap="$bagcar$cancel" type="cancel" size="40"/>
+        </view>
+    </view>
+
+        </view>
+        <view class="tab_item tab_me" hidden="{{currentTab != 3}}">
+            
+    <view>
+        
+    <view class="userInfo">
+        <image class="icon" src="../../resources/icons/set.png"/>
+        <view class="info">
+            <view class="info"  wx:if="{{$me$userInfo$isLogin}}">
+                <image src="{{$me$userInfo$userInfo.avatarUrl}}"/>
+                <view class="nameCity">
+                    <text>{{$me$userInfo$userInfo.nickName}}</text>
+                    <text>{{$me$userInfo$userInfo.city}}</text>
+                </view>
+                <view class="personShow">
+                    <switch checked="{{$me$userInfo$personShow}}" bindchange="$me$userInfo$personChange" color="#ff7700"/>
+                    <text>个性化推荐</text>
+                </view>
+            </view>
+            <view class="info"  wx:if="{{!$me$userInfo$isLogin}}">
+                <image src="../../resources/images/loginfailed.jpg"/>
+                <button open-type="getUserInfo" bindgetuserinfo="$me$userInfo$userInfoHandler">授权登录</button>
+            </view>
+        </view>
+    </view>
+
+        
+    <view class="operation">
+        <view class="item" bindtap="$me$operation$gotoChat">
+            <image class="icon" src="../../resources/icons/robot.png"/>
+            <text class="text">客服</text>
+        </view>
+        <view class="item" bindtap="$me$operation$gotoEditInfo">
+            <image class="icon" src="../../resources/icons/zl.png"/>
+            <text class="text">完善资料</text>
+        </view>
+        <view class="item" bindtap="$me$operation$gotoDongtai">
+            <image class="icon" src="../../resources/icons/msg.png"/>
+            <text class="text">我的消息</text>
+            <view class="mynum"  wx:if="{{$me$operation$count > 0}}">
+                {{$me$operation$count}}
+            </view>
+        </view>
+    </view>
+
+        
+    <view class="myRoom">
+        <view class="title">
+            我的书屋
+        </view>
+        <view class="item">
+            <view class="item-left" bindtap="$me$myRoom$gotoCollect">
+                <text>{{$me$myRoom$collectData.datacount}}</text>
+                <text>总藏书</text>
+            </view>
+            <view class="item-right">
+                <view class="bookInfo">
+                    <text>{{$me$myRoom$collectData.collectCustoms[0].name}}</text>
+                    <text>{{$me$myRoom$collectData.collectCustoms[0].author}}</text>
+                </view>
+                <view class="bookImg">
+                    <image class="bookimgurl" src="{{$me$myRoom$collectData.collectCustoms[0].imageurl}}"/>
+                </view>
+            </view>
+        </view>
+        <view class="item" bindtap="$me$myRoom$gotoLend">
+            <view class="item-left">
+                <text>{{$me$myRoom$borrowData.dateCount}}</text>
+                <text>我的借阅</text>
+            </view>
+            <view class="item-right">
+                <view class="bookInfo">
+                    <text>{{$me$myRoom$borrowData.lendBookCustoms[0].name}}</text>
+                    <text>{{$me$myRoom$borrowData.lendBookCustoms[0].author}}</text>
+                </view>
+                <view class="bookImg">
+                    <image class="bookimgurl" src="{{$me$myRoom$borrowData.lendBookCustoms[0].imageurl}}"/>
+                </view>
+            </view>
+        </view>
+        <view class="item" bindtap="$me$myRoom$gotoAppointment">
+            <view class="item-left">
+                <text>{{$me$myRoom$appointData.dataCount}}</text>
+                <text>我的预约</text>
+            </view>
+            <view class="item-right">
+                <view class="bookInfo">
+                    <text>{{$me$myRoom$appointData.appointCustoms[0].name}}</text>
+                    <text>{{$me$myRoom$appointData.appointCustoms[0].author}}</text>
+                </view>
+                <view class="bookImg">
+                    <image class="bookimgurl" src="{{$me$myRoom$appointData.appointCustoms[0].imageurl}}"/>
+                </view>
+            </view>
+        </view>
+    </view>
+
+    </view>
+
+        </view>
+
+        
+    <view class="tab">
+        <view class="tab_item tab_message{{$tab$active == 0 ? ' active' : ''}}" bindtap="$tab$change" data-wpychange-a="0">
+            <image class="icon" src="../components/images/message{{$tab$active == 0 ? '_active' : ''}}.png"/>
+            <text class="title">首页</text>
+        </view>
+        <view class="tab_item tab_contact{{$tab$active == 1 ? ' active' : ''}}" bindtap="$tab$change" data-wpychange-a="1">
+            <image class="icon" src="../components/images/contact{{$tab$active == 1 ? '_active' : ''}}.png"/>
+            <text class="title">分类</text>
+        </view>
+        <view class="tab_item tab_discovery{{$tab$active == 2 ? ' active' : ''}}" bindtap="$tab$change" data-wpychange-a="2">
+            <image class="icon" src="../components/images/discovery{{$tab$active == 2 ? '_active' : ''}}.png"/>
+            <text class="title">书包</text>
+        </view>
+        <view class="tab_item tab_me{{$tab$active == 3 ? ' active' : ''}}" bindtap="$tab$change" data-wpychange-a="3">
+            <image class="icon" src="../components/images/me{{$tab$active == 3 ? '_active' : ''}}.png"/>
+            <text class="title">我的</text>
+        </view>
+    </view>
+
+    </view>

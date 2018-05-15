@@ -1,0 +1,54 @@
+
+    <view>
+       
+    <view class="load-warp {{$load$index == 1 ? ' index' : 'noindex'}}" wx:if="{{loadShow}}">
+        <view class="spinner">
+            <view class="spinner-container container1">
+                <view class="circle1"/>
+                <view class="circle2"/>
+                <view class="circle3"/>
+                <view class="circle4"/>
+            </view>
+            <view class="spinner-container container2">
+                <view class="circle1"/>
+                <view class="circle2"/>
+                <view class="circle3"/>
+                <view class="circle4"/>
+            </view>
+            <view class="spinner-container container3">
+                <view class="circle1"/>
+                <view class="circle2"/>
+                <view class="circle3"/>
+                <view class="circle4"/>
+            </view>
+        </view>
+
+    </view>
+
+        <view>
+            <view class="toptop"  wx:if="{{collectBooks.datacount == 0}}">
+                <text>快去收藏图书吧~</text>
+            </view>
+            <view class="wrap" wx:if="{{collectBooks.datacount > 0}}">
+                <block wx:for="{{collectBooks.collectCustoms}}" wx:key="{{index}}">
+                    <view class="jz" wx:if="{{index < collectBooks.collectCustoms.length/2}}">
+                        <view class="stage">
+                            <ul class="books-list">
+                                <li bindtap="gotodetail" data-wpygotodetail-a="{{collectBooks.collectCustoms[index*2].isbn}}" data-wpygotodetail-b="{{collectBooks.collectCustoms[index*2].typeId}}" data-wpygotodetail-c="{{collectBooks.collectCustoms[index*2].bid}}">
+                                    <image src="{{collectBooks.collectCustoms[index*2].imageurl}}">
+                                    </image>
+                                </li>
+                                <li wx:if="{{collectBooks.collectCustoms[index*2+1].imageurl}}" bindtap="gotodetail" data-wpygotodetail-a="{{collectBooks.collectCustoms[index*2+1].isbn}}" data-wpygotodetail-b="{{collectBooks.collectCustoms[index*2+1].typeId}}" data-wpygotodetail-c="{{collectBooks.collectCustoms[index*2+1].bid}}">
+                                    <image src="{{collectBooks.collectCustoms[index*2+1].imageurl}}"/>
+                                </li>
+                            </ul>
+                            <icon bindtap="delete_item" class="icon-1" data-fav_id="{{collectBooks.collectCustoms[index*2].id}}" type="cancel" size="16" color="{{item}}" wx:if="{{collectBooks.collectCustoms[index*2]}}"/>
+                            <icon bindtap="delete_item" class="icon-2" data-fav_id="{{collectBooks.collectCustoms[index*2+1].id}}" type="cancel" size="16" color="{{item}}" wx:if="{{collectBooks.collectCustoms[index*2+1]}}"/>
+                            <view class="desk"/>
+                            <view class="desk-shadow"/>
+                        </view>
+                    </view>
+                </block>
+            </view>
+        </view>
+    </view>

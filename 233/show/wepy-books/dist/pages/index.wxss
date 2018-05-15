@@ -1,0 +1,5 @@
+@import "./../components/tab/tabBar.wxss";
+@import "./../components/tab/tabPage/me.wxss";
+@import "./../components/tab/tabPage/bagCar.wxss";
+@import "./../components/tab/tabPage/classify.wxss";
+@import "./../components/tab/tabPage/index.wxss";

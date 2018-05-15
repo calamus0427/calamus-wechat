@@ -1,0 +1,36 @@
+
+    <view class=".editInfo">
+        <form bindsubmit="submitUserDetaiInfo">
+            <view class="header">
+                <image  wx:if="{{isLogin === true}}" src="{{userInfo.avatarUrl}}"/>
+                <button  wx:if="{{isLogin === false}}" open-type="getUserInfo" bindgetuserinfo="userInfoHandler">获取微信头像</button>
+            </view>
+            <view class="bottom">
+                <view class="know">
+                    <view class="know-item">
+                        <text class="item-left">用户名</text>
+                        <input name="username" type="text" class="item-right" value="{{userDetaiInfo.user.username}}"/>
+                    </view>
+                    <view class="know-item">
+                        <text class="item-left">地区</text>
+                        <input name="area" type="text" class="item-right" value="{{userDetaiInfo.user.area}}"/>
+                    </view>
+                </view>
+                <view class="know">
+                    <view class="know-item">
+                        <text class="item-left">手机号</text>
+                        <input name="phone" type="text" class="item-right" value="{{userDetaiInfo.user.phone}}"/>
+                    </view>
+                    <view class="know-item">
+                        <text class="item-left">Email</text>
+                        <input name="Email" type="text" class="item-right" value="{{userDetaiInfo.user.email}}"/>
+                    </view>
+                    <view class="know-item">
+                        <text class="item-left">身份证号</text>
+                        <input name="idcard" type="text" class="item-right" value="{{userDetaiInfo.user.idcard}}"/>
+                    </view>
+                </view>
+            </view>
+            <button class="save" form-type="submit">保存</button>
+        </form>
+    </view>

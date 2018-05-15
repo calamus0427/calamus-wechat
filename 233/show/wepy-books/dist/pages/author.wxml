@@ -1,0 +1,10 @@
+
+    <view>
+        <text>\n</text>
+        <text>\n</text>
+        <view class="gay">
+            <text>{{author}}</text>
+
+            <text>{{author_intro}}</text>
+        </view>
+    </view>

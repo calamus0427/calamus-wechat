@@ -1,0 +1,5 @@
+@import "./../../load.wxss";
+@import "./../../index/search.wxss";
+@import "./../../index/recommend.wxss";
+@import "./../../index/rank.wxss";
+@import "./../../index/swiper.wxss";

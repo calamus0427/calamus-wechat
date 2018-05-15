@@ -20,6 +20,8 @@
     <SearchBar :placeholder="searchText"></SearchBar>
     <Swiper :list.sync="swipers" height="280"></Swiper>
     <Ads></Ads>
+    <animeList :list.sync="list" title="推荐追番"
+     :loading.sync="loading" :noMore.sync="noMoreList"></animeList>
   </view>
 </template>
 
@@ -36,6 +38,8 @@
   import Swiper from '../components/swiper'
   import SearchBar from '../components/searchbar'
   import Ads from '../components/ads'
+  import animeList from '../components/animeList'
+
 
 
   console.log('moduleA ignored: ', moduleA) // => moduleA ignored: {}
@@ -54,7 +58,7 @@
 
   export default class Top extends wepy.page {
     config = {
-      navigationBarTitleText: 'test'
+      navigationBarTitleText: '番荒推荐'
     }
     components = {
       panel: Panel,
@@ -65,7 +69,8 @@
       toast: Toast,
       Swiper:Swiper,
       SearchBar:SearchBar,
-      Ads:Ads
+      Ads:Ads,
+      animeList:animeList
     }
 
     mixins = [testMixin]

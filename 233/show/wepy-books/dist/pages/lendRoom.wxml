@@ -1,0 +1,69 @@
+
+    <view>
+        
+    <view class="load-warp {{$load$index == 1 ? ' index' : 'noindex'}}" wx:if="{{loadShow}}">
+        <view class="spinner">
+            <view class="spinner-container container1">
+                <view class="circle1"/>
+                <view class="circle2"/>
+                <view class="circle3"/>
+                <view class="circle4"/>
+            </view>
+            <view class="spinner-container container2">
+                <view class="circle1"/>
+                <view class="circle2"/>
+                <view class="circle3"/>
+                <view class="circle4"/>
+            </view>
+            <view class="spinner-container container3">
+                <view class="circle1"/>
+                <view class="circle2"/>
+                <view class="circle3"/>
+                <view class="circle4"/>
+            </view>
+        </view>
+
+    </view>
+
+        <view  wx:if="{{!loadShow}}">
+            <view class="lendRoom" wx:if="{{!barCode.show}}">
+
+                <view class="wrap_rel" wx:if="{{count > 0}}">
+                    <view class="rel_title">
+                        <text>我的借阅</text>
+                        <view class="check">
+                            <text bindtap="CheckAll">全选</text>
+                            <icon bindtap="CheckAll" type="success" color="{{allCheck?'#ff7700' :'lightgrey'}}"/>
+                        </view>
+                    </view>
+                    <block wx:for="{{books}}" wx:key="{{index}}">
+                        <view class="rel">
+                            <view class="rel-left">
+                                <icon type="success" color="{{check[index]?'#ff7700':'lightgrey'}}" bindtap="CheckItem" data-wpycheckitem-a="{{index}}"/>
+                                <view class="rel_info">
+                                    <text>{{item.name}}</text>
+                                    <text>借阅日期: {{item.lendTime}}</text>
+                                    <text>应还日期: {{item.shouldReturnTime}} </text>
+                                </view>
+                            </view>
+
+                            <image src="{{item.imageurl}}"/>
+                        </view>
+                    </block>
+                </view>
+
+                <view class="cancel" bindtap="returnBook" wx:if="{{count > 0}}">生成还书二维码</view>
+
+            </view>
+            <view class="toptop" wx:if="{{count === 0}}">
+                <image src="../resources/images/book.jpg"/>
+                <text>您还没有借阅任何图书哦</text>
+            </view>
+
+            <view class="barCode" wx:if="{{barCode.show}}">
+                <image src="{{barCode.url}}" bindload="hideloading"/>
+                <icon bindtap="cancel" type="cancel" size="40"/>
+            </view>
+        </view>
+
+    </view>

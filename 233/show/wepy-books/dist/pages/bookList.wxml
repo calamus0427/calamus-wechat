@@ -1,0 +1,17 @@
+
+    <view class="bookList">
+        <block  wx:for="{{books}}" wx:key="{{index}}">
+            <view class="item-list">
+                <view class="item" bindtap="gotodetail" data-wpygotodetail-a="{{item.isbn}}" data-wpygotodetail-b="{{item.typeId}}" data-wpygotodetail-c="{{item.id}}">
+                    <view class="left">
+                        <image src="{{item.imageurl}}"/>
+                    </view>
+                    <view class="right">
+                        <text>{{item.name}}</text>
+                        <text>{{item.author}}</text>
+                        <text> {{item.publish}}</text>
+                    </view>
+                </view>
+            </view>
+        </block>
+    </view>

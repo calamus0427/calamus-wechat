@@ -1,0 +1,76 @@
+
+    <view class="wrap">
+        <view class="tcc {{isshow?'dis_y':'dis_n'}}">
+            <view class="tcc_top_wrap">
+                <view class="tcc_top">
+                    <view class="tcc_top_header">
+                        <image class="close" bindtap="gotoBagCar" src="../resources/icons/close.png"/>
+                        <image class="user" src="{{imgUrl}}"/>
+                        <text>请输入支付密码</text>
+                    </view>
+                    <view class="line"/>
+                    <view class="tcc_top_conent">
+                        <view class="tcc_top_info">
+                            <text>测试商户</text>
+                            <text>$33</text>
+                        </view>
+                        <view class="tcc_kahao">
+                            <image class="img1" src="../../resources/icons/gongshang.png"/>
+                            <text>工商银行储蓄卡(4444)</text>
+                            <image class="img2" src="../../resources/icons/right3.png"/>
+                        </view>
+                        <view class="tcc_top_card">
+                            <view>
+                                <text class="{{array[0]?'yuan':''}}"/>
+                            </view>
+                            <view>
+                                <text class="{{array[1]?'yuan':''}}"/>
+                            </view>
+                            <view>
+                                <text class="{{array[2]?'yuan':''}}"/>
+                            </view>
+                            <view>
+                                <text class="{{array[3]?'yuan':''}}"/>
+                            </view>
+                            <view>
+                                <text class="{{array[4]?'yuan':''}}"/>
+                            </view>
+                            <view>
+                                <text class="{{array[5]?'yuan':''}}"/>
+                            </view>
+
+                        </view>
+
+                    </view>
+
+                </view>
+            </view>
+
+            <view class="tcc_bottom">
+                <image src="../../resources/icons/bottom.png"/>
+                <view class="num">
+                    <view class="col">
+                        <view hover-class="gra" hover-stay-time="100" bindtap="click">1</view>
+                        <view bindtap="click" hover-class="gra" hover-stay-time="100">2</view>
+                        <view bindtap="click" hover-class="gra" hover-stay-time="100">3</view>
+                    </view>
+                    <view class="col">
+                        <view bindtap="click" hover-class="gra" hover-stay-time="100">4</view>
+                        <view bindtap="click" hover-class="gra" hover-stay-time="100">5</view>
+                        <view bindtap="click" hover-class="gra" hover-stay-time="100">6</view>
+                    </view>
+                    <view class="col">
+                        <view bindtap="click" hover-class="gra" hover-stay-time="100">7</view>
+                        <view bindtap="click" hover-class="gra" hover-stay-time="100">8</view>
+                        <view bindtap="click" hover-class="gra" hover-stay-time="100">9</view>
+                    </view>
+                    <view class="col">
+                        <view class="bg_none" hover-class="gra" hover-stay-time="100"/>
+                        <view bindtap="click" hover-class="gra" hover-stay-time="100">0</view>
+                        <view hover-class="gra" class="bg_none" hover-stay-time="100" bindtap="del">X</view>
+                    </view>
+                </view>
+            </view>
+
+        </view>
+    </view>

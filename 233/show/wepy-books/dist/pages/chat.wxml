@@ -1,0 +1,22 @@
+
+    <view class="body page_chat">
+        <scroll-view style="height: calc(100vh - 100rpx);" scroll-y="true" class="chartboard" scroll-into-view="{{idid}}">
+            <block  wx:for="{{arr}}" wx:key="{{index}}">
+                <view id="id{{index}}" class="msgarea{{item.from === 'me' ? ' fromme' : ' other'}}">
+                    <image class="icon" src="{{item.icon}}"/>
+                    <text class="msg">{{item.msg}}</text>
+                    <view class="clearfix"/>
+                </view>
+            </block>
+        </scroll-view>
+
+        <view class="input">
+            <view class="input_layout">
+                <!--<image class="input_icon voice" src="../../resources/icons/voice.png" />-->
+                <!--<image class="input_icon face" src="../../resources/icons/face.png" />-->
+                <image class="input_icon plus" src="../resources/icons/plus.png"/>
+                <view class="send {{input_value.length == 0 ? 'hidden' : ''}}" bindtap="sendmsg">发送</view>
+                <input bindinput="gogo" value="{{input_value}}" class="input_text " bindfocus="addfix" bindblur="remfix" bindtype="$myinput$input"/>
+            </view>
+        </view>
+    </view>

@@ -1,0 +1,75 @@
+
+    <view>
+        
+    <view class="queryTop">
+        <view class="searchHeader">
+            <image bindtap="$search$backToIndex" class="icon" src="../components/resources/icons/left.png">
+            </image>
+            <view class="input">
+                <input type="text" bindinput="$search$inputChange" value="{{$search$inputValue}}" placeholder="请输入关键字/全拼/isbn" placeholder-style=" color:#666666;font-size: 13px;font-family: 'SimHei';text-align:center"/>
+                <!-- <icon wx:if="{{clearShow}}" bindtap="clearInput" class="clear" type="clear" size="30" /> -->
+            </view>
+            <button bindtap="$search$queryBook">搜索</button>
+        </view>
+        <view class="book-show"  wx:if="{{$search$clearShow}}">
+            <view class="book-list">
+                <block wx:for="{{$search$searchBooks.books}}" wx:if="{{index < 3}}" wx:key="{{index}}">
+                    <view hover-class="hover-item" bindtap="$search$gotodetail" hover-start-time="200" class="book-list-item" data-wpygotodetail-a="{{item.isbn}}" data-wpygotodetail-b="{{item.typeId}}" data-wpygotodetail-c="{{item.id}}" data-wpygotodetail-d="{{item.name}}">
+                        <view hover-start-time="200" class="book-list-left">
+                            <image class="book-list-image" hover-start-time="200" mode="aspectFit" src="{{item.imageurl}}"/>
+                        </view>
+                        <view hover-start-time="200" class="book-list-right">
+                            <text hover-start-time="200" class="book-list-right-style">{{item.name}}\n</text>
+                            <text hover-start-time="200" class="book-list-right-style1">{{item.rating.average}}/{{item.author}}\n</text>
+                            <text hover-start-time="200" class="book-list-right-style1">馆藏数量: {{item.count}}</text>
+                        </view>
+                    </view>
+                </block>
+            </view>
+            <view class="foot" bindtap="$search$queryBook">
+                <text>查看更多图书</text>
+                <text>></text>
+            </view>
+        </view>
+        <view class="history"  wx:if="{{!$search$clearShow}}">
+            <view class="header">
+                <text>历史记录</text>
+                <image src="../components/resources/icons/delete.png" bindtap="$search$clearHistory"/>
+            </view>
+            <view class="content">
+                <block wx:for="{{$search$historyArray}}" wx:key="{{index}}">
+                    <text class="historyItem" bindtap="$search$queryBookByHistory" data-wpyquerybookbyhistory-a="{{item}}">{{item}}</text>
+                </block>
+            </view>
+        </view>
+        <view class="serie" wx:if="{{$search$personShow}}">
+            <view class="serie-header">
+                <text>个性化推荐</text>
+                <text/>
+                <image class="serie-icon" src="../resources/icons/right3.png"/>
+            </view>
+            <view class="bookview">
+                <scroll-view scroll-x="true">
+                    <block wx:for="{{$search$books}}" wx:key="index">
+                        <view class="item" wx:if="{{item.isbn}}">
+                            <image class="item-img" mode="" src="{{item.imageurl}}" bindtap="$search$gotodetail" data-wpygotodetail-a="{{item.isbn}}" data-wpygotodetail-b="{{item.typeId}}" data-wpygotodetail-c="{{item.id}}"/>
+                            <view class="item-intro">
+                                <view class="bookimgurl">{{item.name}}</view>
+                                <text>库存:{{item.count}}本</text>
+                                <view class="author_info">
+                                    <image mode="aspectFit" class="author_img" src="{{item.imageurl}}" bindtap="$search$gotodetail" data-isbn="{{item.isbn}}" data-bookid="{{item.id}}" data-typeid="{{item.typeId}}"/>
+                                    <view class="item-info1">
+                                        <text>{{item.author}}</text>
+                                        <text>{{item.publish}}</text>
+                                    </view>
+                                </view>
+                                <view class="booklistend" data-isbn="{{item.isbn}}" data-bookid="{{item.id}}" data-typeid="{{item.typeId}}" bindtap="$search$gotodetail" data-wpygotodetail-a="{{item.isbn}}" data-wpygotodetail-b="{{item.typeId}}" data-wpygotodetail-c="{{item.id}}">点击查看</view>
+                            </view>
+                        </view>
+                    </block>
+                </scroll-view>
+            </view>
+        </view>
+    </view>
+
+    </view>

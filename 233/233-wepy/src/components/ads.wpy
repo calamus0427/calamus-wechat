@@ -1,10 +1,10 @@
 <template>
-<scroll-view class="scroll-view_H" scroll-x style="width: 100%">
-    <view id="green" class="scroll-view-item_H bc_green"></view>
-    <view id="red"  class="scroll-view-item_H bc_red"></view>
-    <view id="yellow" class="scroll-view-item_H bc_yellow"></view>
-    <view id="blue" class="scroll-view-item_H bc_blue"></view>
-  </scroll-view>
+  <view class="ads-body">
+    <scroll-view class="scroll-view_H" scroll-x style="width: 100%">
+          <view class="scroll-view-item_H">{{ads}}</view>
+    </scroll-view>
+  </view>
+
 </template>
 
 <script>
@@ -12,9 +12,9 @@
 
   export default class ads extends wepy.component {
     props = {
-      list: {
-        type: Object,
-        default: []
+      ads: {
+        type: String,
+        default: '每一个不曾起舞的日子，都是对生命的辜负。'
       }
     }
 
@@ -34,25 +34,17 @@
 </script>
 
 <style type="less">
+.ads-body{
+  border-left:3px solid green;
+  padding-left:5px;
+}
+.scroll-view_H{
+  display: flex;
+  white-space: nowrap;
+}
 .scroll-view-item_H{
-  height:100px;
-}
-.bc_red{
-  background-color: red;
-}
-.bc_green{
-  background-color: green;
-}
-swiper,
-.swiper{
-  width: 100%;
+  font-size:14px;
+  display: inline-block;
 }
 
-.swiper-image{
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 100%;
-  transform: translate(-50%, -50%);
-}
 </style>

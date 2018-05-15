@@ -1,0 +1,5 @@
+@import "./../components/load.wxss";
+@import "./../components/BookDetailPage/bookDetailInfo.wxss";
+@import "./../components/BookDetailPage/bookOperation.wxss";
+@import "./../components/BookDetailPage/bookInfo.wxss";
+@import "./../components/BookDetailPage/bookImage.wxss";
