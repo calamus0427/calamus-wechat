@@ -17,10 +17,10 @@
 </style>
 <template>
   <view>
-    <SearchBar :placeholder="searchText"></SearchBar>
+    <!-- <SearchBar :placeholder="searchText"></SearchBar> -->
     <Swiper :list.sync="swipers" height="280"></Swiper>
-    <Ads></Ads>
-    <animeList :list.sync="list" title="推荐追番"
+    <Ads ads="欢迎加群：575180837"></Ads>
+    <animeList :list.sync="list" title="追番推荐"
      :loading.sync="loading" :noMore.sync="noMoreList"></animeList>
   </view>
 </template>
@@ -58,7 +58,7 @@
 
   export default class Top extends wepy.page {
     config = {
-      navigationBarTitleText: '番荒推荐'
+      navigationBarTitleText: '追番推荐'
     }
     components = {
       panel: Panel,

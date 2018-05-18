@@ -1,46 +1,51 @@
+<style type="less">
+.imageList{
+  background-color: #fff;
+}
+.animelist{
+  display:flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  background-color: #fff;
+}
+
+.animelist-item{
+  margin-left:10px;
+  display:flex;
+  align-items:center;
+  flex-direction: column;
+}
+.animelist-item-image image{
+  padding:8px;
+  height:100px;
+  width:100px;
+}
+.animeList-item-name{
+  color: #626E7A;
+  font-size:28rpx;
+}
+</style>
 <template>
+
+<view class="imageList">
   <view class="animelist">
-    <view wx:if="{{title}}" class="animelist-name">
-      {{title}}
-    <text wx:if="{{star}}" class="weui-badge weui-badge_dot">{{star}}</text>
-    </view>
     <block wx:if="{{list.length > 0}}">
       <block wx:for="{{list}}" wx:key="index">
         <navigator url="/pages/detail" class="animelist-item">
           <view class="animelist-item-image">
             <image src="{{item.image[0]}}" mode="aspectFill"/>
           </view>
-          <view class="animelist-item-content">
-            <view class="animeList-item-main">
-              <view class="animeList-item-right">
-                <text class="animeList-item-name">{{item.name}}</text>
-                <Stars :star="item.stars"></Stars>
-              </view>
-                <text class="animeList-item-time">{{item.createTime}}</text>
-            </view>
-            <view class="animeList-item-description">{{item.description}}</view>
-            <view class="animeList-item-bottom">
-              <view>
-                <block wx:for="{{item.tag}}" wx:key="index" wx:if="{{index<'3'}}">
-                  <text class="anime-item-tags">{{item}}</text>
-              </block>
-              </view>
-              <block wx:if="{{item.flag == '1'}}">
-                <view class="animeList-item-right">
-                  <image src="{{icon_eye_active}}" class="imgicon" mode="aspectFit"/>
-                  <text class="animeList-item-flag color-blue">已追番</text>
-                </view>
-              </block>
-              <block wx:else>
-                <view class="animeList-item-right">
-                  <image src="{{icon_eye}}" class="imgicon" mode="aspectFit"/>
-                  <text class="animeList-item-flag color-bbb">追番</text>
-                </view>
-              </block>
-            </view>
-          </view>
+          <text class="animeList-item-name">{{item.name}}</text>
         </navigator>
       </block>
+    </block>
+    <block wx:else>
+      <view class="weui-loadmore weui-loadmore_line">
+        <view class="weui-loadmore__tips weui-loadmore__tips_in-line">暂无推荐</view>
+      </view>
+    </block>
+  </view>
+  <view>
       <block wx:if="{{loading}}">
         <view class="weui-loadmore">
           <view class="weui-loading"></view>
@@ -52,13 +57,8 @@
           <view class="weui-loadmore__tips weui-loadmore__tips_in-line weui-loadmore__tips_in-dot"></view>
         </view>
       </block>
-    </block>
-    <block wx:else>
-      <view class="weui-loadmore weui-loadmore_line">
-        <view class="weui-loadmore__tips weui-loadmore__tips_in-line">暂无推荐</view>
-      </view>
-    </block>
   </view>
+</view>
 </template>
 
 <script>
@@ -172,65 +172,4 @@
   }
 </script>
 
-<style type="less">
-.animelist{
-  margin-top:10px;
-  background-color: #fff;
-}
-.animelist-name{
-  padding-left:10px;
-  border-left:3px solid green;
-}
-.animelist-item{
-  display:flex;
-  align-items:center;
-}
-.animeList-item-main{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-}
-.animeList-item-bottom{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-}
-.animeList-item-right{
-  display:flex;
-  align-items:center;
-}
-.animelist-item-image image{
-  padding:8px;
-  height:100px;
-  width:100px;
-}
-.animelist-item-name{
-  font-size:80%;
-}
-.animeList-item-time{
-  font-size:70%;
-  color:#9B9B9B;
-}
-.animeList-item-description{
-  color:#999;
-  font-size:90%;
-  display:-webkit-box;
-  -webkit-line-clamp:2;
-  -webkit-box-orient:vertical;
-  overflow:hidden;
-  word-break:break-all;
-  text-overflow:ellipsis;
-}
-.anime-item-tags{
-  background-color:#F1F1F1;
-  color: #9B9B9B;
-  margin-right: 0.2em;
-  padding:0 0.6em;
-  border-radius:1em;
-  display: inline-block;
-  font-size: 60%;
-}
-.animeList-item-flag{
-  font-size:80%;
-}
-</style>
+

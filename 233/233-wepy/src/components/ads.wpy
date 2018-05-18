@@ -1,7 +1,7 @@
 <template>
   <view class="ads-body">
     <scroll-view class="scroll-view_H" scroll-x style="width: 100%">
-          <view class="scroll-view-item_H">{{ads}}</view>
+          <text selectable="true" class="scroll-view-item_H color-pink">{{ads}}</text>
     </scroll-view>
   </view>
 
@@ -35,12 +35,13 @@
 
 <style type="less">
 .ads-body{
-  border-left:3px solid green;
+  border-left:3px solid #FF5577;
   padding-left:5px;
 }
 .scroll-view_H{
   display: flex;
   white-space: nowrap;
+  /* color:#FF5577 */
 }
 .scroll-view-item_H{
   font-size:14px;

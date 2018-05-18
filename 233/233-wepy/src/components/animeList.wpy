@@ -1,8 +1,8 @@
 <template>
   <view class="animelist">
-    <view wx:if="{{title}}" class="animelist-name">
+    <view wx:if="{{title}}" class="animelist-name color-gray">
       {{title}}
-    <text wx:if="{{star}}" class="weui-badge weui-badge_dot">{{star}}</text>
+      <text wx:if="{{star}}" class="weui-badge weui-badge_dot">{{star}}</text>
     </view>
     <block wx:if="{{list.length > 0}}">
       <block wx:for="{{list}}" wx:key="index">
@@ -13,7 +13,7 @@
           <view class="animelist-item-content">
             <view class="animeList-item-main">
               <view class="animeList-item-right">
-                <text class="animeList-item-name">{{item.name}}</text>
+                <text class="animeList-item-name color-gray">{{item.name}}</text>
                 <Stars :star="item.stars"></Stars>
               </view>
                 <text class="animeList-item-time">{{item.createTime}}</text>
@@ -28,13 +28,13 @@
               <block wx:if="{{item.flag == '1'}}">
                 <view class="animeList-item-right">
                   <image src="{{icon_eye_active}}" class="imgicon" mode="aspectFit"/>
-                  <text class="animeList-item-flag color-blue">已追番</text>
+                  <text class="animeList-item-flag color-pink">已追番</text>
                 </view>
               </block>
               <block wx:else>
                 <view class="animeList-item-right">
                   <image src="{{icon_eye}}" class="imgicon" mode="aspectFit"/>
-                  <text class="animeList-item-flag color-bbb">追番</text>
+                  <text class="animeList-item-flag color-yellow">追番</text>
                 </view>
               </block>
             </view>
@@ -118,10 +118,8 @@
     }
 
     data = {
-      icon_eye: '/images/icon/icon-eye@2x.png',
-      icon_eye_active: '/images/icon/icon-eye-active@2x.png',
-      icon_star: '/images/icon/icon-star@2x.png',
-      icon_star_active: '/images/icon/icon-star-active@2x.png'
+      icon_eye: '/images/icon/addBefore.jpg',
+      icon_eye_active: '/images/icon/addAfter.jpg'
     }
 
     computed = {
@@ -173,13 +171,17 @@
 </script>
 
 <style type="less">
+.weui-badge{
+  background-color: #FF5577;
+}
 .animelist{
   margin-top:10px;
   background-color: #fff;
 }
 .animelist-name{
+  font-size:32rpx;
   padding-left:10px;
-  border-left:3px solid green;
+  border-left:3px solid #FF5577;
 }
 .animelist-item{
   display:flex;
@@ -203,9 +205,6 @@
   padding:8px;
   height:100px;
   width:100px;
-}
-.animelist-item-name{
-  font-size:80%;
 }
 .animeList-item-time{
   font-size:70%;

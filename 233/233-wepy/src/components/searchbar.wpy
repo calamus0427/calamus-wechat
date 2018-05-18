@@ -27,12 +27,15 @@
       placeholder: {
         type: String,
         default: '搜索'
+      },
+      inputVal:{
+        type: String,
+        default:''
       }
     }
 
     data = {
-      inputShowed: false,
-      inputVal: ''
+      inputShowed: false
     }
 
     computed = {
@@ -51,7 +54,7 @@
           key_word: this.inputVal || this.placeholder
         }
         wx.navigateTo({
-          url: `/pages/main/list?params=${JSON.stringify(params)}`
+          url: '/pages/search?inputVal='+this.inputVal
         })
       },
       clearInput (cb) {
@@ -66,5 +69,14 @@
     }
   }
 </script>
+<style lang="less">
+.weui-search-bar{
+  border:none;
+}
+.weui-search-bar__cancel-btn{
+  color: #FF5577;
+  font-size:28rpx;
+}
+</style>
 
 

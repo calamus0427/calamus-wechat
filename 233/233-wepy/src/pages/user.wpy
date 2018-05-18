@@ -25,7 +25,6 @@
 
   // text + space + text
   .userinfo-nickname {
-    color: green;
     font-size: (@userinfoHeight - 4 * @userinfoSpace) * (16 / 30);
     margin-bottom: 2 * @userinfoSpace;
   }
@@ -44,7 +43,7 @@
           <view class="weui-cell__bd userinfo clearfix">
             <image class="userinfo-avatar" src="{{ userInfo.avatarUrl }}" background-size="cover"/>
             <view class="userinfo-info">
-              <view class="userinfo-nickname">{{ nickName }}</view>
+              <view class="userinfo-nickname color-pink">{{ nickName }}</view>
               <view class="userinfo-status">{{identity.type}}</view>
             </view>
           </view>
