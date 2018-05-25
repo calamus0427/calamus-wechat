@@ -3,8 +3,8 @@
 </style>
 <template>
     <view  >
-          <SearchBar :placeholder="searchText"></SearchBar>
-<Ads></Ads>
+          <SearchBar type="tag"  :placeholder="searchText"></SearchBar>
+    <Ads></Ads>
     <!--主内容区域-->
       <view wx:if="{{init}}" class="main-box row">
         <SideTab :tab="categories"  @change.user="switchTab"/>
@@ -92,6 +92,11 @@
     }
     initPage(){
       this.getAnimeTag()
+    }
+    search(){
+      wx.navigateTo({
+          url: '/pages/searchTag'
+        })
     }
     getAnimeTag(){
 

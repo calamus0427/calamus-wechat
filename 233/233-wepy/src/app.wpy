@@ -75,7 +75,8 @@ export default class extends wepy.app {
       'pages/old',
       'pages/user',
       'pages/detail',
-      'pages/search'
+      'pages/search',
+      'pages/searchTag'
     ],
     window: {
       backgroundTextStyle: 'light',

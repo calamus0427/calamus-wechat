@@ -8,8 +8,8 @@
 </style>
 <template>
   <view>
-    <!-- <SearchBar :inputVal="inputVal" placeholder="搜索"></SearchBar> -->
-    <animeList :title="title"></animeList>
+    <SearchBar  type="result" placeholder="搜索"></SearchBar>
+    <pannelTag></pannelTag>
   </view>
 </template>
 
@@ -17,6 +17,8 @@
   import wepy from 'wepy'
   import SearchBar from '../components/searchbar'
   import animeList from '../components/animeList'
+  import pannelTag from '../components/pannelTag'
+
 
 
   export default class Search extends wepy.page {
@@ -25,7 +27,8 @@
     }
     components = {
       SearchBar:SearchBar,
-      animeList:animeList
+      animeList:animeList,
+      pannelTag:pannelTag
     }
 
     mixins = []
@@ -37,12 +40,6 @@
     }
 
     computed = {
-      inputVal(){
-        setTimeout(() => {
-          console.log(this.search)
-          return this.search;
-        }, 2000)
-      }
     }
 
     methods = {
@@ -56,7 +53,7 @@
     onLoad(query) {
       const inputVal = query.inputVal;
       console.log("query",query)
-      this.search = query.inputVal ;
+      this.search = query ;
     }
   }
 </script>
