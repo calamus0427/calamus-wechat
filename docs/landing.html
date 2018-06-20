@@ -1,0 +1,102 @@
+<style>
+    h1 {
+        margin: 0;
+        margin-top: -50px;
+        font-weight: normal;
+        font-size: 40px;
+        letter-spacing: 1px;
+    }
+    
+    h2 {
+        margin-top: 20px;
+        font-weight: normal;
+        letter-spacing: 1px;
+    }
+    
+    .landing {
+        padding: 10px;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        height: 100%;
+        -webkit-user-select: none;
+        user-select: none;
+    }
+    
+    .features {
+        margin-top: 20px;
+        margin-bottom: 60px;
+        font-size: 16px;
+        line-height: 1.7;
+    }
+    
+    .landing-button {
+        border: 1px solid #ccc;
+        border-radius: 33px;
+        padding: 10px 30px;
+        background-color: white;
+        display: inline-block;
+        margin-right: 20px;
+    }
+    
+    .landing-button:hover {
+        border-color: #E1244E;
+        color: #E1244E;
+        text-decoration: none;
+    }
+    
+    #space {
+        position: absolute;
+        top: 0;
+        left: 0;
+        background: #000000;
+        width: 100%;
+        min-height: 100vh;
+        z-index: 1;
+    }
+    
+    ul li:hover {
+        color: #E1244E;
+    }
+    
+    h1,
+    h2,
+    ul,
+    div {
+        z-index: 2;
+        color: white !important;
+    }
+</style>
+
+<canvas id="space"></canvas>
+
+<h1>小程序开发经验分享</h1>
+
+<h2>——Calamus</h2>
+
+<ul class="features">
+    <li>小程序的注册与发布 👻</li>
+    <li>小程序组件和api的使用 🙌</li>
+    <li>小程序填坑记录 💯</li>
+    <li>wepy、mpvue等框架开发小程序 😪</li>
+</ul>
+
+<div class="landing-buttons">
+    <a class="landing-button" target="_blank" href="https://www.calamus.xyz">website</a>
+    <a class="landing-button" target="_blank" href="https://github.com/calamus0427">
+            GitHub
+        </a>
+    <a class="landing-button" router-link="/home">
+            Docs
+        </a>
+</div>
